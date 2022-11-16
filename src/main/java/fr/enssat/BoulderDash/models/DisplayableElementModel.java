@@ -213,7 +213,7 @@ public abstract class DisplayableElementModel {
 		BufferedImage sprite = null;
 
 		try {
-			sprite = ImageIO.read(new File("res/drawable/field/" + spriteName + ".gif"));
+			sprite = ImageIO.read(DisplayableElementModel.class.getResourceAsStream("/drawable/field/" + spriteName + ".gif"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

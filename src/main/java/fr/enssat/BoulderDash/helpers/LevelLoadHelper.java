@@ -28,6 +28,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -95,8 +96,9 @@ public class LevelLoadHelper {
      *
      * @return  Level path, with file extension
      */
-	private String getLevelPathInDataStore() {
-		return this.pathToDataStore + "/" + this.getLevelId() + ".xml";
+	private InputStream getLevelPathInDataStore() {
+		String name = "/levels/level" + this.getLevelId() + ".xml"; // TODO this is fragile (we don't really know if this exists)
+		return LevelLoadHelper.class.getResourceAsStream(name);
 	}
 
     /**
@@ -105,7 +107,7 @@ public class LevelLoadHelper {
 	private void loadLevelData() {
 		this.xpathBuilder = XPathFactory.newInstance().newXPath();
 
-		String pathToData = this.getLevelPathInDataStore();
+		InputStream pathToData = this.getLevelPathInDataStore();
 
 		// Parse & process level data
 		this.parseLevelData(pathToData);
@@ -118,7 +120,7 @@ public class LevelLoadHelper {
      *
      * @param  pathToLevelData  FS path to the level data
      */
-	private void parseLevelData(String pathToLevelData) {
+	private void parseLevelData(InputStream pathToLevelData) {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
 		try {

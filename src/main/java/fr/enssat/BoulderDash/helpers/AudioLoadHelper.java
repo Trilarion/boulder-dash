@@ -4,6 +4,7 @@ import fr.enssat.BoulderDash.bridges.SoundJLayerBridge;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.InputStream;
 import java.util.HashMap;
 
 /**
@@ -33,8 +34,8 @@ public class AudioLoadHelper {
      * @param   musicId  Music identifier
      * @return  Music path, with file extension
      */
-    private String getMusicPathInAudioStore(String musicId) {
-        return AudioLoadHelper.pathToAudioStore + "/music/" + musicId + ".mp3";
+    private InputStream getMusicPathInAudioStore(String musicId) {
+        return AudioLoadHelper.class.getResourceAsStream("/audio/music/"+musicId+".mp3");
     }
 
     /**
@@ -47,9 +48,7 @@ public class AudioLoadHelper {
             this.stopMusic();
         }
 
-        this.musicToPlay = new SoundJLayerBridge(
-                this.getMusicPathInAudioStore(musicId)
-        );
+        this.musicToPlay = new SoundJLayerBridge(this.getMusicPathInAudioStore(musicId));
         this.musicToPlay.play();
     }
 
@@ -64,27 +63,12 @@ public class AudioLoadHelper {
      * Preloads available sounds
      */
     private void preloadSounds() {
-        // Initialize
-        String curSoundIdPrep;
+        final String[] sounds = {"coin", "die", "new", "touch"};
         this.preloadedSounds = new HashMap<String, SoundJLayerBridge>();
 
-        // List sound files
-        File soundsDir = new File(AudioLoadHelper.pathToAudioStore + "/sounds/");
-        File [] soundFiles = soundsDir.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".mp3");
-            }
-        });
-
-        // Cache them all!
-        for (File curSoundId : soundFiles) {
-            curSoundIdPrep = curSoundId.getName();
-            curSoundIdPrep = curSoundIdPrep.substring(0, curSoundIdPrep.lastIndexOf('.'));
-
-            this.preloadedSounds.put(curSoundIdPrep, new SoundJLayerBridge(
-                    curSoundId.getPath()
-            ));
+        for (String sound: sounds) {
+            InputStream inputStream = AudioLoadHelper.class.getResourceAsStream("/audio/sounds/"+sound+".mp3");
+            this.preloadedSounds.put(sound, new SoundJLayerBridge(inputStream));
         }
     }
 

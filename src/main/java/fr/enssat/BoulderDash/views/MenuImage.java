@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -18,16 +19,16 @@ import javax.swing.JPanel;
  */
 public class MenuImage extends JPanel {
     private BufferedImage imageFile;
-    private String imagePath = "./res/drawable/app/menu_actual.jpg";
+    private InputStream imagePath = MenuImage.class.getResourceAsStream("/drawable/app/menu_actual.jpg");
 
     /**
      * Class constructor
      */
     public MenuImage() {
         try {
-            this.imageFile = ImageIO.read(new File(this.imagePath));
+            this.imageFile = ImageIO.read(this.imagePath);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

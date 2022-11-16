@@ -1,5 +1,6 @@
 package fr.enssat.BoulderDash.bridges;
 
+import java.io.InputStream;
 import java.net.URL;
 
 import javazoom.jl.player.advanced.*;
@@ -15,17 +16,16 @@ import javazoom.jl.player.FactoryRegistry;
  * @since       2015-06-19
  */
 public class SoundJLayerBridge extends PlaybackListener implements Runnable {
-    private String filePath;
+    private InputStream inputStream;
     private AdvancedPlayer player;
     private Thread playerThread;
 
     /**
      * Class constructor
      *
-     * @param  filePath  File path to sound file
      */
-    public SoundJLayerBridge(String filePath) {
-        this.filePath = filePath;
+    public SoundJLayerBridge(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
     /**
@@ -33,15 +33,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
      */
     public void play() {
         try {
-            String urlAsString = "file:///"
-                               + new java.io.File(".").getCanonicalPath()
-                               + "/"
-                               + this.filePath;
-
-            this.player = new AdvancedPlayer(
-                    new URL(urlAsString).openStream(),
-                    FactoryRegistry.systemRegistry().createAudioDevice()
-            );
+            this.player = new AdvancedPlayer(inputStream, FactoryRegistry.systemRegistry().createAudioDevice());
 
             this.player.setPlayBackListener(this);
 

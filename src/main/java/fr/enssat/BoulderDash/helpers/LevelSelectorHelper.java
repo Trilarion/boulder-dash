@@ -61,36 +61,7 @@ public class LevelSelectorHelper {
      * @return  Available levels
      */
     private String[] listAvailableLevels() {
-        List<String> stockList = new ArrayList<String>();
-
-        File directory = new File(levelStorage);
-        File[] fileList = directory.listFiles();
-        String fileName, fileNameExtValue;
-        int fileNameExtIndex;
-
-        // Add empty element?
-        if(this.hasEmptyElement) {
-            stockList.add("");
-        }
-
-        for (File file : fileList){
-            fileName = file.getName();
-            fileNameExtIndex = fileName.lastIndexOf('.');
-
-            if (fileNameExtIndex > 0) {
-                fileNameExtValue = fileName.substring(fileNameExtIndex, fileName.length());
-
-                if(fileNameExtValue.equals(".xml")) {
-                    fileName = fileName.substring(0, fileNameExtIndex);
-                    stockList.add(fileName);
-                }
-            }
-        }
-
-        // Convert to String[] (required)
-        String[] itemsArr = new String[stockList.size()];
-        itemsArr = stockList.toArray(itemsArr);
-
-        return itemsArr;
+        final String[] availableLevels = {"01", "02", "03", "04", "05"}; // TODO search for files in resources
+        return availableLevels;
     }
 }
