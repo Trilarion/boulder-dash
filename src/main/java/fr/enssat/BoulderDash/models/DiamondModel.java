@@ -21,9 +21,9 @@ public class DiamondModel extends DisplayableElementModel {
     private static final int priority;
     private static final String collideSound;
 
-    /**
-     * Static dataset
-     * Specifies the physical parameters of the object
+    /*
+      Static dataset
+      Specifies the physical parameters of the object
      */
     static {
         spriteName = "diamond";
@@ -76,7 +76,7 @@ public class DiamondModel extends DisplayableElementModel {
      */
     private void initSprites() {
         /* Initialize object sprites */
-        this.framesDiamond = new ArrayList<BufferedImage>();
+        this.framesDiamond = new ArrayList<>();
 
         for (int i = 0; i < 8; i++) {
             this.framesDiamond.add(

@@ -7,6 +7,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,23 +37,20 @@ import java.util.Locale;
  */
 public class LevelLoadHelper {
     private static final String pathToDataStore = "./res/levels";
-    private String levelId = null;
-    private Document levelDOM;
-    private XPath xpathBuilder;
     private final SimpleDateFormat dateFormatter;
-
-    // Parsed values
-    private String nameValue = null;
-    private Date dateCreatedValue = null;
-    private Date dateModifiedValue = null;
-
-    private int widthSizeValue = 0;
-    private int heightSizeValue = 0;
     private final int limitsWidth = 2;
     private final int limitsHeight = 2;
     private final int limitsOffsetWidth = 1;
     private final int limitsOffsetHeight = 1;
-
+    private String levelId = null;
+    private Document levelDOM;
+    private XPath xpathBuilder;
+    // Parsed values
+    private String nameValue = null;
+    private Date dateCreatedValue = null;
+    private Date dateModifiedValue = null;
+    private int widthSizeValue = 0;
+    private int heightSizeValue = 0;
     private RockfordModel rockfordInstance;
     private int rockfordPositionX = 0;
     private int rockfordPositionY = 0;
@@ -116,11 +114,7 @@ public class LevelLoadHelper {
 
             // Parse data in level file
             this.levelDOM = documentBuilder.parse(pathToLevelData);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (org.xml.sax.SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -135,9 +129,7 @@ public class LevelLoadHelper {
             this.processDateElement();
             this.processSizeElement();
             this.processGridElement();
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (XPathExpressionException | ParseException e) {
             e.printStackTrace();
         }
     }

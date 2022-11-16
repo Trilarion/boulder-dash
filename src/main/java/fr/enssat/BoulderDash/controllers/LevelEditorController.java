@@ -21,8 +21,8 @@ import java.awt.event.ActionListener;
  */
 public class LevelEditorController implements ActionListener {
     private final LevelModel levelModel;
-    private LevelEditorView levelEditorView;
     private final NavigationBetweenViewController nav;
+    private LevelEditorView levelEditorView;
 
     /**
      * Class constructor'

@@ -14,7 +14,6 @@ import java.util.HashMap;
  * @since 2015-06-19
  */
 public class AudioLoadHelper {
-    private static final String pathToAudioStore = "./res/audio";
 
     private SoundJLayerBridge musicToPlay;
     private HashMap<String, SoundJLayerBridge> preloadedSounds;
@@ -62,7 +61,7 @@ public class AudioLoadHelper {
      */
     private void preloadSounds() {
         final String[] sounds = {"coin", "die", "new", "touch"};
-        this.preloadedSounds = new HashMap<String, SoundJLayerBridge>();
+        this.preloadedSounds = new HashMap<>();
 
         for (String sound : sounds) {
             InputStream inputStream = AudioLoadHelper.class.getResourceAsStream("/audio/sounds/" + sound + ".mp3");

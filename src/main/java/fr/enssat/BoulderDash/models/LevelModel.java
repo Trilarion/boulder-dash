@@ -25,9 +25,9 @@ public class LevelModel extends Observable implements Runnable {
      * Animation speed
      */
     private final int DELAY = 25;
+    private final AudioLoadHelper audioLoadHelper;
     private DisplayableElementModel[][] groundGrid;
     private String levelName;
-    private final AudioLoadHelper audioLoadHelper;
     private int sizeWidth = 0;
     private int sizeHeight = 0;
     private int cursorXPosition = 0;
@@ -216,14 +216,14 @@ public class LevelModel extends Observable implements Runnable {
         int oldX = this.getRockfordPositionX();
         int oldY = this.getRockfordPositionY();
 
-        if (this.groundGrid[posX][posY].getSpriteName() == "diamond") {
+        if (this.groundGrid[posX][posY].getSpriteName().equals("diamond")) {
             this.gameInformationModel.incrementScore();
             this.gameInformationModel.decrementRemainingsDiamonds();
             if (this.gameInformationModel.getRemainingsDiamonds() == 0) {
                 this.spawnExit();
             }
         }
-        if (this.groundGrid[posX][posY].getSpriteName() == "door") {
+        if (this.groundGrid[posX][posY].getSpriteName().equals("door")) {
             this.gameRunning = false;
         }
 
@@ -360,7 +360,7 @@ public class LevelModel extends Observable implements Runnable {
         // Iterate and catch it!
         for (int x = 0; x < this.getSizeWidth() && !isInModel; x++) {
             for (int y = 0; y < this.getSizeHeight() && !isInModel; y++) {
-                if (this.groundGrid[x][y] != null && this.groundGrid[x][y].getSpriteName() == "rockford") {
+                if (this.groundGrid[x][y] != null && this.groundGrid[x][y].getSpriteName().equals("rockford")) {
                     isInModel = true;
                     break;
                 }
@@ -381,7 +381,7 @@ public class LevelModel extends Observable implements Runnable {
         // Iterate and catch it!
         for (int x = 0; x < this.getSizeWidth(); x++) {
             for (int y = 0; y < this.getSizeHeight(); y++) {
-                if (this.groundGrid[x][y] != null && this.groundGrid[x][y].getSpriteName() == "diamond") {
+                if (this.groundGrid[x][y] != null && this.groundGrid[x][y].getSpriteName().equals("diamond")) {
                     numberOfDiamonds += 1;
                 }
             }
@@ -530,58 +530,46 @@ public class LevelModel extends Observable implements Runnable {
 
     /**
      * Increaments the cursor position X value
-     *
-     * @return Cursor position new X value
      */
-    public int incrementCursorXPosition() {
+    public void incrementCursorXPosition() {
         if (this.cursorXPosition < (this.getSizeWidth() - 1 - 2)) {
             this.cursorXPosition = this.cursorXPosition + 1;
         }
 
         this.localNotifyObservers();
-        return this.getCursorXPosition();
     }
 
     /**
      * Decrements the cursor position X value
-     *
-     * @return Cursor position new X value
      */
-    public int decrementCursorXPosition() {
+    public void decrementCursorXPosition() {
         if (this.cursorXPosition > 0) {
             this.cursorXPosition = this.cursorXPosition - 1;
         }
 
         this.localNotifyObservers();
-        return this.getCursorXPosition();
     }
 
     /**
      * Increaments the cursor position Y value
-     *
-     * @return Cursor position new Y value
      */
-    public int incrementCursorYPosition() {
+    public void incrementCursorYPosition() {
         if (this.cursorYPosition < (this.getSizeHeight() - 1 - 2)) {
             this.cursorYPosition = this.cursorYPosition + 1;
         }
 
         this.localNotifyObservers();
-        return this.getCursorYPosition();
     }
 
     /**
      * Decrements the cursor position Y value
-     *
-     * @return Cursor position new Y value
      */
-    public int decrementCursorYPosition() {
+    public void decrementCursorYPosition() {
         if (this.cursorYPosition > 0) {
             this.cursorYPosition = this.cursorYPosition - 1;
         }
 
         this.localNotifyObservers();
-        return this.getCursorYPosition();
     }
 
     /**

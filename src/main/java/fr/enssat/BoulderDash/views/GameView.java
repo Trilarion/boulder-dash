@@ -18,11 +18,11 @@ import java.util.Observer;
  * @since 2015-06-19
  */
 public class GameView extends JFrame implements Observer {
+    private final GameController gameController;
+    private final LevelModel levelModel;
     private GameGroundView gameGroundView;
     private JPanel actionPanel;
     private JPanel informationPanel;
-    private final GameController gameController;
-    private final LevelModel levelModel;
 
     /**
      * Class constructor
@@ -91,16 +91,14 @@ public class GameView extends JFrame implements Observer {
      * Creates the given button
      *
      * @param name Button name
-     * @return Created button
      */
-    public JButton createButton(String id, String name) {
+    public void createButton(String id, String name) {
         JButton button = new JButton(name);
         button.addActionListener(this.gameController);
         button.setActionCommand(id);
 
         this.actionPanel.add(button);
 
-        return button;
     }
 
     /**

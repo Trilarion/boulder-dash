@@ -30,9 +30,9 @@ public class RockfordModel extends DisplayableElementModel {
     private static ArrayList<BufferedImage> framesRunningRight;
     private static ArrayList<BufferedImage> framesRunningUpOrDown;
 
-    /**
-     * Static dataset
-     * Specifies the physical parameters of the object
+    /*
+      Static dataset
+      Specifies the physical parameters of the object
      */
     static {
         spriteName = "rockford";
@@ -252,10 +252,10 @@ public class RockfordModel extends DisplayableElementModel {
      * Takes the sub images and append them into storage arrays
      */
     private void initSprites() {
-        framesBlinking = new ArrayList<BufferedImage>();
-        framesRunningLeft = new ArrayList<BufferedImage>();
-        framesRunningRight = new ArrayList<BufferedImage>();
-        framesRunningUpOrDown = new ArrayList<BufferedImage>();
+        framesBlinking = new ArrayList<>();
+        framesRunningLeft = new ArrayList<>();
+        framesRunningRight = new ArrayList<>();
+        framesRunningUpOrDown = new ArrayList<>();
 
         /* INIT SPRITE ARRAYS FOR ROCKFORD */
         for (int i = 0; i < 8; i++) {

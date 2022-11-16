@@ -41,7 +41,7 @@ public abstract class GroundView extends JPanel implements Observer {
      */
     public void drawTerrain(int width, int height, Graphics g) {
         // Draw items
-        if (this.levelModel.getMode() == "game") {
+        if (this.levelModel.getMode().equals("game")) {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     g.drawImage(this.levelModel.getImage(x, y), (x * 16), (y * 16), this);

@@ -18,9 +18,9 @@ public class CursorModel extends DisplayableElementModel {
     private static final boolean falling;
     private static final String collideSound;
 
-    /**
-     * Static dataset
-     * Specifies the physical parameters of the object
+    /*
+      Static dataset
+      Specifies the physical parameters of the object
      */
     static {
         spriteName = "cursor";

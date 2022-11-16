@@ -106,7 +106,6 @@ public class GameInformationModel extends Observable {
      */
     public void resetInformations() {
         this.score = 0;
-        this.remainingsDiamonds = remainingsDiamonds;
         this.timer = 0;
     }
 

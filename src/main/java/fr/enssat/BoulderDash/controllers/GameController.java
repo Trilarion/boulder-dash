@@ -19,12 +19,12 @@ import java.awt.event.ActionListener;
  * @since 2015-06-19
  */
 public class GameController implements ActionListener {
-    private LevelModel levelModel;
     private final AudioLoadHelper audioLoadHelper;
-    private boolean firstClickOnPause;
     private final MenuView menuView;
-    private GameView gameView;
     private final NavigationBetweenViewController navigationBetweenViewController;
+    private LevelModel levelModel;
+    private boolean firstClickOnPause;
+    private GameView gameView;
 
     /**
      * Class constructor
@@ -54,11 +54,7 @@ public class GameController implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         switch (event.getActionCommand()) {
             case "pause":
-                if (this.firstClickOnPause) {
-                    this.levelModel.setGamePaused(true);
-                } else if (!this.firstClickOnPause) {
-                    this.levelModel.setGamePaused(false);
-                }
+                this.levelModel.setGamePaused(this.firstClickOnPause);
 
                 this.firstClickOnPause = !this.firstClickOnPause;
                 this.gameView.getGameFieldView().grabFocus();

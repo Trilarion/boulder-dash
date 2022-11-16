@@ -19,8 +19,8 @@ public abstract class DisplayableElementModel {
     private static final String groupName;
     private static final String stateValue;
 
-    /**
-     * Static dataset
+    /*
+      Static dataset
      */
     static {
         groupName = "field";
@@ -29,9 +29,9 @@ public abstract class DisplayableElementModel {
 
     private final boolean destructible;
     private final boolean moving;
+    private final String spriteName;
     private boolean animate;
     private boolean impactExplosive;
-    private final String spriteName;
     private int priority;
     private BufferedImage sprite;
     private boolean falling;

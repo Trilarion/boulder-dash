@@ -20,14 +20,13 @@ import java.util.Observer;
  * @since 2015-06-19
  */
 public class LevelEditorView extends JFrame implements Observer {
+    private final NavigationBetweenViewController nav;
     private LevelEditorGroundView fieldPanel;
     private JPanel selectPanel;
     private AssetsLevelEditorComponent assetsComponent;
     private JPanel actionsComponent;
     private String selectedLevel;
     private MenuLevelSelector menuLevelSelector;
-    private final NavigationBetweenViewController nav;
-
     private LevelEditorController levelEditorController;
     private LevelModel levelModel;
 

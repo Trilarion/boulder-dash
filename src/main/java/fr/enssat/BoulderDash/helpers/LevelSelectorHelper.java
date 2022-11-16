@@ -57,7 +57,6 @@ public class LevelSelectorHelper {
      * @return Available levels
      */
     private String[] listAvailableLevels() {
-        final String[] availableLevels = {"01", "02", "03", "04", "05"}; // TODO search for files in resources
-        return availableLevels;
+        return new String[]{"01", "02", "03", "04", "05"};
     }
 }

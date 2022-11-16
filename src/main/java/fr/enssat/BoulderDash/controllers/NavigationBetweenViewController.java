@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
  * @author Colin Leverger <me@colinleverger.fr>
  */
 public class NavigationBetweenViewController implements ActionListener {
+    private final AudioLoadHelper audioLoadHelper;
     private LevelEditorController levelEditorController;
     private MenuView menuView;
-    private final AudioLoadHelper audioLoadHelper;
     private LevelModel levelModelForGame, levelModelForEditor;
     private GameController gameController;
     private String pickedLevelIdentifier;
@@ -99,12 +99,9 @@ public class NavigationBetweenViewController implements ActionListener {
 
     /**
      * Set the first view
-     *
-     * @param menuView
      */
-    public MenuView setMenuView() {
+    public void setMenuView() {
         this.menuView = new MenuView(this);
-        return menuView;
     }
 
     /**

@@ -75,16 +75,14 @@ public class MenuView extends JFrame {
      * Creates the given button
      *
      * @param name Button name
-     * @return Created button
      */
-    public JButton createButton(String id, String name) {
+    public void createButton(String id, String name) {
         JButton button = new JButton(name);
         button.addActionListener(this.navigationBetweenViewController);
         button.setActionCommand(id);
 
         this.actionPanel.add(button);
 
-        return button;
     }
 
     /**

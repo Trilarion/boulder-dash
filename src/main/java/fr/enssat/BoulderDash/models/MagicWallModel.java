@@ -22,9 +22,9 @@ public class MagicWallModel extends DisplayableElementModel {
     private static final boolean falling;
     private static final String collideSound;
 
-    /**
-     * Static dataset
-     * Specifies the physical parameters of the object
+    /*
+      Static dataset
+      Specifies the physical parameters of the object
      */
     static {
         spriteName = "magicwall";
@@ -37,6 +37,7 @@ public class MagicWallModel extends DisplayableElementModel {
         collideSound = "touch";
     }
 
+    private final long speed;
     /**
      * Stores the frames
      * Used for the sprites
@@ -44,7 +45,6 @@ public class MagicWallModel extends DisplayableElementModel {
     private ArrayList<BufferedImage> framesMagicWall;
     private long previousTime;
     private int currentFrame;
-    private final long speed;
 
     /**
      * Class constructor
@@ -78,7 +78,7 @@ public class MagicWallModel extends DisplayableElementModel {
      * Init the subimages
      */
     private void initSprites() {
-        this.framesMagicWall = new ArrayList<BufferedImage>();
+        this.framesMagicWall = new ArrayList<>();
         /* INIT SPRITE FOR DIAMOND */
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 0, 0, 16, 16));
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 24, 0, 16, 16));

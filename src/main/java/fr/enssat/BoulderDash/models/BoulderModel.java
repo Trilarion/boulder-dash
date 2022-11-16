@@ -17,9 +17,9 @@ public class BoulderModel extends DisplayableElementModel {
     private static final int priority;
     private static final String collideSound;
 
-    /**
-     * Static dataset
-     * Specifies the physical parameters of the object
+    /*
+      Static dataset
+      Specifies the physical parameters of the object
      */
     static {
         spriteName = "boulder";

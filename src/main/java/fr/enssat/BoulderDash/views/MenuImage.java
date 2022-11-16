@@ -17,8 +17,8 @@ import java.io.InputStream;
  * @since 2015-06-23
  */
 public class MenuImage extends JPanel {
-    private BufferedImage imageFile;
     private final InputStream imagePath = MenuImage.class.getResourceAsStream("/drawable/app/menu_actual.jpg");
+    private BufferedImage imageFile;
 
     /**
      * Class constructor

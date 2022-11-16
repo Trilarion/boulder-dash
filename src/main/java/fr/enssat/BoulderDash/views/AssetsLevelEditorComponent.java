@@ -39,8 +39,8 @@ public class AssetsLevelEditorComponent extends JPanel implements ActionListener
 
         String curListChoice;
 
-        for (int i = 0; i < choiceList.size(); i++) {
-            curListChoice = choiceList.get(i);
+        for (String s : choiceList) {
+            curListChoice = s;
 
             // Create radio buttons from list
             JRadioButton curButton = new JRadioButton(curListChoice);
