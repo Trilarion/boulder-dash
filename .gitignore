@@ -1,3 +1,9 @@
-/bin/
-/out/
-/.idea/
+# gradle
+/build
+/.gradle
+/gradle.properties
+
+# idea
+/.idea
+/*.iml
+/out

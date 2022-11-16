@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'fr.enssat.BoulderDash'
+version '1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+mainClassName = 'fr.enssat.BoulderDash.Game'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files('libs/jl1.0.1.jar', 'libs/scalatest_2.11-2.2.4.jar')
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': project.mainClassName
+        )
+    }
+}
