@@ -1,26 +1,23 @@
 package fr.enssat.BoulderDash.views;
 
+import fr.enssat.BoulderDash.controllers.LevelEditorController;
+import fr.enssat.BoulderDash.controllers.NavigationBetweenViewController;
+import fr.enssat.BoulderDash.helpers.LevelSelectorHelper;
+import fr.enssat.BoulderDash.models.LevelModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-import fr.enssat.BoulderDash.helpers.LevelSelectorHelper;
-import fr.enssat.BoulderDash.controllers.LevelEditorController;
-import fr.enssat.BoulderDash.controllers.NavigationBetweenViewController;
-import fr.enssat.BoulderDash.models.LevelModel;
-import fr.enssat.BoulderDash.views.LevelEditorGroundView;
-import fr.enssat.BoulderDash.views.AssetsLevelEditorComponent;
-import fr.enssat.BoulderDash.views.MenuLevelSelector;
-
 
 /**
  * LevelEditorView
- *
+ * <p>
  * Specifies the level editor view.
  *
- * @author      Colin Leverger <me@colinleverger.fr>
- * @since       2015-06-19
+ * @author Colin Leverger <me@colinleverger.fr>
+ * @since 2015-06-19
  */
 public class LevelEditorView extends JFrame implements Observer {
     private LevelEditorGroundView fieldPanel;
@@ -29,7 +26,7 @@ public class LevelEditorView extends JFrame implements Observer {
     private JPanel actionsComponent;
     private String selectedLevel;
     private MenuLevelSelector menuLevelSelector;
-    private NavigationBetweenViewController nav;
+    private final NavigationBetweenViewController nav;
 
     private LevelEditorController levelEditorController;
     private LevelModel levelModel;
@@ -39,23 +36,23 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Class constructor
      */
-	public LevelEditorView(LevelEditorController levelEditorController, LevelModel levelModel, NavigationBetweenViewController nav) {
+    public LevelEditorView(LevelEditorController levelEditorController, LevelModel levelModel, NavigationBetweenViewController nav) {
         this.levelEditorController = levelEditorController;
         this.levelModel = levelModel;
         this.nav = nav;
 
         this.levelModel.addObserver(this);
 
-		this.initializeView();
+        this.initializeView();
         this.createLayout();
 
         this.fieldPanel.grabFocus();
-	}
+    }
 
     /**
      * Initializes the view layout
      */
-	private void initializeView() {
+    private void initializeView() {
         this.setFocusable(true);
         this.setVisible(false);
         this.setResizable(false);
@@ -70,18 +67,18 @@ public class LevelEditorView extends JFrame implements Observer {
 
         Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png");
         this.setIconImage(appIcon);
-	}
+    }
 
     /**
      * Creates the view layout
      */
-	private void createLayout() {
+    private void createLayout() {
         // List of levels
         LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(true, this);
         this.menuLevelSelector = levelSelectorHelper.createLevelList();
 
         // Field + select panels
-		this.fieldPanel = new LevelEditorGroundView(this.levelModel, this);
+        this.fieldPanel = new LevelEditorGroundView(this.levelModel, this);
         this.selectPanel = new JPanel();
 
         this.assetsComponent = new AssetsLevelEditorComponent(this);
@@ -104,14 +101,14 @@ public class LevelEditorView extends JFrame implements Observer {
         // Add top components
         this.add(this.fieldPanel, BorderLayout.CENTER);
         this.add(this.selectPanel, BorderLayout.WEST);
-	}
+    }
 
     /**
      * Creates the given button
      *
-     * @param   id    Button identifier
-     * @param   name  Button name
-     * @return  Created button
+     * @param id   Button identifier
+     * @param name Button name
+     * @return Created button
      */
     public JButton createButton(String id, String name) {
         JButton button = new JButton(name);
@@ -124,7 +121,7 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Gets the level editor field view
      *
-     * @return  Level editor field view
+     * @return Level editor field view
      */
     public LevelEditorGroundView getLevelEditorGroundView() {
         return this.fieldPanel;
@@ -133,7 +130,7 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Gets picked block value
      *
-     * @return  Picked block value
+     * @return Picked block value
      */
     public String getPickedBlockValue() {
         return this.pickedBlockValue;
@@ -142,7 +139,7 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Sets picked block value
      *
-     * @param  pickedBlockValue  Picked block value
+     * @param pickedBlockValue Picked block value
      */
     public void setPickedBlockValue(String pickedBlockValue) {
         this.pickedBlockValue = pickedBlockValue;
@@ -151,8 +148,8 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Updates the view
      *
-     * @param  obs  Observable item
-     * @param  obj  Object item
+     * @param obs Observable item
+     * @param obj Object item
      */
     @Override
     public void update(Observable obs, Object obj) {
@@ -162,12 +159,12 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Change opened level
      *
-     * @param  selectedLevelValue  Selected level value
+     * @param selectedLevelValue Selected level value
      */
     public void openedLevelChange(String selectedLevelValue) {
         LevelModel pickedLevelModel;
 
-        if(selectedLevelValue != null && !selectedLevelValue.isEmpty()) {
+        if (selectedLevelValue != null && !selectedLevelValue.isEmpty()) {
             // Load existing model
             pickedLevelModel = new LevelModel(selectedLevelValue, this.nav.getAudioLoadHelper(), "editor");
         } else {
@@ -195,13 +192,13 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Menu level selector change handler
      *
-     * @param  changedSelector  Changed selector
+     * @param changedSelector Changed selector
      */
     public void menuLevelSelectorChanged(MenuLevelSelector changedSelector) {
-        String selectedLevelValue = changedSelector.getChoiceValue().toString();
+        String selectedLevelValue = changedSelector.getChoiceValue();
 
         // Value didn't change?
-        if(selectedLevelValue.equals(this.getSelectedLevel())) {
+        if (selectedLevelValue.equals(this.getSelectedLevel())) {
             return;
         }
 
@@ -211,7 +208,7 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Gets selected level
      *
-     * @return  Selected level
+     * @return Selected level
      */
     public String getSelectedLevel() {
         return this.selectedLevel;
@@ -220,9 +217,9 @@ public class LevelEditorView extends JFrame implements Observer {
     /**
      * Sets selected level
      *
-     * @param  level  Selected level
+     * @param level Selected level
      */
-    public void setSelectedLevel(String level) { 
-    	this.selectedLevel = level;
+    public void setSelectedLevel(String level) {
+        this.selectedLevel = level;
     }
 }

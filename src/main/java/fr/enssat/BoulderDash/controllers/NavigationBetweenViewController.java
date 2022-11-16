@@ -1,49 +1,46 @@
 package fr.enssat.BoulderDash.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import fr.enssat.BoulderDash.helpers.AudioLoadHelper;
 import fr.enssat.BoulderDash.models.LevelModel;
 import fr.enssat.BoulderDash.views.MenuView;
-import fr.enssat.BoulderDash.controllers.LevelEditorController;
-import fr.enssat.BoulderDash.controllers.GameController;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Controller to navigate between the different views
- * 
- * @author Colin Leverger <me@colinleverger.fr>
  *
+ * @author Colin Leverger <me@colinleverger.fr>
  */
 public class NavigationBetweenViewController implements ActionListener {
-	private LevelEditorController levelEditorController;
-	private MenuView menuView;
-	private AudioLoadHelper audioLoadHelper;
-	private LevelModel levelModelForGame, levelModelForEditor;
-	private GameController gameController;
-	private String pickedLevelIdentifier;
+    private LevelEditorController levelEditorController;
+    private MenuView menuView;
+    private final AudioLoadHelper audioLoadHelper;
+    private LevelModel levelModelForGame, levelModelForEditor;
+    private GameController gameController;
+    private String pickedLevelIdentifier;
 
     /**
      * Class constructor
      */
-	public NavigationBetweenViewController() {
-		this.audioLoadHelper = new AudioLoadHelper();
+    public NavigationBetweenViewController() {
+        this.audioLoadHelper = new AudioLoadHelper();
 
         // Play game music
         this.getAudioLoadHelper().startMusic("game");
 
-		// Creation of the first view
-		this.menuView = new MenuView(this);
-	}
+        // Creation of the first view
+        this.menuView = new MenuView(this);
+    }
 
     /**
      * Action performed event handler
      *
-     * @param  event  Action event
+     * @param event Action event
      */
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		switch (event.getActionCommand()) {
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        switch (event.getActionCommand()) {
             case "quit":
                 System.exit(0);
                 break;
@@ -76,16 +73,16 @@ public class NavigationBetweenViewController implements ActionListener {
                 this.gameController.getGameView().setVisible(true);
                 this.gameController.getGameView().getGameFieldView().grabFocus();
 
-			    break;
-		}
+                break;
+        }
 
-		this.menuView.setVisible(false);
-	}
+        this.menuView.setVisible(false);
+    }
 
     /**
      * Get the audio load helper
      *
-     * @return  Audio load helper
+     * @return Audio load helper
      */
     public AudioLoadHelper getAudioLoadHelper() {
         return this.audioLoadHelper;
@@ -94,39 +91,38 @@ public class NavigationBetweenViewController implements ActionListener {
     /**
      * Get the first view
      *
-     * @return  First view
+     * @return First view
      */
     public MenuView getMenuView() {
         return this.menuView;
     }
 
-	/**
-	 * Set the first view
-	 * 
-	 * @param  menuView
-	 */
-	public MenuView setMenuView() {
-		this.menuView = new MenuView(this);
-		return menuView;
-	}
-
-	/**
-	 * Get the pickedLevel
+    /**
+     * Set the first view
      *
-	 * @return  pickedLevelIdentifier  Picked level identifier
-	 */
-	public String getPickedLevelIdentifier() {
-		return pickedLevelIdentifier;
-	}
+     * @param menuView
+     */
+    public MenuView setMenuView() {
+        this.menuView = new MenuView(this);
+        return menuView;
+    }
 
-	/**
-	 * Set the pickedLevelIdentifier
+    /**
+     * Get the pickedLevel
      *
-	 * @param  pickedLevelIdentifier  Picked level identifier
-	 */
-	public void setPickedLevelIdentifier(String pickedLevelIdentifier) {
-		this.pickedLevelIdentifier = pickedLevelIdentifier;
-	}
-	
-	
+     * @return pickedLevelIdentifier  Picked level identifier
+     */
+    public String getPickedLevelIdentifier() {
+        return pickedLevelIdentifier;
+    }
+
+    /**
+     * Set the pickedLevelIdentifier
+     *
+     * @param pickedLevelIdentifier Picked level identifier
+     */
+    public void setPickedLevelIdentifier(String pickedLevelIdentifier) {
+        this.pickedLevelIdentifier = pickedLevelIdentifier;
+    }
+
 }

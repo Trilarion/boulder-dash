@@ -1,25 +1,22 @@
 package fr.enssat.BoulderDash.models;
 
-import fr.enssat.BoulderDash.models.DisplayableElementModel;
-
-
 /**
  * CursorModel
- *
+ * <p>
  * Represents the field cursor pointer.
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-22
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-22
  */
 public class CursorModel extends DisplayableElementModel {
-    private static String spriteName;
-    private static boolean isDestructible;
-    private static boolean canMove;
-    private static boolean impactExplosive;
-    private static boolean animate;
-    private static int priority;
-    private static boolean falling;
-    private static String collideSound;
+    private static final String spriteName;
+    private static final boolean isDestructible;
+    private static final boolean canMove;
+    private static final boolean impactExplosive;
+    private static final boolean animate;
+    private static final int priority;
+    private static final boolean falling;
+    private static final String collideSound;
 
     /**
      * Static dataset

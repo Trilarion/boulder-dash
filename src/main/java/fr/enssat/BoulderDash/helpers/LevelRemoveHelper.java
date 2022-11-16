@@ -5,21 +5,21 @@ import java.io.File;
 
 /**
  * LevelRemoveHelper
- *
+ * <p>
  * Proceeds level save routine
  * Able to iterate on internal representation of a map and serialize it to XML
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-21
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-21
  */
 public class LevelRemoveHelper {
-    private static String pathToDataStore = "./res/levels";
+    private static final String pathToDataStore = "./res/levels";
     private String levelId = null;
 
     /**
      * Class constructor
      *
-     * @param  levelId  Level identifier
+     * @param levelId Level identifier
      */
     public LevelRemoveHelper(String levelId) {
         this.levelId = levelId;
@@ -31,9 +31,9 @@ public class LevelRemoveHelper {
     /**
      * Gets level storage path
      *
-     * @return  Level path, with file extension
+     * @return Level path, with file extension
      */
     private String getLevelPathInDataStore() {
-        return this.pathToDataStore + "/" + this.levelId + ".xml";
+        return pathToDataStore + "/" + this.levelId + ".xml";
     }
 }

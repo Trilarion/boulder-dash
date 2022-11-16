@@ -1,46 +1,42 @@
 package fr.enssat.BoulderDash.helpers;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+import fr.enssat.BoulderDash.models.DirtModel;
+import fr.enssat.BoulderDash.models.DisplayableElementModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import fr.enssat.BoulderDash.models.DisplayableElementModel;
-import fr.enssat.BoulderDash.models.DirtModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * LevelSaveHelper
- *
+ * <p>
  * Proceeds level save routine
  * Able to iterate on internal representation of a map and serialize it to XML
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-21
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-21
  */
 public class LevelSaveHelper {
-    private static String pathToDataStore = "./res/levels";
+    private static final String pathToDataStore = "./res/levels";
     private String levelId = null;
     private DisplayableElementModel[][] groundGrid;
-    private SimpleDateFormat dateFormatter;
+    private final SimpleDateFormat dateFormatter;
 
     /**
      * Class constructor
      *
-     * @param  levelId     Level identifier
-     * @param  groundGrid  Ground grid
+     * @param levelId    Level identifier
+     * @param groundGrid Ground grid
      */
     public LevelSaveHelper(String levelId, DisplayableElementModel[][] groundGrid) {
         this.setLevelId(levelId);
@@ -58,25 +54,16 @@ public class LevelSaveHelper {
     /**
      * Class constructor
      *
-     * @param  groundGrid  Ground grid
+     * @param groundGrid Ground grid
      */
     public LevelSaveHelper(DisplayableElementModel[][] groundGrid) {
         this(generateNewLevelId(), groundGrid);
     }
 
     /**
-     * Gets level storage path
-     *
-     * @return  Level path, with file extension
-     */
-    private String getLevelPathInDataStore() {
-        return this.pathToDataStore + "/" + this.getLevelId() + ".xml";
-    }
-
-    /**
      * Generates a new level identifier
      *
-     * @return  Level identifier
+     * @return Level identifier
      */
     private static String generateNewLevelId() {
         File directory = new File(pathToDataStore);
@@ -93,14 +80,14 @@ public class LevelSaveHelper {
         Pattern pattern = Pattern.compile("^level([0-9]+)\\.xml");
         Matcher matcher;
 
-        for (File file : fileList){
+        for (File file : fileList) {
             matcher = pattern.matcher(file.getName());
 
             if (matcher.matches()) {
                 matchedId = matcher.group(1);
 
-                if(!matchedId.isEmpty()) {
-                    tempLevelId = new Integer(matchedId);
+                if (!matchedId.isEmpty()) {
+                    tempLevelId = Integer.valueOf(matchedId);
 
                     if (tempLevelId > electedLastLevelId) {
                         electedLastLevelId = tempLevelId;
@@ -117,13 +104,22 @@ public class LevelSaveHelper {
         electedLastLevelId += 1;
 
         // Stringify
-        if(electedLastLevelId < 10) {
-            finalLevelId = "0" + electedLastLevelId.toString();
+        if (electedLastLevelId < 10) {
+            finalLevelId = "0" + electedLastLevelId;
         } else {
             finalLevelId = electedLastLevelId.toString();
         }
 
         return "level" + finalLevelId;
+    }
+
+    /**
+     * Gets level storage path
+     *
+     * @return Level path, with file extension
+     */
+    private String getLevelPathInDataStore() {
+        return pathToDataStore + "/" + this.getLevelId() + ".xml";
     }
 
     /**
@@ -156,8 +152,8 @@ public class LevelSaveHelper {
     /**
      * Writes the level document data to disk
      *
-     * @param   document  Document to be saved
-     * @return  Whether save was successful or not
+     * @param document Document to be saved
+     * @return Whether save was successful or not
      */
     private boolean writeDocumentToDisk(Document document) {
         boolean isSuccessful = true;
@@ -180,8 +176,8 @@ public class LevelSaveHelper {
     /**
      * Creates the name node
      *
-     * @param   document  Document
-     * @return  Name node
+     * @param document Document
+     * @return Name node
      */
     private Node nameNode(Document document) {
         String nameValue;
@@ -194,14 +190,14 @@ public class LevelSaveHelper {
     /**
      * Creates the date node
      *
-     * @param   document  Document
-     * @return  Date node
+     * @param document Document
+     * @return Date node
      */
     private Node dateNode(Document document) {
         // Get values
         String dateCreatedValue, dateModifiedValue;
 
-        dateCreatedValue  = "0000-00-00/00:00:00";
+        dateCreatedValue = "0000-00-00/00:00:00";
         dateModifiedValue = "0000-00-00/00:00:00";
 
         // Create element
@@ -218,8 +214,8 @@ public class LevelSaveHelper {
     /**
      * Creates the size node
      *
-     * @param   document  Document
-     * @return  Size node
+     * @param document Document
+     * @return Size node
      */
     private Node sizeNode(Document document) {
         // Get values
@@ -227,11 +223,11 @@ public class LevelSaveHelper {
 
         widthValue = this.getGroundGrid().length - 2;
 
-        if(widthValue > 0) {
+        if (widthValue > 0) {
             heightValue = this.getGroundGrid()[0].length - 2;
         }
 
-        if(heightValue < 0 || widthValue < 0) {
+        if (heightValue < 0 || widthValue < 0) {
             heightValue = 0;
             widthValue = 0;
         }
@@ -248,15 +244,15 @@ public class LevelSaveHelper {
     /**
      * Creates the grid node
      *
-     * @param   document  Document
-     * @return  Grid node
+     * @param document Document
+     * @return Grid node
      */
     private Node gridNode(Document document) {
         Element gridElement = document.createElement("grid");
         gridElement.setAttribute("state", "initial");
 
         // Iterate in MATRIX:{x}
-        if(this.getGroundGrid().length > 2) {
+        if (this.getGroundGrid().length > 2) {
             // XML structure matrix is the inverse of the internal representation (hence the weird loop)
             for (Integer curLineIndex = 1; curLineIndex < (this.getGroundGrid()[0].length - 1); curLineIndex++) {
                 gridElement.appendChild(this.gridLineNode(document, curLineIndex));
@@ -269,16 +265,16 @@ public class LevelSaveHelper {
     /**
      * Creates the grid line node
      *
-     * @param   document      Document
-     * @param   curLineIndex  Current line index
-     * @return  Grid line node
+     * @param document     Document
+     * @param curLineIndex Current line index
+     * @return Grid line node
      */
     private Node gridLineNode(Document document, Integer curLineIndex) {
         Element gridLineElement = document.createElement("line");
         gridLineElement.setAttribute("index", Integer.toString(curLineIndex - 1));
 
         // Iterate in MATRIX:X:{y}
-        if(this.getGroundGrid().length > 2) {
+        if (this.getGroundGrid().length > 2) {
             // XML structure matrix is the inverse of the internal representation (hence the weird loop)
             for (Integer curItemIndex = 1; curItemIndex < (this.getGroundGrid().length - 1); curItemIndex++) {
                 gridLineElement.appendChild(this.gridLineItemNode(document, curLineIndex, curItemIndex));
@@ -291,10 +287,10 @@ public class LevelSaveHelper {
     /**
      * Creates the grid line item node
      *
-     * @param   document      Document
-     * @param   curLineIndex  Current line index
-     * @param   curItemIndex  Current line item index
-     * @return  Grid line item node
+     * @param document     Document
+     * @param curLineIndex Current line index
+     * @param curItemIndex Current line item index
+     * @return Grid line item node
      */
     private Node gridLineItemNode(Document document, Integer curLineIndex, Integer curItemIndex) {
         Element gridLineItemElement = document.createElement("item");
@@ -308,10 +304,10 @@ public class LevelSaveHelper {
     /**
      * Creates the grid line sprite item node
      *
-     * @param   document      Document
-     * @param   curLineIndex  Current line index
-     * @param   curItemIndex  Current line item index
-     * @return  Grid line item sprite node
+     * @param document     Document
+     * @param curLineIndex Current line index
+     * @param curItemIndex Current line item index
+     * @return Grid line item sprite node
      */
     private Node gridLineItemSpriteNode(Document document, Integer curLineIndex, Integer curItemIndex) {
         String groupValue, nameValue, stateValue, convertibleValue;
@@ -319,14 +315,14 @@ public class LevelSaveHelper {
         DisplayableElementModel curGridElement = this.getGroundGrid()[curItemIndex][curLineIndex];
 
         // Null?
-        if(curGridElement == null) {
+        if (curGridElement == null) {
             curGridElement = new DirtModel();
         }
 
         // Retrieve current values
-        groupValue       = curGridElement.getGroupName();
-        nameValue        = curGridElement.getSpriteName();
-        stateValue       = curGridElement.getStateValue();
+        groupValue = curGridElement.getGroupName();
+        nameValue = curGridElement.getSpriteName();
+        stateValue = curGridElement.getStateValue();
         convertibleValue = curGridElement.isConvertible() ? "1" : "0";
 
         // Create sprite XML element
@@ -337,7 +333,7 @@ public class LevelSaveHelper {
         gridLineItemSpriteElement.setAttribute("name", nameValue);
         gridLineItemSpriteElement.setAttribute("state", stateValue);
 
-        if(convertibleValue == "1") {
+        if (convertibleValue == "1") {
             gridLineItemSpriteElement.setAttribute("convertible", convertibleValue);
         }
 
@@ -347,10 +343,10 @@ public class LevelSaveHelper {
     /**
      * Creates a bare text node
      *
-     * @param   document  Document
-     * @param   name      Element name
-     * @param   value     Element value
-     * @return  Text node
+     * @param document Document
+     * @param name     Element name
+     * @param value    Element value
+     * @return Text node
      */
     private Node textNode(Document document, String name, String value) {
         Element node = document.createElement(name);
@@ -362,7 +358,7 @@ public class LevelSaveHelper {
     /**
      * Gets the level identifier
      *
-     * @return  Level identifier
+     * @return Level identifier
      */
     public String getLevelId() {
         return this.levelId;
@@ -371,7 +367,7 @@ public class LevelSaveHelper {
     /**
      * Sets the level identifier
      *
-     * @param  levelId  Level identifier
+     * @param levelId Level identifier
      */
     private void setLevelId(String levelId) {
         this.levelId = levelId;
@@ -380,7 +376,7 @@ public class LevelSaveHelper {
     /**
      * Gets the ground grid
      *
-     * @return  Ground grid
+     * @return Ground grid
      */
     public DisplayableElementModel[][] getGroundGrid() {
         return this.groundGrid;
@@ -389,7 +385,7 @@ public class LevelSaveHelper {
     /**
      * Sets the ground grid
      *
-     * @param  groundGrid  Ground grid
+     * @param groundGrid Ground grid
      */
     private void setGroundGrid(DisplayableElementModel[][] groundGrid) {
         this.groundGrid = groundGrid;

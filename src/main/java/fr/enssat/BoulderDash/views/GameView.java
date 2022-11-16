@@ -1,47 +1,44 @@
 package fr.enssat.BoulderDash.views;
 
-import javax.swing.*;
+import fr.enssat.BoulderDash.controllers.GameController;
+import fr.enssat.BoulderDash.models.LevelModel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-import fr.enssat.BoulderDash.controllers.GameController;
-import fr.enssat.BoulderDash.models.LevelModel;
-import fr.enssat.BoulderDash.views.GameGroundView;
-import fr.enssat.BoulderDash.views.InformationPanel;
-
 
 /**
  * GameView
- *
+ * <p>
  * Specifies the game view itself.
  *
- * @author      Colin Leverger <me@colinleverger.fr>
- * @since       2015-06-19
+ * @author Colin Leverger <me@colinleverger.fr>
+ * @since 2015-06-19
  */
 public class GameView extends JFrame implements Observer {
-	private GameGroundView gameGroundView;
-	private JPanel actionPanel;
-	private JPanel informationPanel;
-	private GameController gameController;
-	private LevelModel levelModel;
+    private GameGroundView gameGroundView;
+    private JPanel actionPanel;
+    private JPanel informationPanel;
+    private final GameController gameController;
+    private final LevelModel levelModel;
 
     /**
      * Class constructor
      *
-     * @param  gameController  Game controller
-     * @param  levelModel      Level model
+     * @param gameController Game controller
+     * @param levelModel     Level model
      */
-	public GameView(GameController gameController, LevelModel levelModel) {
-		this.gameController = gameController;
-		this.levelModel = levelModel;
-		
+    public GameView(GameController gameController, LevelModel levelModel) {
+        this.gameController = gameController;
+        this.levelModel = levelModel;
+
         this.initializeView();
         this.createLayout();
 
         this.gameGroundView.grabFocus();
-	}
+    }
 
     /**
      * Initializes the view
@@ -84,36 +81,36 @@ public class GameView extends JFrame implements Observer {
     /**
      * Gets the game field view
      *
-     * @return  Game field view
+     * @return Game field view
      */
-	public GameGroundView getGameFieldView() {
-		return this.gameGroundView;
-	}
+    public GameGroundView getGameFieldView() {
+        return this.gameGroundView;
+    }
 
     /**
      * Creates the given button
      *
-     * @param   name  Button name
-     * @return  Created button
+     * @param name Button name
+     * @return Created button
      */
-	public JButton createButton(String id, String name) {
-		JButton button = new JButton(name);
-		button.addActionListener(this.gameController);
-		button.setActionCommand(id);
+    public JButton createButton(String id, String name) {
+        JButton button = new JButton(name);
+        button.addActionListener(this.gameController);
+        button.setActionCommand(id);
 
-		this.actionPanel.add(button);
+        this.actionPanel.add(button);
 
-		return button;
-	}
+        return button;
+    }
 
-	/**
+    /**
      * Updates the frame
      *
-     * @param   obs  Observable item
-     * @param   obj  Object item
+     * @param obs Observable item
+     * @param obj Object item
      */
-	@Override
-	public void update(Observable obs, Object obj) {
-		// Nothing done.
-	}
+    @Override
+    public void update(Observable obs, Object obj) {
+        // Nothing done.
+    }
 }

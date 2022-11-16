@@ -1,10 +1,8 @@
 package fr.enssat.BoulderDash.controllers;
 
+import fr.enssat.BoulderDash.helpers.AudioLoadHelper;
 import fr.enssat.BoulderDash.models.DisplayableElementModel;
 import fr.enssat.BoulderDash.models.LevelModel;
-import fr.enssat.BoulderDash.controllers.RockfordUpdateController;
-import fr.enssat.BoulderDash.controllers.BoulderAndDiamondController;
-import fr.enssat.BoulderDash.helpers.AudioLoadHelper;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,32 +10,33 @@ import java.awt.event.KeyListener;
 
 /**
  * GameKeyController
- *
+ * <p>
  * Manages the key events controller.
  *
- * @author      Colin Leverger <me@colinleverger.fr>
- * @since       2015-06-19
+ * @author Colin Leverger <me@colinleverger.fr>
+ * @since 2015-06-19
  */
 public class GameKeyController implements KeyListener {
-	private LevelModel levelModel;
-	private RockfordUpdateController updatePosRockford;
+    private final LevelModel levelModel;
+    private final RockfordUpdateController updatePosRockford;
+
     /**
      * Class constructor
      *
-     * @param  levelModel  Level model
+     * @param levelModel Level model
      */
-	public GameKeyController(LevelModel levelModel, AudioLoadHelper audioLoadHelper) {
-		this.levelModel = levelModel;
-		new BoulderAndDiamondController(levelModel, audioLoadHelper);
-		this.updatePosRockford = new RockfordUpdateController(levelModel);
-	}
+    public GameKeyController(LevelModel levelModel, AudioLoadHelper audioLoadHelper) {
+        this.levelModel = levelModel;
+        new BoulderAndDiamondController(levelModel, audioLoadHelper);
+        this.updatePosRockford = new RockfordUpdateController(levelModel);
+    }
 
     /**
      * Handles the 'key pressed' event
      *
-     * @param  e  Key event
+     * @param e Key event
      */
-	public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {
@@ -85,25 +84,25 @@ public class GameKeyController implements KeyListener {
 
                 break;
         }
-	}
+    }
 
     /**
      * Handles the 'key released' event
      *
-     * @param  e  Key event
+     * @param e Key event
      */
-	@Override
-	public void keyReleased(KeyEvent e) {
-		this.levelModel.getRockford().startStaying();
-	}
+    @Override
+    public void keyReleased(KeyEvent e) {
+        this.levelModel.getRockford().startStaying();
+    }
 
     /**
      * Handles the 'key typed' event
      *
-     * @param  e  Key event
+     * @param e Key event
      */
-	@Override
-	public void keyTyped(KeyEvent e) {
+    @Override
+    public void keyTyped(KeyEvent e) {
         // Do nothing.
-	}
+    }
 }

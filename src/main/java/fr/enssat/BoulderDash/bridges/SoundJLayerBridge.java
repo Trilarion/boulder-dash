@@ -1,28 +1,27 @@
 package fr.enssat.BoulderDash.bridges;
 
-import java.io.InputStream;
-import java.net.URL;
-
-import javazoom.jl.player.advanced.*;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.FactoryRegistry;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackListener;
+
+import java.io.InputStream;
 
 /**
  * SoundJLayerBridge
- *
+ * <p>
  * Sound bridge to the JLayer library.
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-19
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-19
  */
 public class SoundJLayerBridge extends PlaybackListener implements Runnable {
-    private InputStream inputStream;
+    private final InputStream inputStream;
     private AdvancedPlayer player;
     private Thread playerThread;
 
     /**
      * Class constructor
-     *
      */
     public SoundJLayerBridge(InputStream inputStream) {
         this.inputStream = inputStream;

@@ -1,47 +1,45 @@
 package fr.enssat.BoulderDash.views;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.*;
-
-import fr.enssat.BoulderDash.views.LevelEditorView;
 
 
 /**
  * AssetsLevelEditorComponent
- *
+ * <p>
  * Information panel element.
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-22
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-22
  */
 public class AssetsLevelEditorComponent extends JPanel implements ActionListener {
-    private LevelEditorView levelEditorView;
-
     /**
      * Available choices
      */
     static List<String> choiceList = Arrays.asList(
             "Boulder", "Diamond", "Dirt", "Brick Wall", "Expanding Wall", "Magic Wall", "Steel Wall", "Rockford"
     );
+    private final LevelEditorView levelEditorView;
 
     /**
      * Class constructor
      *
-     * @param  levelEditorView  Controller for level editor
+     * @param levelEditorView Controller for level editor
      */
     public AssetsLevelEditorComponent(LevelEditorView levelEditorView) {
         super(new BorderLayout());
 
-    	this.levelEditorView = levelEditorView;
+        this.levelEditorView = levelEditorView;
         ButtonGroup buttonGroup = new ButtonGroup();
         JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 
         String curListChoice;
 
-        for(int i = 0; i < choiceList.size(); i++) {
+        for (int i = 0; i < choiceList.size(); i++) {
             curListChoice = choiceList.get(i);
 
             // Create radio buttons from list
@@ -66,7 +64,7 @@ public class AssetsLevelEditorComponent extends JPanel implements ActionListener
     /**
      * Listens for action events
      *
-     * @param  e  Action event
+     * @param e Action event
      */
     public void actionPerformed(ActionEvent e) {
         JRadioButton sourceButton = (JRadioButton) e.getSource();

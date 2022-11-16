@@ -9,22 +9,22 @@ import java.awt.event.KeyListener;
 
 /**
  * LevelEditorKeyController
- *
+ * <p>
  * Manages the key events controller.
  *
- * @author      Valerian Saliou <valerian@valeriansaliou.name>
- * @since       2015-06-21
+ * @author Valerian Saliou <valerian@valeriansaliou.name>
+ * @since 2015-06-21
  */
 public class LevelEditorKeyController implements KeyListener {
-    private LevelModel levelModel;
-    private LevelEditorView levelEditorView;
-	private boolean capLocks;
+    private final LevelModel levelModel;
+    private final LevelEditorView levelEditorView;
+    private boolean capLocks;
 
     /**
      * Class constructor
      *
-     * @param  levelModel       Level model
-     * @param  levelEditorView  Level editor view
+     * @param levelModel      Level model
+     * @param levelEditorView Level editor view
      */
     public LevelEditorKeyController(LevelModel levelModel, LevelEditorView levelEditorView) {
         this.levelModel = levelModel;
@@ -35,7 +35,7 @@ public class LevelEditorKeyController implements KeyListener {
     /**
      * Handles the 'key pressed' event
      *
-     * @param  e  Key event
+     * @param e Key event
      */
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -65,22 +65,22 @@ public class LevelEditorKeyController implements KeyListener {
             case KeyEvent.VK_SPACE:
                 this.levelModel.triggerBlockChange(this.levelEditorView.getPickedBlockValue());
                 break;
-            
+
             case 16:
                 this.capLocks = !capLocks;
                 break;
         }
 
         // Hold block change (quick edit)
-        if(capLocks) {
-        	this.levelModel.triggerBlockChange(this.levelEditorView.getPickedBlockValue());
+        if (capLocks) {
+            this.levelModel.triggerBlockChange(this.levelEditorView.getPickedBlockValue());
         }
     }
 
     /**
      * Handles the 'key released' event
      *
-     * @param  e  Key event
+     * @param e Key event
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -90,7 +90,7 @@ public class LevelEditorKeyController implements KeyListener {
     /**
      * Handles the 'key typed' event
      *
-     * @param  e  Key event
+     * @param e Key event
      */
     @Override
     public void keyTyped(KeyEvent e) {

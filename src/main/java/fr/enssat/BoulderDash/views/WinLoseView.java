@@ -1,22 +1,19 @@
 package fr.enssat.BoulderDash.views;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
 
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
+public class WinLoseView extends JFrame {
 
-public class WinLoseView extends JFrame{
-	
-	private String winOrLose;
+    private final String winOrLose;
 
-	/**
-	 * Generate the HelpView
-	 */
-	public WinLoseView(String winOrLose){
-		this.winOrLose = winOrLose;
-		this.initializeView();
-		this.createLayout();
-	}
+    /**
+     * Generate the HelpView
+     */
+    public WinLoseView(String winOrLose) {
+        this.winOrLose = winOrLose;
+        this.initializeView();
+        this.createLayout();
+    }
 
     /**
      * Initializes the view
@@ -36,14 +33,14 @@ public class WinLoseView extends JFrame{
     /**
      * Creates the view layout
      */
-    private void createLayout() {    	
-    	JTextArea help = new JTextArea();
-    	help.setEditable(false);
-    	if(winOrLose.equals("win"))
-	    	help.setText("YOU WIN THE GAME :-)");
-    	else
-    		help.setText("YOU LOSE THE GAME :-( TRY AGAIN!");
-    	
+    private void createLayout() {
+        JTextArea help = new JTextArea();
+        help.setEditable(false);
+        if (winOrLose.equals("win"))
+            help.setText("YOU WIN THE GAME :-)");
+        else
+            help.setText("YOU LOSE THE GAME :-( TRY AGAIN!");
+
         this.add(help);
     }
 }
