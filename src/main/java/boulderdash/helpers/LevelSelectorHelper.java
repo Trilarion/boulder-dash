@@ -1,0 +1,54 @@
+package boulderdash.helpers;
+
+import boulderdash.views.LevelEditorView;
+import boulderdash.views.MenuLevelSelector;
+
+
+/**
+ * LevelSelectorHelper
+ * <p>
+ * Level selector helper
+ */
+public class LevelSelectorHelper {
+    private static final String levelStorage = "./res/levels";
+    private LevelEditorView levelEditorView = null;
+
+    public LevelSelectorHelper(boolean hasEmptyElement) {
+    }
+
+    public LevelSelectorHelper(boolean hasEmptyElement, LevelEditorView levelEditorView) {
+        this(hasEmptyElement);
+
+        this.levelEditorView = levelEditorView;
+    }
+
+    /**
+     * Creates the level list
+     *
+     * @return Level list selector
+     */
+    public MenuLevelSelector createLevelList() {
+        String[] availableLevels = this.listAvailableLevels();
+
+        // Proceed available levels listing
+        MenuLevelSelector menuLevelList = new MenuLevelSelector(availableLevels, this.levelEditorView);
+
+        if (availableLevels.length > 0) {
+            menuLevelList.setChoiceValue(availableLevels[0]);
+            menuLevelList.setSelectedIndex(0);
+        }
+
+        menuLevelList.addActionListener(menuLevelList);
+
+        return menuLevelList;
+    }
+
+    /**
+     * Lists available levels and store them in instance context
+     *
+     * @return Available levels
+     */
+    private String[] listAvailableLevels() {
+        return new String[]{"01", "02", "03", "04", "05"};
+    }
+}

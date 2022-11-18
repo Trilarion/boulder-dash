@@ -3,14 +3,14 @@ plugins {
     id 'application'
 }
 
-group 'fr.enssat.BoulderDash'
+group 'boulderdash'
 version '1.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
-mainClassName = 'fr.enssat.BoulderDash.Game'
+mainClassName = 'boulderdash.Game'
 
 repositories {
     mavenCentral()
