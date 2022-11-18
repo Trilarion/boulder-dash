@@ -20,29 +20,27 @@ public class MenuView extends JFrame {
     private MenuLevelSelector menuLevelSelector;
     private JPanel actionPanel;
 
-    /**
-     * Class constructor
-     */
+
     public MenuView(NavigationBetweenViewController navigationBetweenViewController) {
         this.navigationBetweenViewController = navigationBetweenViewController;
-        this.initializeView();
-        this.createLayout();
+        initializeView();
+        createLayout();
     }
 
     /**
      * Initializes the view
      */
     private void initializeView() {
-        this.setVisible(true);
-        this.setResizable(false);
+        setVisible(true);
+        setResizable(false);
 
         // UI parameters
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBounds(100, 100, 200, 100);
-        this.setSize(432, 536);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 200, 100);
+        setSize(432, 536);
 
         // App parameters
-        this.setTitle("Boulder Dash | Menu");
+        setTitle("Boulder Dash | Menu");
     }
 
     /**
@@ -50,23 +48,23 @@ public class MenuView extends JFrame {
      */
     private void createLayout() {
         LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(false);
-        this.menuLevelSelector = levelSelectorHelper.createLevelList();
+        menuLevelSelector = levelSelectorHelper.createLevelList();
 
         JPanel targetPanel = new JPanel();
 
         MenuImage menuImage = new MenuImage();
-        this.actionPanel = new JPanel();
+        actionPanel = new JPanel();
 
         // Add some buttons on the actionPanel
-        this.createButton("game", "Game");
-        this.createButton("editor", "Editor");
-        this.createButton("quit", "Quit");
+        createButton("game", "Game");
+        createButton("editor", "Editor");
+        createButton("quit", "Quit");
 
-        this.add(menuImage, BorderLayout.CENTER);
-        this.add(targetPanel, BorderLayout.SOUTH);
+        add(menuImage, BorderLayout.CENTER);
+        add(targetPanel, BorderLayout.SOUTH);
 
-        targetPanel.add(this.menuLevelSelector, BorderLayout.NORTH);
-        targetPanel.add(this.actionPanel, BorderLayout.SOUTH);
+        targetPanel.add(menuLevelSelector, BorderLayout.NORTH);
+        targetPanel.add(actionPanel, BorderLayout.SOUTH);
     }
 
     /**
@@ -76,10 +74,10 @@ public class MenuView extends JFrame {
      */
     public void createButton(String id, String name) {
         JButton button = new JButton(name);
-        button.addActionListener(this.navigationBetweenViewController);
+        button.addActionListener(navigationBetweenViewController);
         button.setActionCommand(id);
 
-        this.actionPanel.add(button);
+        actionPanel.add(button);
 
     }
 
@@ -89,6 +87,6 @@ public class MenuView extends JFrame {
      * @return Level identifier
      */
     public String getLevelIdentifier() {
-        return this.menuLevelSelector.getChoiceValue();
+        return menuLevelSelector.getChoiceValue();
     }
 }

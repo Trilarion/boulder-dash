@@ -8,9 +8,6 @@ import java.util.ArrayList;
  * MagicWallModel
  * <p>
  * Represents the magic wall.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class MagicWallModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -46,14 +43,12 @@ public class MagicWallModel extends DisplayableElementModel {
     private long previousTime;
     private int currentFrame;
 
-    /**
-     * Class constructor
-     */
+
     public MagicWallModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
-        this.currentFrame = 0;
-        this.speed = 100;
-        this.initSprites();
+        currentFrame = 0;
+        speed = 100;
+        initSprites();
     }
 
     /**
@@ -67,7 +62,7 @@ public class MagicWallModel extends DisplayableElementModel {
             try {
                 currentFrame += 1;
 
-                this.setSprite(framesMagicWall.get(this.currentFrame));
+                setSprite(framesMagicWall.get(currentFrame));
             } catch (IndexOutOfBoundsException e) {
                 currentFrame = 0;
             }
@@ -78,7 +73,7 @@ public class MagicWallModel extends DisplayableElementModel {
      * Init the subimages
      */
     private void initSprites() {
-        this.framesMagicWall = new ArrayList<>();
+        framesMagicWall = new ArrayList<>();
         /* INIT SPRITE FOR DIAMOND */
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 0, 0, 16, 16));
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 24, 0, 16, 16));

@@ -4,9 +4,6 @@ package boulderdash.models;
  * ExpandingWallModel
  * <p>
  * Represents a ExpandingWall in the game.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class ExpandingWallModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -33,11 +30,8 @@ public class ExpandingWallModel extends DisplayableElementModel {
         collideSound = null;
     }
 
-    /**
-     * Class constructor
-     */
     public ExpandingWallModel() {
         super(destructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
-        this.loadSprite(spriteName);
+        loadSprite(spriteName);
     }
 }

@@ -13,9 +13,6 @@ import java.awt.*;
  * LevelEditorView
  * <p>
  * Specifies the level editor view.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class LevelEditorView extends JFrame {
     private final NavigationBetweenViewController nav;
@@ -27,38 +24,36 @@ public class LevelEditorView extends JFrame {
 
     private String pickedBlockValue;
 
-    /**
-     * Class constructor
-     */
+
     public LevelEditorView(LevelEditorController levelEditorController, LevelModel levelModel, NavigationBetweenViewController nav) {
         this.levelEditorController = levelEditorController;
         this.levelModel = levelModel;
         this.nav = nav;
 
-        this.initializeView();
-        this.createLayout();
+        initializeView();
+        createLayout();
 
-        this.fieldPanel.grabFocus();
+        fieldPanel.grabFocus();
     }
 
     /**
      * Initializes the view layout
      */
     private void initializeView() {
-        this.setFocusable(true);
-        this.setVisible(false);
-        this.setResizable(false);
+        setFocusable(true);
+        setVisible(false);
+        setResizable(false);
 
         // UI parameters
-        this.setSize(984, 454);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(984, 454);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // App parameters
-        this.setTitle("Boulder Dash | Level Editor");
+        setTitle("Boulder Dash | Level Editor");
 
         Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png");
-        this.setIconImage(appIcon);
+        setIconImage(appIcon);
     }
 
     /**
@@ -67,22 +62,22 @@ public class LevelEditorView extends JFrame {
     private void createLayout() {
         // List of levels
         LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(true, this);
-        this.menuLevelSelector = levelSelectorHelper.createLevelList();
+        menuLevelSelector = levelSelectorHelper.createLevelList();
 
         // Field + select panels
-        this.fieldPanel = new LevelEditorGroundView(this.levelModel, this);
+        fieldPanel = new LevelEditorGroundView(levelModel, this);
         JPanel selectPanel = new JPanel();
 
         AssetsLevelEditorComponent assetsComponent = new AssetsLevelEditorComponent(this);
         JPanel actionsComponent = new JPanel();
 
         // Add actions
-        actionsComponent.add(this.menuLevelSelector);
-        actionsComponent.add(this.createButton("save", "Save"));
-        actionsComponent.add(this.createButton("delete", "Delete"));
-        actionsComponent.add(this.createButton("new", "New level"));
-        actionsComponent.add(this.createButton("menu", "Menu"));
-        actionsComponent.add(this.createButton("help", "Help"));
+        actionsComponent.add(menuLevelSelector);
+        actionsComponent.add(createButton("save", "Save"));
+        actionsComponent.add(createButton("delete", "Delete"));
+        actionsComponent.add(createButton("new", "New level"));
+        actionsComponent.add(createButton("menu", "Menu"));
+        actionsComponent.add(createButton("help", "Help"));
 
         // Add select panel subcomponents
         selectPanel.setLayout(new BoxLayout(selectPanel, BoxLayout.Y_AXIS));
@@ -91,8 +86,8 @@ public class LevelEditorView extends JFrame {
         selectPanel.add(actionsComponent);
 
         // Add top components
-        this.add(this.fieldPanel, BorderLayout.CENTER);
-        this.add(selectPanel, BorderLayout.WEST);
+        add(fieldPanel, BorderLayout.CENTER);
+        add(selectPanel, BorderLayout.WEST);
     }
 
     /**
@@ -104,7 +99,7 @@ public class LevelEditorView extends JFrame {
      */
     public JButton createButton(String id, String name) {
         JButton button = new JButton(name);
-        button.addActionListener(this.levelEditorController);
+        button.addActionListener(levelEditorController);
         button.setActionCommand(id);
 
         return button;
@@ -116,7 +111,7 @@ public class LevelEditorView extends JFrame {
      * @return Level editor field view
      */
     public LevelEditorGroundView getLevelEditorGroundView() {
-        return this.fieldPanel;
+        return fieldPanel;
     }
 
     /**
@@ -125,7 +120,7 @@ public class LevelEditorView extends JFrame {
      * @return Picked block value
      */
     public String getPickedBlockValue() {
-        return this.pickedBlockValue;
+        return pickedBlockValue;
     }
 
     /**
@@ -147,27 +142,27 @@ public class LevelEditorView extends JFrame {
 
         if (selectedLevelValue != null && !selectedLevelValue.isEmpty()) {
             // Load existing model
-            pickedLevelModel = new LevelModel(selectedLevelValue, this.nav.getAudioLoadHelper(), "editor");
+            pickedLevelModel = new LevelModel(selectedLevelValue, nav.getAudioLoadHelper(), "editor");
         } else {
             // New blank model for editor
-            pickedLevelModel = new LevelModel(this.nav.getAudioLoadHelper());
+            pickedLevelModel = new LevelModel(nav.getAudioLoadHelper());
         }
 
         pickedLevelModel.setShowCursor(true);
         pickedLevelModel.setMode("editor");
-        this.levelModel = pickedLevelModel;
+        levelModel = pickedLevelModel;
 
         // Hide old view
-        this.levelEditorController.getLevelEditorView().dispose();
+        levelEditorController.getLevelEditorView().dispose();
 
-        this.levelEditorController = new LevelEditorController(this.levelModel, this.nav);
+        levelEditorController = new LevelEditorController(levelModel, nav);
 
-        this.levelEditorController.getLevelEditorView().setSelectedLevel(selectedLevelValue);
-        this.levelEditorController.getLevelEditorView().setVisible(true);
-        this.levelEditorController.getLevelEditorView().getLevelEditorGroundView().grabFocus();
+        levelEditorController.getLevelEditorView().setSelectedLevel(selectedLevelValue);
+        levelEditorController.getLevelEditorView().setVisible(true);
+        levelEditorController.getLevelEditorView().fieldPanel.grabFocus();
 
-        this.levelEditorController.getLevelEditorView().menuLevelSelector.setChoiceValue(selectedLevelValue);
-        this.levelEditorController.getLevelEditorView().menuLevelSelector.setSelectedValue(selectedLevelValue);
+        levelEditorController.getLevelEditorView().menuLevelSelector.setChoiceValue(selectedLevelValue);
+        levelEditorController.getLevelEditorView().menuLevelSelector.setSelectedValue(selectedLevelValue);
     }
 
     /**
@@ -179,11 +174,11 @@ public class LevelEditorView extends JFrame {
         String selectedLevelValue = changedSelector.getChoiceValue();
 
         // Value didn't change?
-        if (selectedLevelValue.equals(this.getSelectedLevel())) {
+        if (selectedLevelValue.equals(selectedLevel)) {
             return;
         }
 
-        this.openedLevelChange(selectedLevelValue);
+        openedLevelChange(selectedLevelValue);
     }
 
     /**
@@ -192,7 +187,7 @@ public class LevelEditorView extends JFrame {
      * @return Selected level
      */
     public String getSelectedLevel() {
-        return this.selectedLevel;
+        return selectedLevel;
     }
 
     /**
@@ -201,6 +196,6 @@ public class LevelEditorView extends JFrame {
      * @param level Selected level
      */
     public void setSelectedLevel(String level) {
-        this.selectedLevel = level;
+        selectedLevel = level;
     }
 }

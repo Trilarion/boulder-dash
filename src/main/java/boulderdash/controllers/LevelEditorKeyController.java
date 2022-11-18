@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 /**
  * LevelEditorKeyController
- *
+ * <p>
  * Manages the key-events controller.
  */
 public class LevelEditorKeyController implements KeyListener {
@@ -23,7 +23,7 @@ public class LevelEditorKeyController implements KeyListener {
      */
     public LevelEditorKeyController(LevelModel levelModel, LevelEditorView levelEditorView) {
         this.levelModel = levelModel;
-        this.capLocks = false;
+        capLocks = false;
         this.levelEditorView = levelEditorView;
     }
 
@@ -38,37 +38,37 @@ public class LevelEditorKeyController implements KeyListener {
         switch (keyCode) {
             // Direction: UP
             case KeyEvent.VK_UP:
-                this.levelModel.decrementCursorYPosition();
+                levelModel.decrementCursorYPosition();
                 break;
 
             // Direction: DOWN
             case KeyEvent.VK_DOWN:
-                this.levelModel.incrementCursorYPosition();
+                levelModel.incrementCursorYPosition();
                 break;
 
             // Direction: LEFT
             case KeyEvent.VK_LEFT:
-                this.levelModel.decrementCursorXPosition();
+                levelModel.decrementCursorXPosition();
                 break;
 
             // Direction: RIGHT
             case KeyEvent.VK_RIGHT:
-                this.levelModel.incrementCursorXPosition();
+                levelModel.incrementCursorXPosition();
                 break;
 
             // Key: SPACE
             case KeyEvent.VK_SPACE:
-                this.levelModel.triggerBlockChange(this.levelEditorView.getPickedBlockValue());
+                levelModel.triggerBlockChange(levelEditorView.getPickedBlockValue());
                 break;
 
             case 16:
-                this.capLocks = !capLocks;
+                capLocks = !capLocks;
                 break;
         }
 
         // Hold block change (quick edit)
         if (capLocks) {
-            this.levelModel.triggerBlockChange(this.levelEditorView.getPickedBlockValue());
+            levelModel.triggerBlockChange(levelEditorView.getPickedBlockValue());
         }
     }
 

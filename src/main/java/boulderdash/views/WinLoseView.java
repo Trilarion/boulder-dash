@@ -11,23 +11,23 @@ public class WinLoseView extends JFrame {
      */
     public WinLoseView(String winOrLose) {
         this.winOrLose = winOrLose;
-        this.initializeView();
-        this.createLayout();
+        initializeView();
+        createLayout();
     }
 
     /**
      * Initializes the view
      */
     private void initializeView() {
-        this.setVisible(true);
-        this.setResizable(false);
+        setVisible(true);
+        setResizable(false);
 
         // UI parameters
-        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-        this.setBounds(300, 300, 250, 100);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setBounds(300, 300, 250, 100);
 
         // App parameters
-        this.setTitle("END OF THE GAME ! ");
+        setTitle("END OF THE GAME ! ");
     }
 
     /**
@@ -36,11 +36,11 @@ public class WinLoseView extends JFrame {
     private void createLayout() {
         JTextArea help = new JTextArea();
         help.setEditable(false);
-        if (winOrLose.equals("win"))
+        if ("win".equals(winOrLose))
             help.setText("YOU WIN THE GAME :-)");
         else
             help.setText("YOU LOSE THE GAME :-( TRY AGAIN!");
 
-        this.add(help);
+        add(help);
     }
 }

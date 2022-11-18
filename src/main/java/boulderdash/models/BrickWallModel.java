@@ -4,9 +4,6 @@ package boulderdash.models;
  * BrickWallModel
  * <p>
  * Represents the brick wall in the game.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class BrickWallModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -33,11 +30,8 @@ public class BrickWallModel extends DisplayableElementModel {
         collideSound = "touch";
     }
 
-    /**
-     * Class constructor
-     */
     public BrickWallModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
-        this.loadSprite(spriteName);
+        loadSprite(spriteName);
     }
 }

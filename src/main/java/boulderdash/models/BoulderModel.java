@@ -4,9 +4,6 @@ package boulderdash.models;
  * BoulderModel
  * <p>
  * Represents the boulders.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class BoulderModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -31,12 +28,9 @@ public class BoulderModel extends DisplayableElementModel {
         collideSound = "die";
     }
 
-    /**
-     * Class constructor
-     */
     public BoulderModel(boolean convertible) {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, false, collideSound, convertible);
-        this.loadSprite(spriteName);
+        loadSprite(spriteName);
     }
 
 }

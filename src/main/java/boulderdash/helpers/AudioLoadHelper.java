@@ -16,7 +16,7 @@ public class AudioLoadHelper {
     private HashMap<String, SoundJLayerBridge> preloadedSounds;
 
     public AudioLoadHelper() {
-        this.preloadSounds();
+        preloadSounds();
     }
 
     /**
@@ -25,7 +25,7 @@ public class AudioLoadHelper {
      * @param musicId Music identifier
      * @return Music path, with file extension
      */
-    private InputStream getMusicPathInAudioStore(String musicId) {
+    private static InputStream getMusicPathInAudioStore(String musicId) {
         return AudioLoadHelper.class.getResourceAsStream("/audio/music/" + musicId + ".mp3");
     }
 
@@ -35,19 +35,19 @@ public class AudioLoadHelper {
      * @param musicId Music identifier
      */
     public void startMusic(String musicId) {
-        if (this.musicToPlay != null) {
-            this.stopMusic();
+        if (musicToPlay != null) {
+            stopMusic();
         }
 
-        this.musicToPlay = new SoundJLayerBridge(this.getMusicPathInAudioStore(musicId));
-        this.musicToPlay.play();
+        musicToPlay = new SoundJLayerBridge(getMusicPathInAudioStore(musicId));
+        musicToPlay.play();
     }
 
     /**
      * Stops game music
      */
     public void stopMusic() {
-        this.musicToPlay.stop();
+        musicToPlay.stop();
     }
 
     /**
@@ -55,11 +55,11 @@ public class AudioLoadHelper {
      */
     private void preloadSounds() {
         final String[] sounds = {"coin", "die", "new", "touch"};
-        this.preloadedSounds = new HashMap<>();
+        preloadedSounds = new HashMap<>();
 
         for (String sound : sounds) {
             InputStream inputStream = AudioLoadHelper.class.getResourceAsStream("/audio/sounds/" + sound + ".mp3");
-            this.preloadedSounds.put(sound, new SoundJLayerBridge(inputStream));
+            preloadedSounds.put(sound, new SoundJLayerBridge(inputStream));
         }
     }
 
@@ -70,7 +70,7 @@ public class AudioLoadHelper {
      * @return Preloaded sound instance
      */
     private SoundJLayerBridge getPreloadedSound(String soundId) {
-        return this.preloadedSounds.get(soundId);
+        return preloadedSounds.get(soundId);
     }
 
     /**
@@ -79,6 +79,6 @@ public class AudioLoadHelper {
      * @param soundId Sound identifier
      */
     public void playSound(String soundId) {
-        this.getPreloadedSound(soundId).play();
+        getPreloadedSound(soundId).play();
     }
 }

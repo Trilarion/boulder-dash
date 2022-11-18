@@ -16,9 +16,7 @@ public class MenuLevelSelector extends JComboBox<String> {
     private String choiceValue;
     private LevelEditorView levelEditorView = null;
 
-    /**
-     * Class constructor
-     */
+
     public MenuLevelSelector(String[] items) {
         super(items);
     }
@@ -35,10 +33,10 @@ public class MenuLevelSelector extends JComboBox<String> {
      */
     public void actionPerformed(ActionEvent e) {
         JComboBox<String> comboBoxSource = (JComboBox) e.getSource();
-        this.choiceValue = (String) comboBoxSource.getSelectedItem();
+        choiceValue = (String) comboBoxSource.getSelectedItem();
 
-        if (this.levelEditorView != null) {
-            this.levelEditorView.menuLevelSelectorChanged(this);
+        if (levelEditorView != null) {
+            levelEditorView.menuLevelSelectorChanged(this);
         }
     }
 
@@ -48,7 +46,7 @@ public class MenuLevelSelector extends JComboBox<String> {
      * @return Choice value
      */
     public String getChoiceValue() {
-        return this.choiceValue;
+        return choiceValue;
     }
 
     /**
@@ -66,9 +64,9 @@ public class MenuLevelSelector extends JComboBox<String> {
      * @param value Value to be selected
      */
     public void setSelectedValue(String value) {
-        for (int i = 0; i < this.getItemCount(); i++) {
-            if (this.getItemAt(i).equals(value)) {
-                this.setSelectedIndex(i);
+        for (int i = 0; i < getItemCount(); i++) {
+            if (getItemAt(i).equals(value)) {
+                setSelectedIndex(i);
                 break;
             }
         }

@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 /**
  * LevelEditorController
- *
+ * <p>
  * Manages the level editor controller.
  */
 public class LevelEditorController implements ActionListener {
@@ -31,7 +31,7 @@ public class LevelEditorController implements ActionListener {
         this.nav = nav;
         this.nav.getAudioLoadHelper().stopMusic();
 
-        this.levelEditorView = new LevelEditorView(this, levelModel, nav);
+        levelEditorView = new LevelEditorView(this, levelModel, nav);
 
         // Pre-bind event watcher (hack to fix a Java issue)
         this.levelModel.decrementCursorXPosition();
@@ -45,19 +45,19 @@ public class LevelEditorController implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         switch (event.getActionCommand()) {
             case "menu":
-                this.levelEditorView.setVisible(false);
-                this.nav.setMenuView();
-                this.nav.getAudioLoadHelper().startMusic("game");
+                levelEditorView.setVisible(false);
+                nav.setMenuView();
+                nav.getAudioLoadHelper().startMusic("game");
 
                 break;
 
             case "save":
                 // Check constraints
                 try {
-                    this.levelModel.checkConstraints();
+                    levelModel.checkConstraints();
 
                     // Save action (direct save)
-                    String levelId = this.levelEditorView.getSelectedLevel();
+                    String levelId = levelEditorView.getSelectedLevel();
                     LevelSaveHelper levelSave;
 
                     if (levelId == null || levelId.isEmpty()) {
@@ -71,7 +71,7 @@ public class LevelEditorController implements ActionListener {
                     JFrame frameDialog = new JFrame("Info");
                     JOptionPane.showMessageDialog(frameDialog, "Level saved");
 
-                    this.levelEditorView.openedLevelChange(levelSave.getLevelId());
+                    levelEditorView.openedLevelChange(levelSave.getLevelId());
                 } catch (LevelConstraintNotRespectedException e) {
                     JFrame frameDialog = new JFrame("Error");
                     JOptionPane.showMessageDialog(frameDialog, e.getMessage());
@@ -80,7 +80,7 @@ public class LevelEditorController implements ActionListener {
                 break;
 
             case "delete":
-                String levelId = this.levelEditorView.getSelectedLevel();
+                String levelId = levelEditorView.getSelectedLevel();
                 JFrame frameDialog = new JFrame("Info");
 
                 if (levelId == null || levelId.isEmpty()) {
@@ -89,7 +89,7 @@ public class LevelEditorController implements ActionListener {
                     new LevelRemoveHelper(levelId);
                     JOptionPane.showMessageDialog(frameDialog, "Level deleted!");
 
-                    this.levelEditorView.openedLevelChange(null);
+                    levelEditorView.openedLevelChange(null);
                 }
                 break;
 
@@ -98,11 +98,11 @@ public class LevelEditorController implements ActionListener {
                 break;
 
             case "new":
-                this.levelEditorView.openedLevelChange(null);
+                levelEditorView.openedLevelChange(null);
                 break;
         }
 
-        this.getLevelEditorView().getLevelEditorGroundView().grabFocus();
+        levelEditorView.getLevelEditorGroundView().grabFocus();
     }
 
     /**
@@ -129,7 +129,7 @@ public class LevelEditorController implements ActionListener {
      * @return Level model
      */
     public LevelModel getLevelModel() {
-        return this.levelModel;
+        return levelModel;
     }
 
 }

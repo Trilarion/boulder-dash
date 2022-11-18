@@ -19,13 +19,11 @@ import java.io.InputStream;
 public class MenuImage extends JPanel {
     private BufferedImage imageFile;
 
-    /**
-     * Class constructor
-     */
+
     public MenuImage() {
         try {
             InputStream imagePath = MenuImage.class.getResourceAsStream("/drawable/app/menu_actual.jpg");
-            this.imageFile = ImageIO.read(imagePath);
+            imageFile = ImageIO.read(imagePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,6 +38,6 @@ public class MenuImage extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawImage(this.imageFile, 0, 0, null);
+        g.drawImage(imageFile, 0, 0, null);
     }
 }

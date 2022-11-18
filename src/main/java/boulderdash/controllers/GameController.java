@@ -27,17 +27,17 @@ public class GameController implements ActionListener {
      * @param levelModel Level model
      */
     public GameController(LevelModel levelModel, AudioLoadHelper audioLoadHelper, NavigationBetweenViewController navigationBetweenViewController) {
-        this.firstClickOnPause = true;
+        firstClickOnPause = true;
 
         this.navigationBetweenViewController = navigationBetweenViewController;
 
         this.levelModel = levelModel;
         this.audioLoadHelper = audioLoadHelper;
-        this.gameView = new GameView(this, levelModel);
-        this.menuView = navigationBetweenViewController.getMenuView();
+        gameView = new GameView(this, levelModel);
+        menuView = navigationBetweenViewController.getMenuView();
 
-        this.getAudioLoadHelper().stopMusic();
-        this.getAudioLoadHelper().playSound("new");
+        this.audioLoadHelper.stopMusic();
+        this.audioLoadHelper.playSound("new");
     }
 
     /**
@@ -48,22 +48,22 @@ public class GameController implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         switch (event.getActionCommand()) {
             case "pause":
-                this.levelModel.setGamePaused(this.firstClickOnPause);
+                levelModel.setGamePaused(firstClickOnPause);
 
-                this.firstClickOnPause = !this.firstClickOnPause;
-                this.gameView.getGameFieldView().grabFocus();
+                firstClickOnPause = !firstClickOnPause;
+                gameView.getGameFieldView().grabFocus();
                 break;
 
             case "restart":
-                this.resetGame("restart");
-                this.getAudioLoadHelper().playSound("new");
-                this.gameView.getGameFieldView().grabFocus();
+                resetGame("restart");
+                audioLoadHelper.playSound("new");
+                gameView.getGameFieldView().grabFocus();
                 break;
 
             case "menu":
-                this.menuView.setVisible(true);
-                this.getAudioLoadHelper().startMusic("game");
-                this.resetGame("menu");
+                menuView.setVisible(true);
+                audioLoadHelper.startMusic("game");
+                resetGame("menu");
                 break;
         }
     }
@@ -72,12 +72,12 @@ public class GameController implements ActionListener {
      * Function to reset the game
      */
     private void resetGame(String source) {
-        this.gameView.dispose();
+        gameView.dispose();
 
-        if (source.equals("restart")) {
-            this.levelModel = new LevelModel(this.navigationBetweenViewController.getPickedLevelIdentifier(), audioLoadHelper);
-            this.gameView = new GameView(this, levelModel);
-            this.gameView.setVisible(true);
+        if ("restart".equals(source)) {
+            levelModel = new LevelModel(navigationBetweenViewController.getPickedLevelIdentifier(), audioLoadHelper);
+            gameView = new GameView(this, levelModel);
+            gameView.setVisible(true);
         }
     }
 
@@ -85,7 +85,7 @@ public class GameController implements ActionListener {
      * Gets the audio load helper instance
      */
     public AudioLoadHelper getAudioLoadHelper() {
-        return this.audioLoadHelper;
+        return audioLoadHelper;
     }
 
     /**

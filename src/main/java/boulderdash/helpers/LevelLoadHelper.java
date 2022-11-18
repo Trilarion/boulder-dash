@@ -34,10 +34,10 @@ import java.util.Locale;
  */
 public class LevelLoadHelper {
     private final SimpleDateFormat dateFormatter;
-    private final int limitsWidth = 2;
-    private final int limitsHeight = 2;
-    private final int limitsOffsetWidth = 1;
-    private final int limitsOffsetHeight = 1;
+    private static final int limitsWidth = 2;
+    private static final int limitsHeight = 2;
+    private static final int limitsOffsetWidth = 1;
+    private static final int limitsOffsetHeight = 1;
     private String levelId = null;
     private Document levelDOM;
     private XPath xpathBuilder;
@@ -59,15 +59,15 @@ public class LevelLoadHelper {
      * @param levelId Level identifier
      */
     public LevelLoadHelper(String levelId) {
-        this.setLevelId(levelId);
-        this.diamondsToCatch = 0;
+        setLevelId(levelId);
+        diamondsToCatch = 0;
 
         // Requirements
-        this.dateFormatter = new SimpleDateFormat("yyy-MM-dd/HH:mm:ss", Locale.ENGLISH);
+        dateFormatter = new SimpleDateFormat("yyy-MM-dd/HH:mm:ss", Locale.ENGLISH);
 
         if (this.levelId != null) {
             // Let's go.
-            this.loadLevelData();
+            loadLevelData();
         }
     }
 
@@ -77,7 +77,7 @@ public class LevelLoadHelper {
      * @return Level path, with file extension
      */
     private InputStream getLevelPathInDataStore() {
-        String name = "/levels/level" + this.getLevelId() + ".xml"; // TODO this is fragile (we don't really know if this exists)
+        String name = "/levels/level" + levelId + ".xml"; // TODO this is fragile (we don't really know if this exists)
         return LevelLoadHelper.class.getResourceAsStream(name);
     }
 
@@ -85,13 +85,13 @@ public class LevelLoadHelper {
      * Loads the level data into instance data space
      */
     private void loadLevelData() {
-        this.xpathBuilder = XPathFactory.newInstance().newXPath();
+        xpathBuilder = XPathFactory.newInstance().newXPath();
 
-        InputStream pathToData = this.getLevelPathInDataStore();
+        InputStream pathToData = getLevelPathInDataStore();
 
         // Parse & process level data
-        this.parseLevelData(pathToData);
-        this.processLevelData();
+        parseLevelData(pathToData);
+        processLevelData();
     }
 
     /**
@@ -107,7 +107,7 @@ public class LevelLoadHelper {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
             // Parse data in level file
-            this.levelDOM = documentBuilder.parse(pathToLevelData);
+            levelDOM = documentBuilder.parse(pathToLevelData);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
@@ -119,10 +119,10 @@ public class LevelLoadHelper {
     private void processLevelData() {
         // Parse elements from structure
         try {
-            this.processNameElement();
-            this.processDateElement();
-            this.processSizeElement();
-            this.processGridElement();
+            processNameElement();
+            processDateElement();
+            processSizeElement();
+            processGridElement();
         } catch (XPathExpressionException | ParseException e) {
             e.printStackTrace();
         }
@@ -133,7 +133,7 @@ public class LevelLoadHelper {
      */
     private void processNameElement() throws XPathExpressionException {
         // Returns level name value
-        this.nameValue = this.xpathBuilder.compile("/bd-level/name").evaluate(this.levelDOM);
+        nameValue = xpathBuilder.compile("/bd-level/name").evaluate(levelDOM);
     }
 
     /**
@@ -141,10 +141,10 @@ public class LevelLoadHelper {
      */
     private void processDateElement() throws XPathExpressionException, ParseException {
         // Returns level creation date value
-        this.dateCreatedValue = this.dateFormatter.parse(xpathBuilder.compile("/bd-level/date[@format='utc']/created").evaluate(this.levelDOM));
+        dateCreatedValue = dateFormatter.parse(xpathBuilder.compile("/bd-level/date[@format='utc']/created").evaluate(levelDOM));
 
         // Returns level modification date value
-        this.dateModifiedValue = this.dateFormatter.parse(this.xpathBuilder.compile("/bd-level/date[@format='utc']/modified").evaluate(this.levelDOM));
+        dateModifiedValue = dateFormatter.parse(xpathBuilder.compile("/bd-level/date[@format='utc']/modified").evaluate(levelDOM));
     }
 
     /**
@@ -152,12 +152,12 @@ public class LevelLoadHelper {
      */
     private void processSizeElement() throws XPathExpressionException {
         // Returns level width value
-        this.widthSizeValue = Integer.parseInt(this.xpathBuilder.compile("/bd-level/size/width").evaluate(this.levelDOM));
-        this.widthSizeValue += this.limitsWidth;
+        widthSizeValue = Integer.parseInt(xpathBuilder.compile("/bd-level/size/width").evaluate(levelDOM));
+        widthSizeValue += limitsWidth;
 
         // Returns level height value
-        this.heightSizeValue = Integer.parseInt(this.xpathBuilder.compile("/bd-level/size/height").evaluate(this.levelDOM));
-        this.heightSizeValue += this.limitsHeight;
+        heightSizeValue = Integer.parseInt(xpathBuilder.compile("/bd-level/size/height").evaluate(levelDOM));
+        heightSizeValue += limitsHeight;
     }
 
     /**
@@ -165,10 +165,10 @@ public class LevelLoadHelper {
      */
     private void processGridElement() throws XPathExpressionException {
         // Initialize the grid
-        this.groundGrid = new DisplayableElementModel[this.widthSizeValue][this.heightSizeValue];
+        groundGrid = new DisplayableElementModel[widthSizeValue][heightSizeValue];
 
         // Populate the grid
-        NodeList lineNode = (NodeList) this.xpathBuilder.compile("/bd-level/grid[@state='initial']/line").evaluate(this.levelDOM, XPathConstants.NODESET);
+        NodeList lineNode = (NodeList) xpathBuilder.compile("/bd-level/grid[@state='initial']/line").evaluate(levelDOM, XPathConstants.NODESET);
 
         // Parse lines
         for (int y = 0; y < lineNode.getLength(); y++) {
@@ -205,16 +205,16 @@ public class LevelLoadHelper {
                                     continue;
                                 }
 
-                                if (currentSpriteConvertibleValue.equals("1")) {
+                                if ("1".equals(currentSpriteConvertibleValue)) {
                                     currentSpriteConvertible = true;
                                 }
 
                                 // Process positions
-                                int pX = rowIndex + this.limitsOffsetWidth;
-                                int pY = lineIndex + this.limitsOffsetHeight;
+                                int pX = rowIndex + limitsOffsetWidth;
+                                int pY = lineIndex + limitsOffsetHeight;
 
                                 try {
-                                    this.groundGrid[pX][pY] = this.constructGridElement(currentSpriteName, pX, pY, currentSpriteConvertible);
+                                    groundGrid[pX][pY] = constructGridElement(currentSpriteName, pX, pY, currentSpriteConvertible);
                                 } catch (UnknownModelException e) {
                                     e.printStackTrace();
                                 }
@@ -235,7 +235,7 @@ public class LevelLoadHelper {
      */
     private DisplayableElementModel constructGridElement(String spriteName, int rowIndex, int lineIndex, boolean convertible) throws UnknownModelException {
         ModelConvertHelper modelConvert = new ModelConvertHelper();
-        DisplayableElementModel element = modelConvert.toModel(spriteName, convertible);
+        DisplayableElementModel element = ModelConvertHelper.toModel(spriteName, convertible);
 
         // Custom actions?
         switch (spriteName) {
@@ -244,9 +244,9 @@ public class LevelLoadHelper {
                 break;
 
             case "rockford":
-                this.setRockfordPositionX(rowIndex);
-                this.setRockfordPositionY(lineIndex);
-                this.setRockfordInstance((RockfordModel) element);
+                setRockfordPositionX(rowIndex);
+                setRockfordPositionY(lineIndex);
+                setRockfordInstance((RockfordModel) element);
                 break;
         }
 
@@ -259,7 +259,7 @@ public class LevelLoadHelper {
      * @return Level identifier
      */
     public String getLevelId() {
-        return this.levelId;
+        return levelId;
     }
 
     /**
@@ -277,7 +277,7 @@ public class LevelLoadHelper {
      * @return Name value
      */
     public String getNameValue() {
-        return this.nameValue;
+        return nameValue;
     }
 
     /**
@@ -295,7 +295,7 @@ public class LevelLoadHelper {
      * @return Creation date value
      */
     public Date getDateCreatedValue() {
-        return this.dateCreatedValue;
+        return dateCreatedValue;
     }
 
     /**
@@ -313,7 +313,7 @@ public class LevelLoadHelper {
      * @return Modified date value
      */
     public Date getDateModifiedValue() {
-        return this.dateModifiedValue;
+        return dateModifiedValue;
     }
 
     /**
@@ -331,7 +331,7 @@ public class LevelLoadHelper {
      * @return Width size value
      */
     public int getWidthSizeValue() {
-        return this.widthSizeValue;
+        return widthSizeValue;
     }
 
     /**
@@ -349,7 +349,7 @@ public class LevelLoadHelper {
      * @return Height size value
      */
     public int getHeightSizeValue() {
-        return this.heightSizeValue;
+        return heightSizeValue;
     }
 
     /**
@@ -367,7 +367,7 @@ public class LevelLoadHelper {
      * @return Horizontal position of the Rockford element
      */
     public int getRockfordPositionX() {
-        return this.rockfordPositionX;
+        return rockfordPositionX;
     }
 
     /**
@@ -376,7 +376,7 @@ public class LevelLoadHelper {
      * @param x Horizontal position of the Rockford element
      */
     public void setRockfordPositionX(int x) {
-        this.rockfordPositionX = x;
+        rockfordPositionX = x;
     }
 
     /**
@@ -385,7 +385,7 @@ public class LevelLoadHelper {
      * @return Vertical position of the Rockford element
      */
     public int getRockfordPositionY() {
-        return this.rockfordPositionY;
+        return rockfordPositionY;
     }
 
     /**
@@ -394,7 +394,7 @@ public class LevelLoadHelper {
      * @param y Vertical position of the Rockford element
      */
     public void setRockfordPositionY(int y) {
-        this.rockfordPositionY = y;
+        rockfordPositionY = y;
     }
 
     /**
@@ -403,7 +403,7 @@ public class LevelLoadHelper {
      * @return Rockford instance
      */
     public RockfordModel getRockfordInstance() {
-        return this.rockfordInstance;
+        return rockfordInstance;
     }
 
     /**
@@ -421,7 +421,7 @@ public class LevelLoadHelper {
      * @return Ground grid
      */
     public DisplayableElementModel[][] getGroundGrid() {
-        return this.groundGrid;
+        return groundGrid;
     }
 
     /**

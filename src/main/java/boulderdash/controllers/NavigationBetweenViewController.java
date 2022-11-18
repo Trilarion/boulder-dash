@@ -18,13 +18,13 @@ public class NavigationBetweenViewController implements ActionListener {
     private String pickedLevelIdentifier;
 
     public NavigationBetweenViewController() {
-        this.audioLoadHelper = new AudioLoadHelper();
+        audioLoadHelper = new AudioLoadHelper();
 
         // Play game music
-        this.getAudioLoadHelper().startMusic("game");
+        audioLoadHelper.startMusic("game");
 
         // Creation of the first view
-        this.menuView = new MenuView(this);
+        menuView = new MenuView(this);
     }
 
     /**
@@ -42,56 +42,56 @@ public class NavigationBetweenViewController implements ActionListener {
             case "editor":
                 // New blank model for editor
                 LevelModel levelModelForEditor = new LevelModel(audioLoadHelper);
-                this.levelEditorController = new LevelEditorController(levelModelForEditor, this);
+                levelEditorController = new LevelEditorController(levelModelForEditor, this);
 
-                this.levelEditorController.getLevelEditorView().setVisible(true);
-                this.levelEditorController.getLevelEditorView().getLevelEditorGroundView().grabFocus();
+                levelEditorController.getLevelEditorView().setVisible(true);
+                levelEditorController.getLevelEditorView().getLevelEditorGroundView().grabFocus();
 
                 if (gameController != null) {
-                    this.gameController.getGameView().setVisible(false);
+                    gameController.getGameView().setVisible(false);
                 }
 
                 break;
 
             case "game":
                 // Reinit the levelModelForGame...
-                pickedLevelIdentifier = this.menuView.getLevelIdentifier();
+                pickedLevelIdentifier = menuView.getLevelIdentifier();
 
                 LevelModel levelModelForGame = new LevelModel(pickedLevelIdentifier, audioLoadHelper);
-                this.gameController = new GameController(levelModelForGame, audioLoadHelper, this);
+                gameController = new GameController(levelModelForGame, audioLoadHelper, this);
 
                 if (levelEditorController != null) {
-                    this.levelEditorController.getLevelEditorView().setVisible(false);
+                    levelEditorController.getLevelEditorView().setVisible(false);
                 }
 
-                this.gameController.getGameView().setVisible(true);
-                this.gameController.getGameView().getGameFieldView().grabFocus();
+                gameController.getGameView().setVisible(true);
+                gameController.getGameView().getGameFieldView().grabFocus();
 
                 break;
         }
 
-        this.menuView.setVisible(false);
+        menuView.setVisible(false);
     }
 
     /**
      * Get the audio load helper
      */
     public AudioLoadHelper getAudioLoadHelper() {
-        return this.audioLoadHelper;
+        return audioLoadHelper;
     }
 
     /**
      * Get the first view
      */
     public MenuView getMenuView() {
-        return this.menuView;
+        return menuView;
     }
 
     /**
      * Set the first view
      */
     public void setMenuView() {
-        this.menuView = new MenuView(this);
+        menuView = new MenuView(this);
     }
 
     /**

@@ -16,7 +16,7 @@ public class ModelConvertHelper {
      * @param spriteName Sprite name
      * @return Model associated to given sprite name
      */
-    public DisplayableElementModel toModel(String spriteName, boolean isConvertible) throws UnknownModelException {
+    public static DisplayableElementModel toModel(String spriteName, boolean isConvertible) throws UnknownModelException {
         DisplayableElementModel element;
 
         // Instanciates the sprite element matching the given sprite name

@@ -19,21 +19,19 @@ public class InformationPanel extends JPanel implements Observer<String> {
     private final LevelModel levelModel;
     private final JTextArea text;
 
-    /**
-     * Class constructor
-     */
+
     public InformationPanel(LevelModel levelModel) {
         this.levelModel = levelModel;
-        this.text = new JTextArea();
-        this.text.setEditable(false);
+        text = new JTextArea();
+        text.setEditable(false);
         this.levelModel.getGameInformationModel().addObserver(this);
 
-        this.text.setText(
+        text.setText(
                 "Score : " + levelModel.getGameInformationModel().getScore() +
                         "\nRemaining diamonds : " + levelModel.getGameInformationModel().getRemainingsDiamonds()
         );
 
-        this.add(this.text);
+        add(text);
     }
 
     /**
@@ -41,9 +39,9 @@ public class InformationPanel extends JPanel implements Observer<String> {
      */
     @Override
     public void update(@NotNull String notification) {
-        this.text.setText(
-                "Score : " + this.levelModel.getGameInformationModel().getScore() +
-                        "\nRemaining diamonds : " + this.levelModel.getGameInformationModel().getRemainingsDiamonds()
+        text.setText(
+                "Score : " + levelModel.getGameInformationModel().getScore() +
+                        "\nRemaining diamonds : " + levelModel.getGameInformationModel().getRemainingsDiamonds()
         );
     }
 }

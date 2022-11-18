@@ -11,8 +11,6 @@ import javax.swing.*;
  */
 public class Game {
     /**
-     * Class constructor
-     *
      * @param args Command-line arguments
      */
     public static void main(String[] args) {

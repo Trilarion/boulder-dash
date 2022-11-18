@@ -4,14 +4,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-
 /**
  * DisplayableElementModel
  * <p>
  * Represents a abstract displayable element
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public abstract class DisplayableElementModel {
     private static final String groupName;
@@ -37,8 +33,6 @@ public abstract class DisplayableElementModel {
     private String collideSound;
 
     /**
-     * Class constructor
-     *
      * @param destructible    Object destructible?
      * @param moving          Object is moving?
      * @param spriteName      Object sprite name?
@@ -70,7 +64,7 @@ public abstract class DisplayableElementModel {
      * @return Whether object is destructible or not
      */
     public boolean isDestructible() {
-        return this.destructible;
+        return destructible;
     }
 
     /**
@@ -79,7 +73,7 @@ public abstract class DisplayableElementModel {
      * @return Whether object is moving or not
      */
     public boolean isMoving() {
-        return this.moving;
+        return moving;
     }
 
     /**
@@ -87,7 +81,7 @@ public abstract class DisplayableElementModel {
      *
      * @return Group name value
      */
-    public String getGroupName() {
+    public static String getGroupName() {
         return groupName;
     }
 
@@ -96,7 +90,7 @@ public abstract class DisplayableElementModel {
      *
      * @return State value
      */
-    public String getStateValue() {
+    public static String getStateValue() {
         return stateValue;
     }
 
@@ -106,7 +100,7 @@ public abstract class DisplayableElementModel {
      * @return Sprite name value
      */
     public String getSpriteName() {
-        return this.spriteName;
+        return spriteName;
     }
 
     /**
@@ -115,7 +109,7 @@ public abstract class DisplayableElementModel {
      * @return Object priority
      */
     public int getPriority() {
-        return this.priority;
+        return priority;
     }
 
     /**
@@ -133,7 +127,7 @@ public abstract class DisplayableElementModel {
      * @return Whether object is animated or not
      */
     public boolean isAnimate() {
-        return this.animate;
+        return animate;
     }
 
     /**
@@ -149,7 +143,7 @@ public abstract class DisplayableElementModel {
      * @return Whether object explodes on impact or not
      */
     public boolean isImpactExplosive() {
-        return this.impactExplosive;
+        return impactExplosive;
     }
 
     /**
@@ -210,7 +204,7 @@ public abstract class DisplayableElementModel {
     public BufferedImage grabSprite(BufferedImage spriteSheet, int x, int y, int width, int height) {
         BufferedImage subImage = spriteSheet.getSubimage(x, y, width, height);
 
-        this.sprite = subImage;
+        sprite = subImage;
         return subImage;
     }
 
@@ -220,7 +214,7 @@ public abstract class DisplayableElementModel {
      * @return Whether object is falling or not
      */
     public boolean isFalling() {
-        return this.falling;
+        return falling;
     }
 
     /**
@@ -238,7 +232,7 @@ public abstract class DisplayableElementModel {
      * @return Collide sound
      */
     public String getCollideSound() {
-        return this.collideSound;
+        return collideSound;
     }
 
     /**
@@ -256,7 +250,7 @@ public abstract class DisplayableElementModel {
      * @return Convertible value
      */
     public boolean isConvertible() {
-        return this.convertible;
+        return convertible;
     }
 
     /**

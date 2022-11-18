@@ -19,7 +19,7 @@ public class LevelRemoveHelper {
     public LevelRemoveHelper(String levelId) {
         this.levelId = levelId;
 
-        File file = new File(this.getLevelPathInDataStore());
+        File file = new File(getLevelPathInDataStore());
         file.delete();
     }
 
@@ -29,6 +29,6 @@ public class LevelRemoveHelper {
      * @return Level path, with file extension
      */
     private String getLevelPathInDataStore() {
-        return pathToDataStore + "/" + this.levelId + ".xml";
+        return pathToDataStore + "/" + levelId + ".xml";
     }
 }

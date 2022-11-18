@@ -4,9 +4,6 @@ package boulderdash.models;
  * DoorModel
  * <p>
  * Represents escape door.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class DoorModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -33,12 +30,8 @@ public class DoorModel extends DisplayableElementModel {
         collideSound = null;
     }
 
-    /**
-     * Class constructor
-     */
     public DoorModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
-
-        this.loadSprite(spriteName);
+        loadSprite(spriteName);
     }
 }

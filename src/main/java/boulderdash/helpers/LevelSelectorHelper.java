@@ -28,10 +28,10 @@ public class LevelSelectorHelper {
      * @return Level list selector
      */
     public MenuLevelSelector createLevelList() {
-        String[] availableLevels = this.listAvailableLevels();
+        String[] availableLevels = listAvailableLevels();
 
         // Proceed available levels listing
-        MenuLevelSelector menuLevelList = new MenuLevelSelector(availableLevels, this.levelEditorView);
+        MenuLevelSelector menuLevelList = new MenuLevelSelector(availableLevels, levelEditorView);
 
         if (availableLevels.length > 0) {
             menuLevelList.setChoiceValue(availableLevels[0]);
@@ -48,7 +48,7 @@ public class LevelSelectorHelper {
      *
      * @return Available levels
      */
-    private String[] listAvailableLevels() {
+    private static String[] listAvailableLevels() {
         return new String[]{"01", "02", "03", "04", "05"};
     }
 }

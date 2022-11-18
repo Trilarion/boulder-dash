@@ -22,18 +22,18 @@ public class RockfordUpdateController implements Runnable {
         this.levelModel = levelModel;
         Thread elementMovingThread = new Thread(this);
         elementMovingThread.start();
-        this.rockfordHasMoved = false;
+        rockfordHasMoved = false;
     }
 
     /**
      * Watches for elements to be moved
      */
     public void run() {
-        while (this.levelModel.isGameRunning()) {
-            if (!this.levelModel.getGamePaused()) {
-                if (this.rockfordHasMoved) {
-                    this.levelModel.setPositionOfRockford(rockfordPositionX, rockfordPositionY);
-                    this.rockfordHasMoved = false;
+        while (levelModel.isGameRunning()) {
+            if (!levelModel.getGamePaused()) {
+                if (rockfordHasMoved) {
+                    levelModel.setPositionOfRockford(rockfordPositionX, rockfordPositionY);
+                    rockfordHasMoved = false;
                 }
             }
             try {
@@ -53,6 +53,6 @@ public class RockfordUpdateController implements Runnable {
     public void moveRockford(int rockfordPositionX, int rockfordPositionY) {
         this.rockfordPositionX = rockfordPositionX;
         this.rockfordPositionY = rockfordPositionY;
-        this.rockfordHasMoved = true;
+        rockfordHasMoved = true;
     }
 }

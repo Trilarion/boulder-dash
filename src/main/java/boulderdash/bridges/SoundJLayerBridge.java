@@ -17,9 +17,6 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
     private AdvancedPlayer player;
     private Thread playerThread;
 
-    /**
-     * Class constructor
-     */
     public SoundJLayerBridge(InputStream inputStream) {
         this.inputStream = inputStream;
     }
@@ -29,12 +26,12 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
      */
     public void play() {
         try {
-            this.player = new AdvancedPlayer(inputStream, FactoryRegistry.systemRegistry().createAudioDevice());
+            player = new AdvancedPlayer(inputStream, FactoryRegistry.systemRegistry().createAudioDevice());
 
-            this.player.setPlayBackListener(this);
+            player.setPlayBackListener(this);
 
-            this.playerThread = new Thread(this, "AudioPlayerThread");
-            this.playerThread.start();
+            playerThread = new Thread(this, "AudioPlayerThread");
+            playerThread.start();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -45,7 +42,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
      */
     public void stop() {
         try {
-            this.playerThread.stop();
+            playerThread.stop();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -56,7 +53,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
      */
     public void run() {
         try {
-            this.player.play();
+            player.play();
         } catch (JavaLayerException ex) {
             ex.printStackTrace();
         }

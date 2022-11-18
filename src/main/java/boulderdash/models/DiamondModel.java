@@ -5,14 +5,10 @@ import boulderdash.Options;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-
 /**
  * DiamondModel
  * <p>
  * Represents a diamond in the game.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class DiamondModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -42,13 +38,11 @@ public class DiamondModel extends DisplayableElementModel {
     private long speed;
     private ArrayList<BufferedImage> framesDiamond;
 
-    /**
-     * Class constructor
-     */
+
     public DiamondModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, false, collideSound);
 
-        this.initSprites();
+        initSprites();
     }
 
     /**
@@ -62,10 +56,10 @@ public class DiamondModel extends DisplayableElementModel {
             previousTime = time;
 
             try {
-                this.currentFrame += 1;
-                this.setSprite(framesDiamond.get(this.currentFrame));
+                currentFrame += 1;
+                setSprite(framesDiamond.get(currentFrame));
             } catch (IndexOutOfBoundsException e) {
-                this.currentFrame = 0;
+                currentFrame = 0;
             }
         }
     }
@@ -76,11 +70,11 @@ public class DiamondModel extends DisplayableElementModel {
      */
     private void initSprites() {
         /* Initialize object sprites */
-        this.framesDiamond = new ArrayList<>();
+        framesDiamond = new ArrayList<>();
 
         for (int i = 0; i < 8; i++) {
-            this.framesDiamond.add(
-                    this.grabSprite(loadSprite(spriteName), i * 24, 0, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
+            framesDiamond.add(
+                    grabSprite(loadSprite(spriteName), i * 24, 0, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
             );
         }
     }

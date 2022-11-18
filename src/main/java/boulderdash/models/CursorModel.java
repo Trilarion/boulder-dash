@@ -4,9 +4,6 @@ package boulderdash.models;
  * CursorModel
  * <p>
  * Represents the field cursor pointer.
- *
- * @author Valerian Saliou <valerian@valeriansaliou.name>
- * @since 2015-06-22
  */
 public class CursorModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -33,12 +30,8 @@ public class CursorModel extends DisplayableElementModel {
         collideSound = null;
     }
 
-    /**
-     * Class constructor
-     */
     public CursorModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
-
-        this.loadSprite(spriteName);
+        loadSprite(spriteName);
     }
 }

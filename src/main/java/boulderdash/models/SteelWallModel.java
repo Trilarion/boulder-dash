@@ -4,9 +4,6 @@ package boulderdash.models;
  * SteelWallModel
  * <p>
  * Represents the steelWall
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class SteelWallModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -33,11 +30,8 @@ public class SteelWallModel extends DisplayableElementModel {
         collideSound = "touch";
     }
 
-    /**
-     * Class constructor
-     */
     public SteelWallModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
-        this.loadSprite(spriteName);
+        loadSprite(spriteName);
     }
 }

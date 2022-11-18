@@ -10,9 +10,6 @@ import java.util.ArrayList;
  * RockfordModel
  * <p>
  * Represents the hero of the game.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  */
 public class RockfordModel extends DisplayableElementModel {
     private static final String spriteName;
@@ -64,16 +61,14 @@ public class RockfordModel extends DisplayableElementModel {
     private int currentFrame;
     private boolean hasExploded;
 
-    /**
-     * Class constructor
-     */
+
     public RockfordModel() {
         super(isDestructible, canMove, spriteName, priority, impactExplosive, animate, falling, collideSound);
         // Speed of the animation of the sprite
-        this.setSpeed(100);
+        setSpeed(100);
         // Init the sprites in arrays
-        this.initSprites();
-        this.hasExploded = false;
+        initSprites();
+        hasExploded = false;
     }
 
     public void setSpeed(int speed) {
@@ -85,23 +80,23 @@ public class RockfordModel extends DisplayableElementModel {
      * (And only that single thing)
      */
     public void update(long time) {
-        if (time - this.previousTime >= this.speed) {
+        if (time - previousTime >= speed) {
             // Update the animation
-            this.previousTime = time;
+            previousTime = time;
             try {
                 currentFrame += 1;
 
-                if (isStaying()) {
-                    this.setSprite(framesBlinking.get(currentFrame));
-                } else if (isRunningLeft()) {
-                    this.setSprite(framesRunningLeft.get(currentFrame));
-                } else if (isRunningRight()) {
-                    this.setSprite(framesRunningRight.get(currentFrame));
+                if (isStaying) {
+                    setSprite(framesBlinking.get(currentFrame));
+                } else if (isRunningLeft) {
+                    setSprite(framesRunningLeft.get(currentFrame));
+                } else if (isRunningRight) {
+                    setSprite(framesRunningRight.get(currentFrame));
                 } else if (isRunningUpOrDown()) {
-                    this.setSprite(framesRunningUpOrDown.get(currentFrame));
+                    setSprite(framesRunningUpOrDown.get(currentFrame));
                 }
             } catch (IndexOutOfBoundsException e) {
-                this.currentFrame = 0;
+                currentFrame = 0;
             }
         }
     }
@@ -178,7 +173,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford collision handled or not
      */
     public boolean isCollisionDone() {
-        return this.isCollisionDone;
+        return isCollisionDone;
     }
 
     /**
@@ -196,7 +191,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford staying or not
      */
     public boolean isStaying() {
-        return this.isStaying;
+        return isStaying;
     }
 
     /**
@@ -205,7 +200,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford running to the left or not
      */
     public boolean isRunningLeft() {
-        return this.isRunningLeft;
+        return isRunningLeft;
     }
 
     /**
@@ -214,7 +209,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford running to the right or not
      */
     public boolean isRunningRight() {
-        return this.isRunningRight;
+        return isRunningRight;
     }
 
     /**
@@ -223,7 +218,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford running up, or not
      */
     public boolean isRunningUp() {
-        return this.isRunningUp;
+        return isRunningUp;
     }
 
     /**
@@ -232,7 +227,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford running down, or not
      */
     public boolean isRunningDown() {
-        return this.isRunningDown;
+        return isRunningDown;
     }
 
     /**
@@ -241,7 +236,7 @@ public class RockfordModel extends DisplayableElementModel {
      * @return Rockford running up or down, or not
      */
     public boolean isRunningUpOrDown() {
-        return this.isRunningUp() || this.isRunningDown();
+        return isRunningUp || isRunningDown;
     }
 
     /**
@@ -257,20 +252,20 @@ public class RockfordModel extends DisplayableElementModel {
         /* INIT SPRITE ARRAYS FOR ROCKFORD */
         for (int i = 0; i < 8; i++) {
             framesBlinking.add(
-                    this.grabSprite(this.loadSprite(spriteName), 7 + (24 * i), 79, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
+                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 79, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
             );
 
             framesRunningLeft.add(
-                    this.grabSprite(this.loadSprite(spriteName), 7 + (24 * i), 103, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
+                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 103, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
             );
 
             framesRunningRight.add(
-                    this.grabSprite(this.loadSprite(spriteName), 7 + (24 * i), 127, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
+                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 127, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
             );
         }
 
         framesRunningUpOrDown.add(
-                this.grabSprite(this.loadSprite(spriteName), 7, 7, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
+                grabSprite(loadSprite(spriteName), 7, 7, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
         );
     }
 

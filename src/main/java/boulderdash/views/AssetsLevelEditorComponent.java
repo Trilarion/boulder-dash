@@ -12,22 +12,17 @@ import java.util.List;
  * AssetsLevelEditorComponent
  * <p>
  * Information panel element.
- *
- * @author Valerian Saliou <valerian@valeriansaliou.name>
- * @since 2015-06-22
  */
 public class AssetsLevelEditorComponent extends JPanel implements ActionListener {
     /**
      * Available choices
      */
-    static final List<String> choiceList = Arrays.asList(
+    private static final List<String> choiceList = Arrays.asList(
             "Boulder", "Diamond", "Dirt", "Brick Wall", "Expanding Wall", "Magic Wall", "Steel Wall", "Rockford"
     );
     private final LevelEditorView levelEditorView;
 
     /**
-     * Class constructor
-     *
      * @param levelEditorView Controller for level editor
      */
     public AssetsLevelEditorComponent(LevelEditorView levelEditorView) {
@@ -57,8 +52,8 @@ public class AssetsLevelEditorComponent extends JPanel implements ActionListener
             radioPanel.add(curButton);
         }
 
-        this.add(radioPanel, BorderLayout.LINE_START);
-        this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        add(radioPanel, BorderLayout.LINE_START);
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
     }
 
     /**
@@ -70,7 +65,7 @@ public class AssetsLevelEditorComponent extends JPanel implements ActionListener
         JRadioButton sourceButton = (JRadioButton) e.getSource();
         String sourceText = sourceButton.getText();
 
-        this.levelEditorView.setPickedBlockValue(sourceText);
-        this.levelEditorView.getLevelEditorGroundView().grabFocus();
+        levelEditorView.setPickedBlockValue(sourceText);
+        levelEditorView.getLevelEditorGroundView().grabFocus();
     }
 }

@@ -9,23 +9,23 @@ public class HelpView extends JFrame {
      * Generate the HelpView
      */
     public HelpView() {
-        this.initializeView();
-        this.createLayout();
+        initializeView();
+        createLayout();
     }
 
     /**
      * Initializes the view
      */
     private void initializeView() {
-        this.setVisible(true);
-        this.setResizable(false);
+        setVisible(true);
+        setResizable(false);
 
         // UI parameters
-        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-        this.setBounds(100, 100, 560, 150);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 560, 150);
 
         // App parameters
-        this.setTitle("Boulder Dash | Help");
+        setTitle("Boulder Dash | Help");
     }
 
     /**
@@ -43,6 +43,6 @@ public class HelpView extends JFrame {
                 + "You have to place at least 3 diamonds and 1 rockford!\n"
                 + "Have fun ;-)");
 
-        this.add(help, BorderLayout.CENTER);
+        add(help, BorderLayout.CENTER);
     }
 }

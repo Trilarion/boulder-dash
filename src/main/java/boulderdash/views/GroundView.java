@@ -14,17 +14,13 @@ import java.awt.*;
  * levelModel observable; Because of the sprites we have to refresh the game
  * windows very often so don't need of observers/observable mechanism
  *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-19
  * <p>
  * This view is basically drawing into the Frame the levelModel.
  */
 public abstract class GroundView extends JPanel implements Observer<String> {
-    protected LevelModel levelModel;
+    private LevelModel levelModel;
 
     /**
-     * Class constructor
-     *
      * @param levelModel Level model
      */
     public GroundView(LevelModel levelModel) {
@@ -41,31 +37,31 @@ public abstract class GroundView extends JPanel implements Observer<String> {
      */
     public void drawTerrain(int width, int height, Graphics g) {
         // Draw items
-        if (this.levelModel.getMode().equals("game")) {
+        if ("game".equals(levelModel.getMode())) {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    g.drawImage(this.levelModel.getImage(x, y), (x * 16), (y * 16), this);
+                    g.drawImage(levelModel.getImage(x, y), (x * 16), (y * 16), this);
                 }
             }
 
-            if (!this.levelModel.isGameRunning()) {
-                if (!this.levelModel.getRockford().getHasExplosed()) {
-                    this.displayWin();
+            if (!levelModel.isGameRunning()) {
+                if (!levelModel.getRockford().getHasExplosed()) {
+                    displayWin();
                 } else {
-                    this.displayLose();
+                    displayLose();
                 }
             }
         } else {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    g.drawImage(this.levelModel.getImage(x, y), (x * 16), (y * 16), this);
+                    g.drawImage(levelModel.getImage(x, y), (x * 16), (y * 16), this);
                 }
             }
-            if (this.levelModel.getShowCursor()) {
+            if (levelModel.getShowCursor()) {
                 g.drawImage(
-                        this.levelModel.getCursorImage(),
-                        ((this.levelModel.getCursorXPosition() + 1) * 16),
-                        ((this.levelModel.getCursorYPosition() + 1) * 16),
+                        levelModel.getCursorImage(),
+                        ((levelModel.getCursorXPosition() + 1) * 16),
+                        ((levelModel.getCursorYPosition() + 1) * 16),
                         this
                 );
             }
@@ -75,14 +71,14 @@ public abstract class GroundView extends JPanel implements Observer<String> {
     /**
      * Set the view to inform the user that he won
      */
-    private void displayWin() {
+    private static void displayWin() {
         new WinLoseView("win");
     }
 
     /**
      * Set the view to inform the user that he is not good at this game
      */
-    private void displayLose() {
+    private static void displayLose() {
         new WinLoseView("lose");
     }
 
@@ -92,7 +88,7 @@ public abstract class GroundView extends JPanel implements Observer<String> {
      * @param g Map graphical object
      */
     public void paint(Graphics g) {
-        this.drawTerrain(this.levelModel.getSizeWidth(), this.levelModel.getSizeHeight(), g);
+        drawTerrain(levelModel.getSizeWidth(), levelModel.getSizeHeight(), g);
     }
 
     /**
@@ -101,5 +97,9 @@ public abstract class GroundView extends JPanel implements Observer<String> {
     @Override
     public void update(@NotNull String notification) {
         repaint();
+    }
+
+    public LevelModel getLevelModel() {
+        return levelModel;
     }
 }
