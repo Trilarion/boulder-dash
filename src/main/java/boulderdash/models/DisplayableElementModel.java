@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * DisplayableElementModel
- * <p>
  * Represents a abstract displayable element
  */
 public abstract class DisplayableElementModel {
@@ -183,7 +181,7 @@ public abstract class DisplayableElementModel {
         try {
             sprite = ImageIO.read(DisplayableElementModel.class.getResourceAsStream("/drawable/field/" + spriteName + ".gif"));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
 
         this.sprite = sprite;

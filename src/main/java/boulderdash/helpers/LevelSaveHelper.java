@@ -18,14 +18,12 @@ import java.util.regex.Pattern;
 
 
 /**
- * LevelSaveHelper
- * <p>
  * Proceeds level save routine
- * Able to iterate on internal representation of a map and serialize it to XML
+ * Can iterate on internal representation of a map and serialize it to XML
  */
 public class LevelSaveHelper {
     private static final String pathToDataStore = "./res/levels";
-    private String levelId = null;
+    private String levelId;
     private DisplayableElementModel[][] groundGrid;
 
     /**
@@ -33,8 +31,8 @@ public class LevelSaveHelper {
      * @param groundGrid Ground grid
      */
     public LevelSaveHelper(String levelId, DisplayableElementModel[][] groundGrid) {
-        setLevelId(levelId);
-        setGroundGrid(groundGrid);
+        this.levelId = levelId;
+        this.groundGrid = groundGrid;
 
         // Requirements
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyy-MM-dd/HH:mm:ss", Locale.ENGLISH);
@@ -137,7 +135,7 @@ public class LevelSaveHelper {
             // Write to disk
             writeDocumentToDisk(document);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
     }
 
@@ -158,7 +156,7 @@ public class LevelSaveHelper {
             serializer.serialize(document);
         } catch (IOException e) {
             isSuccessful = false;
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
 
     }

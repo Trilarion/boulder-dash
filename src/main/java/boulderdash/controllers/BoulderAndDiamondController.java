@@ -6,11 +6,9 @@ import boulderdash.models.DisplayableElementModel;
 import boulderdash.models.LevelModel;
 
 /**
- * ElementPositionUpdateHelper
- * <p>
  * Updates position of all elements displayed on the map, according to their
  * next potential position. Each object has a weight, which is used to compare
- * their power to destroy in the food chain. Sorry for that Darwinism.
+ * their power to destroy in the food chain.
  */
 public class BoulderAndDiamondController implements Runnable {
     private final LevelModel levelModel;
@@ -39,7 +37,7 @@ public class BoulderAndDiamondController implements Runnable {
             try {
                 Thread.sleep(250);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // TODO rethrow exception
             }
         }
     }
@@ -47,7 +45,7 @@ public class BoulderAndDiamondController implements Runnable {
     /**
      * Scan the ground to detect the boulders & the diamonds, then make them
      * fall if necessary
-     * Note: scan of the ground upside down: we want things to fall slowly !
+     * Note: scan of the ground upside down: we want things to fall slowly!
      */
     private void manageFallingObject() {
         for (int x = levelModel.getSizeWidth() - 1; x >= 0; x--) {
@@ -66,7 +64,7 @@ public class BoulderAndDiamondController implements Runnable {
                     manageFall(x, y);
                 } else if ("expandingwall".equals(spriteName)) {
                     if ("left".equals(expandWall(x, y))) {
-                        x -= 1;
+                        x -= 1; // TODO assignment to loop variable, is this good?
                     }
                 }
             }
@@ -131,7 +129,7 @@ public class BoulderAndDiamondController implements Runnable {
             try {
                 Thread.sleep(25);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // TODO rethrow exception
             }
 
             levelModel.setGameRunning(false);

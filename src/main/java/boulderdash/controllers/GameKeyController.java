@@ -8,8 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * GameKeyController
- * <p>
  * Manages the key-events controller.
  */
 public class GameKeyController implements KeyListener {

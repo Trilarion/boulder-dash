@@ -1,18 +1,18 @@
 package boulderdash;
 
 /**
- *
+ * Constants that define the game.
  */
 public final class Options {
 
     /**
-     * Defines the size of the sprite
+     * Size of the sprite
      */
-    public static final int SIZE_X_OF_SPRITE = 16;
-    public static final int SIZE_Y_OF_SPRITE = 16;
+    public static final int SPRITE_SIZE_X = 16;
+    public static final int SPRITE_SIZE_Y = 16;
 
     /**
-     * Animation speed
+     * Animation speed (ms)
      */
     public static final int DELAY = 25;
 

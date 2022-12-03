@@ -4,36 +4,21 @@ import javax.swing.*;
 
 public class WinLoseView extends JFrame {
 
-    private final String winOrLose;
-
     /**
      * Generate the HelpView
      */
     public WinLoseView(String winOrLose) {
-        this.winOrLose = winOrLose;
-        initializeView();
-        createLayout();
-    }
-
-    /**
-     * Initializes the view
-     */
-    private void initializeView() {
+        // Initializes the view
         setVisible(true);
         setResizable(false);
 
         // UI parameters
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setBounds(300, 300, 250, 100);
+        setBounds(300, 300, 250, 100); // TODO replace with constants
 
         // App parameters
         setTitle("END OF THE GAME ! ");
-    }
-
-    /**
-     * Creates the view layout
-     */
-    private void createLayout() {
+        // Creates the view layout
         JTextArea help = new JTextArea();
         help.setEditable(false);
         if ("win".equals(winOrLose))
@@ -43,4 +28,5 @@ public class WinLoseView extends JFrame {
 
         add(help);
     }
+
 }

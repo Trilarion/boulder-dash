@@ -9,8 +9,6 @@ import java.awt.*;
 
 
 /**
- * GameFieldView
- * <p>
  * Game field view for the game itself.
  */
 public class GameGroundView extends GroundView {

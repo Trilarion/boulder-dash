@@ -1,17 +1,13 @@
 package boulderdash.helpers;
 
-
 import java.io.File;
 
 /**
- * LevelRemoveHelper
- * <p>
  * Proceeds level save routine
  * Able to iterate on internal representation of a map and serialize it to XML
  */
 public class LevelRemoveHelper {
-    private static final String pathToDataStore = "./res/levels";
-    private String levelId = null;
+    private String levelId;
 
     /**
      * @param levelId Level identifier
@@ -29,6 +25,6 @@ public class LevelRemoveHelper {
      * @return Level path, with file extension
      */
     private String getLevelPathInDataStore() {
-        return pathToDataStore + "/" + levelId + ".xml";
+        return "./res/levels/" + levelId + ".xml"; // TODO better path handling
     }
 }

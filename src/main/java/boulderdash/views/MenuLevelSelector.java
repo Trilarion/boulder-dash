@@ -3,19 +3,12 @@ package boulderdash.views;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-
 /**
- * MenuLevelSelector
- * <p>
  * Specifies the menu level selector
- *
- * @author Valerian Saliou <valerian@valeriansaliou.name>
- * @since 2015-06-23
  */
 public class MenuLevelSelector extends JComboBox<String> {
     private String choiceValue;
-    private LevelEditorView levelEditorView = null;
-
+    private LevelEditorView levelEditorView;
 
     public MenuLevelSelector(String[] items) {
         super(items);

@@ -23,14 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
 /**
- * LevelLoadHelper
- * <p>
  * Proceeds level load routine
- * Able to deserialize level data from storage, and format it to
- * internal representation To be used as a data factory from level
- * model classes
+ * Can deserialize level data from storage, and format it to internal representation
+ * to be used as a data factory from level model classes
  */
 public class LevelLoadHelper {
     private final SimpleDateFormat dateFormatter;
@@ -38,18 +34,18 @@ public class LevelLoadHelper {
     private static final int limitsHeight = 2;
     private static final int limitsOffsetWidth = 1;
     private static final int limitsOffsetHeight = 1;
-    private String levelId = null;
+    private String levelId;
     private Document levelDOM;
     private XPath xpathBuilder;
     // Parsed values
-    private String nameValue = null;
-    private Date dateCreatedValue = null;
-    private Date dateModifiedValue = null;
-    private int widthSizeValue = 0;
-    private int heightSizeValue = 0;
+    private String nameValue;
+    private Date dateCreatedValue;
+    private Date dateModifiedValue;
+    private int widthSizeValue;
+    private int heightSizeValue;
     private RockfordModel rockfordInstance;
-    private int rockfordPositionX = 0;
-    private int rockfordPositionY = 0;
+    private int rockfordPositionX;
+    private int rockfordPositionY;
 
     private int diamondsToCatch;
 
@@ -59,7 +55,7 @@ public class LevelLoadHelper {
      * @param levelId Level identifier
      */
     public LevelLoadHelper(String levelId) {
-        setLevelId(levelId);
+        this.levelId = levelId;
         diamondsToCatch = 0;
 
         // Requirements
@@ -109,7 +105,7 @@ public class LevelLoadHelper {
             // Parse data in level file
             levelDOM = documentBuilder.parse(pathToLevelData);
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
     }
 
@@ -124,7 +120,7 @@ public class LevelLoadHelper {
             processSizeElement();
             processGridElement();
         } catch (XPathExpressionException | ParseException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
     }
 
@@ -216,7 +212,7 @@ public class LevelLoadHelper {
                                 try {
                                     groundGrid[pX][pY] = constructGridElement(currentSpriteName, pX, pY, currentSpriteConvertible);
                                 } catch (UnknownModelException e) {
-                                    e.printStackTrace();
+                                    e.printStackTrace(); // TODO rethrow exception
                                 }
                             }
                         }
@@ -244,9 +240,9 @@ public class LevelLoadHelper {
                 break;
 
             case "rockford":
-                setRockfordPositionX(rowIndex);
-                setRockfordPositionY(lineIndex);
-                setRockfordInstance((RockfordModel) element);
+                rockfordPositionX = rowIndex;
+                rockfordPositionY = lineIndex;
+                rockfordInstance = (RockfordModel) element;
                 break;
         }
 

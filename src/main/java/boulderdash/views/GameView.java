@@ -7,15 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * GameView
- * <p>
  * Specifies the game view itself.
  */
 public class GameView extends JFrame {
     private final GameController gameController;
-    private final LevelModel levelModel;
-    private GameGroundView gameGroundView;
-    private JPanel actionPanel;
+    private final GameGroundView gameGroundView;
+    private final JPanel actionPanel;
 
     /**
      * @param gameController Game controller
@@ -23,18 +20,7 @@ public class GameView extends JFrame {
      */
     public GameView(GameController gameController, LevelModel levelModel) {
         this.gameController = gameController;
-        this.levelModel = levelModel;
 
-        initializeView();
-        createLayout();
-
-        gameGroundView.grabFocus();
-    }
-
-    /**
-     * Initializes the view
-     */
-    private void initializeView() {
         setVisible(false);
         setResizable(false);
 
@@ -45,15 +31,11 @@ public class GameView extends JFrame {
         // App parameters
         setTitle("Boulder Dash | Game");
 
-        Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png");
+        Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png"); // TODO replace with constant
         setIconImage(appIcon);
-    }
 
-    /**
-     * Creates the view layout
-     */
-    private void createLayout() {
-        gameGroundView = new GameGroundView(gameController, levelModel);
+        // view layout
+        gameGroundView = new GameGroundView(this.gameController, levelModel);
         actionPanel = new JPanel();
         JPanel informationPanel = new InformationPanel(levelModel);
         informationPanel.setBackground(Color.white);
@@ -67,6 +49,8 @@ public class GameView extends JFrame {
         add(actionPanel, BorderLayout.SOUTH);
         add(informationPanel, BorderLayout.NORTH);
         add(gameGroundView, BorderLayout.CENTER);
+
+        gameGroundView.grabFocus();
     }
 
     /**
@@ -89,6 +73,5 @@ public class GameView extends JFrame {
         button.setActionCommand(id);
 
         actionPanel.add(button);
-
     }
 }

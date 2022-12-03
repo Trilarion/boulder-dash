@@ -3,8 +3,7 @@ package boulderdash.models;
 import boulderdash.utils.Observable;
 
 /**
- * GameInformationModel will contain all the data which will
- * go to the InformationPanel.
+ * Contains all the data, which goes to the InformationPanel.
  */
 public class GameInformationModel extends Observable<String> {
     private int score;

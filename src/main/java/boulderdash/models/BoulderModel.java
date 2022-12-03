@@ -1,8 +1,6 @@
 package boulderdash.models;
 
 /**
- * BoulderModel
- * <p>
  * Represents the boulders.
  */
 public class BoulderModel extends DisplayableElementModel {
@@ -18,7 +16,7 @@ public class BoulderModel extends DisplayableElementModel {
       Static dataset
       Specifies the physical parameters of the object
      */
-    static {
+    static { // TODO maybe create Enums from it
         spriteName = "boulder";
         isDestructible = false;
         canMove = true;

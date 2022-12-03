@@ -8,64 +8,46 @@ import boulderdash.models.LevelModel;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
- * LevelEditorView
- * <p>
  * Specifies the level editor view.
  */
 public class LevelEditorView extends JFrame {
     private final NavigationBetweenViewController nav;
-    private LevelEditorGroundView fieldPanel;
+    private final LevelEditorGroundView fieldPanel;
     private String selectedLevel;
-    private MenuLevelSelector menuLevelSelector;
+    private final MenuLevelSelector menuLevelSelector;
     private LevelEditorController levelEditorController;
     private LevelModel levelModel;
 
     private String pickedBlockValue;
-
 
     public LevelEditorView(LevelEditorController levelEditorController, LevelModel levelModel, NavigationBetweenViewController nav) {
         this.levelEditorController = levelEditorController;
         this.levelModel = levelModel;
         this.nav = nav;
 
-        initializeView();
-        createLayout();
-
-        fieldPanel.grabFocus();
-    }
-
-    /**
-     * Initializes the view layout
-     */
-    private void initializeView() {
+        // Initializes the view layout
         setFocusable(true);
         setVisible(false);
         setResizable(false);
 
         // UI parameters
-        setSize(984, 454);
+        setSize(984, 454); // TODO replace with constant
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // App parameters
         setTitle("Boulder Dash | Level Editor");
 
-        Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png");
+        Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png"); // TODO replace with constant
         setIconImage(appIcon);
-    }
-
-    /**
-     * Creates the view layout
-     */
-    private void createLayout() {
+        // Creates the view layout
         // List of levels
         LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(true, this);
         menuLevelSelector = levelSelectorHelper.createLevelList();
 
         // Field + select panels
-        fieldPanel = new LevelEditorGroundView(levelModel, this);
+        fieldPanel = new LevelEditorGroundView(this.levelModel, this);
         JPanel selectPanel = new JPanel();
 
         AssetsLevelEditorComponent assetsComponent = new AssetsLevelEditorComponent(this);
@@ -88,6 +70,8 @@ public class LevelEditorView extends JFrame {
         // Add top components
         add(fieldPanel, BorderLayout.CENTER);
         add(selectPanel, BorderLayout.WEST);
+
+        fieldPanel.grabFocus();
     }
 
     /**
@@ -157,7 +141,7 @@ public class LevelEditorView extends JFrame {
 
         levelEditorController = new LevelEditorController(levelModel, nav);
 
-        levelEditorController.getLevelEditorView().setSelectedLevel(selectedLevelValue);
+        levelEditorController.getLevelEditorView().selectedLevel = selectedLevelValue;
         levelEditorController.getLevelEditorView().setVisible(true);
         levelEditorController.getLevelEditorView().fieldPanel.grabFocus();
 

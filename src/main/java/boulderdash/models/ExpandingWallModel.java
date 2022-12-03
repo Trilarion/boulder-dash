@@ -1,8 +1,6 @@
 package boulderdash.models;
 
 /**
- * ExpandingWallModel
- * <p>
  * Represents a ExpandingWall in the game.
  */
 public class ExpandingWallModel extends DisplayableElementModel {

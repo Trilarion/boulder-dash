@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 /**
- * AudioLoadHelper
- * <p>
  * Manages audio
  */
 public class AudioLoadHelper {
@@ -54,11 +52,11 @@ public class AudioLoadHelper {
      * Preloads available sounds
      */
     private void preloadSounds() {
-        final String[] sounds = {"coin", "die", "new", "touch"};
+        String[] sounds = {"coin", "die", "new", "touch"};
         preloadedSounds = new HashMap<>();
 
         for (String sound : sounds) {
-            InputStream inputStream = AudioLoadHelper.class.getResourceAsStream("/audio/sounds/" + sound + ".mp3");
+            InputStream inputStream = AudioLoadHelper.class.getResourceAsStream("/audio/sounds/" + sound + ".mp3"); // TODO better path handling
             preloadedSounds.put(sound, new SoundJLayerBridge(inputStream));
         }
     }

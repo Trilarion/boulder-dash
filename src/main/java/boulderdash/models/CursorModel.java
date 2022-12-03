@@ -1,8 +1,8 @@
 package boulderdash.models;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
- * CursorModel
- * <p>
  * Represents the field cursor pointer.
  */
 public class CursorModel extends DisplayableElementModel {
@@ -13,7 +13,7 @@ public class CursorModel extends DisplayableElementModel {
     private static final boolean animate;
     private static final int priority;
     private static final boolean falling;
-    private static final String collideSound;
+    private static final @Nullable String collideSound;
 
     /*
       Static dataset

@@ -8,10 +8,7 @@ import boulderdash.views.MenuView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 /**
- * GameController
- * <p>
  * This system creates the view.
  * The game loop is also handled there.
  */

@@ -6,8 +6,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * DiamondModel
- * <p>
  * Represents a diamond in the game.
  */
 public class DiamondModel extends DisplayableElementModel {
@@ -74,7 +72,7 @@ public class DiamondModel extends DisplayableElementModel {
 
         for (int i = 0; i < 8; i++) {
             framesDiamond.add(
-                    grabSprite(loadSprite(spriteName), i * 24, 0, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
+                    grabSprite(loadSprite(spriteName), i * 24, 0, Options.SPRITE_SIZE_X, Options.SPRITE_SIZE_Y)
             );
         }
     }

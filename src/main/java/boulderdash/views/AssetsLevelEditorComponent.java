@@ -9,15 +9,13 @@ import java.util.List;
 
 
 /**
- * AssetsLevelEditorComponent
- * <p>
  * Information panel element.
  */
 public class AssetsLevelEditorComponent extends JPanel implements ActionListener {
     /**
      * Available choices
      */
-    private static final List<String> choiceList = Arrays.asList(
+    private static final List<String> CHOICES = Arrays.asList(
             "Boulder", "Diamond", "Dirt", "Brick Wall", "Expanding Wall", "Magic Wall", "Steel Wall", "Rockford"
     );
     private final LevelEditorView levelEditorView;
@@ -32,15 +30,12 @@ public class AssetsLevelEditorComponent extends JPanel implements ActionListener
         ButtonGroup buttonGroup = new ButtonGroup();
         JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 
-        String curListChoice;
-
-        for (String s : choiceList) {
-            curListChoice = s;
+        for (String choice : CHOICES) {
 
             // Create radio buttons from list
-            JRadioButton curButton = new JRadioButton(curListChoice);
+            JRadioButton curButton = new JRadioButton(choice);
             //boulderButton.setMnemonic(KeyEvent.VK_A);
-            curButton.setActionCommand(curListChoice);
+            curButton.setActionCommand(choice);
 
             // Group the radio buttons
             buttonGroup.add(curButton);

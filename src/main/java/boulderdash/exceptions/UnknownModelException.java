@@ -1,8 +1,6 @@
 package boulderdash.exceptions;
 
 /**
- * UnknownModelException
- * <p>
  * Raises an 'UnknownSpriteException' exception.
  * Given the exception message.
  */

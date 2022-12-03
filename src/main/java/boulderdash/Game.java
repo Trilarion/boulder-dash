@@ -5,8 +5,6 @@ import boulderdash.controllers.NavigationBetweenViewController;
 import javax.swing.*;
 
 /**
- * Game
- * <p>
  * Spawns the game.
  */
 public class Game {

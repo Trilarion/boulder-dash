@@ -1,8 +1,6 @@
 package boulderdash.models;
 
 /**
- * SteelWallModel
- * <p>
  * Represents the steelWall
  */
 public class SteelWallModel extends DisplayableElementModel {

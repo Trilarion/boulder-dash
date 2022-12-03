@@ -4,8 +4,6 @@ import boulderdash.exceptions.UnknownModelException;
 import boulderdash.models.*;
 
 /**
- * ModelConvertHelper
- * <p>
  * Provides model conversion services.
  */
 public class ModelConvertHelper {
@@ -20,7 +18,7 @@ public class ModelConvertHelper {
         DisplayableElementModel element;
 
         // Instanciates the sprite element matching the given sprite name
-        switch (spriteName) {
+        switch (spriteName) { // TODO this is a mapping from String to Model (can be done better?)
             case "black":
             case "Black":
                 element = new EmptyModel();

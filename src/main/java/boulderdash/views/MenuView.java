@@ -6,47 +6,28 @@ import boulderdash.helpers.LevelSelectorHelper;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
- * MenuView
- * <p>
  * Menu view
- *
- * @author Valerian Saliou <valerian@valeriansaliou.name>
- * @since 2015-06-23
  */
 public class MenuView extends JFrame {
     private final NavigationBetweenViewController navigationBetweenViewController;
-    private MenuLevelSelector menuLevelSelector;
-    private JPanel actionPanel;
-
+    private final MenuLevelSelector menuLevelSelector;
+    private final JPanel actionPanel;
 
     public MenuView(NavigationBetweenViewController navigationBetweenViewController) {
         this.navigationBetweenViewController = navigationBetweenViewController;
-        initializeView();
-        createLayout();
-    }
-
-    /**
-     * Initializes the view
-     */
-    private void initializeView() {
+        // Initializes the view
         setVisible(true);
         setResizable(false);
 
         // UI parameters
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 200, 100);
+        setBounds(100, 100, 200, 100); // TODO replace with constants
         setSize(432, 536);
 
         // App parameters
         setTitle("Boulder Dash | Menu");
-    }
-
-    /**
-     * Creates the view layout
-     */
-    private void createLayout() {
+        // Creates the view layout
         LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(false);
         menuLevelSelector = levelSelectorHelper.createLevelList();
 

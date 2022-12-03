@@ -5,10 +5,7 @@ import boulderdash.Options;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-
 /**
- * RockfordModel
- * <p>
  * Represents the hero of the game.
  */
 public class RockfordModel extends DisplayableElementModel {
@@ -51,12 +48,12 @@ public class RockfordModel extends DisplayableElementModel {
     /**
      * Maps possible states for Rockford
      */
-    private boolean isCollisionDone = false;
+    private boolean isCollisionDone;
     private boolean isStaying = true;
-    private boolean isRunningLeft = false;
-    private boolean isRunningRight = false;
-    private boolean isRunningUp = false;
-    private boolean isRunningDown = false;
+    private boolean isRunningLeft;
+    private boolean isRunningRight;
+    private boolean isRunningUp;
+    private boolean isRunningDown;
     private long previousTime;
     private int currentFrame;
     private boolean hasExploded;
@@ -67,7 +64,32 @@ public class RockfordModel extends DisplayableElementModel {
         // Speed of the animation of the sprite
         setSpeed(100);
         // Init the sprites in arrays
-        initSprites();
+
+        // Initializes all sprites from the main image
+        //  Takes the sub images and append them into storage arrays
+        framesBlinking = new ArrayList<>();
+        framesRunningLeft = new ArrayList<>();
+        framesRunningRight = new ArrayList<>();
+        framesRunningUpOrDown = new ArrayList<>();
+
+        /* INIT SPRITE ARRAYS FOR ROCKFORD */
+        for (int i = 0; i < 8; i++) {
+            framesBlinking.add(
+                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 79, Options.SPRITE_SIZE_X, Options.SPRITE_SIZE_Y)
+            );
+
+            framesRunningLeft.add(
+                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 103, Options.SPRITE_SIZE_X, Options.SPRITE_SIZE_Y)
+            );
+
+            framesRunningRight.add(
+                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 127, Options.SPRITE_SIZE_X, Options.SPRITE_SIZE_Y)
+            );
+        }
+
+        framesRunningUpOrDown.add(
+                grabSprite(loadSprite(spriteName), 7, 7, Options.SPRITE_SIZE_X, Options.SPRITE_SIZE_Y)
+        );
         hasExploded = false;
     }
 
@@ -170,16 +192,16 @@ public class RockfordModel extends DisplayableElementModel {
     /**
      * Gets whether Rockford collision has been handled or not
      *
-     * @return Rockford collision handled or not
+     * @return Rockford's collision handled or not
      */
     public boolean isCollisionDone() {
         return isCollisionDone;
     }
 
     /**
-     * Sets whether Rockford collision has been handled or not
+     * Sets whether Rockford's collision has been handled or not
      *
-     * @param isCollisionDone Rockford collision handled or not
+     * @param isCollisionDone Rockford's collision handled or not
      */
     public void setCollisionDone(boolean isCollisionDone) {
         this.isCollisionDone = isCollisionDone;
@@ -237,36 +259,6 @@ public class RockfordModel extends DisplayableElementModel {
      */
     public boolean isRunningUpOrDown() {
         return isRunningUp || isRunningDown;
-    }
-
-    /**
-     * Initializes all sprites from the main image
-     * Takes the sub images and append them into storage arrays
-     */
-    private void initSprites() {
-        framesBlinking = new ArrayList<>();
-        framesRunningLeft = new ArrayList<>();
-        framesRunningRight = new ArrayList<>();
-        framesRunningUpOrDown = new ArrayList<>();
-
-        /* INIT SPRITE ARRAYS FOR ROCKFORD */
-        for (int i = 0; i < 8; i++) {
-            framesBlinking.add(
-                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 79, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
-            );
-
-            framesRunningLeft.add(
-                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 103, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
-            );
-
-            framesRunningRight.add(
-                    grabSprite(loadSprite(spriteName), 7 + (24 * i), 127, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
-            );
-        }
-
-        framesRunningUpOrDown.add(
-                grabSprite(loadSprite(spriteName), 7, 7, Options.SIZE_X_OF_SPRITE, Options.SIZE_Y_OF_SPRITE)
-        );
     }
 
     /**

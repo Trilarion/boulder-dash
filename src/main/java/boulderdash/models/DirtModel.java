@@ -1,8 +1,6 @@
 package boulderdash.models;
 
 /**
- * DirtModel
- * <p>
  * Represents the dirt in the game.
  */
 public class DirtModel extends DisplayableElementModel {

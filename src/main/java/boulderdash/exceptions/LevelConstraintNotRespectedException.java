@@ -1,9 +1,6 @@
 package boulderdash.exceptions;
 
-
 /**
- * LevelConstraintNotRespectedException
- * <p>
  * Raises an 'LevelConstraintNotRespectedException' exception.
  * Given the exception message.
  */

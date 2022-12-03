@@ -1,8 +1,6 @@
 package boulderdash.models;
 
 /**
- * BrickWallModel
- * <p>
  * Represents the brick wall in the game.
  */
 public class BrickWallModel extends DisplayableElementModel {

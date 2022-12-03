@@ -3,15 +3,11 @@ package boulderdash.helpers;
 import boulderdash.views.LevelEditorView;
 import boulderdash.views.MenuLevelSelector;
 
-
 /**
- * LevelSelectorHelper
- * <p>
  * Level selector helper
  */
 public class LevelSelectorHelper {
-    private static final String levelStorage = "./res/levels";
-    private LevelEditorView levelEditorView = null;
+    private LevelEditorView levelEditorView;
 
     public LevelSelectorHelper(boolean hasEmptyElement) {
     }

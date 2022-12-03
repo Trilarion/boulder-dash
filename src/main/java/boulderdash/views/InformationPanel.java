@@ -8,17 +8,11 @@ import javax.swing.*;
 
 
 /**
- * InformationPanel
- * <p>
  * Information panel element.
- *
- * @author Colin Leverger <me@colinleverger.fr>
- * @since 2015-06-20
  */
 public class InformationPanel extends JPanel implements Observer<String> {
     private final LevelModel levelModel;
     private final JTextArea text;
-
 
     public InformationPanel(LevelModel levelModel) {
         this.levelModel = levelModel;

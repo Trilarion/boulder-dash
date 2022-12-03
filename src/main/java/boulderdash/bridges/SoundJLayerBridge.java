@@ -8,8 +8,6 @@ import javazoom.jl.player.advanced.PlaybackListener;
 import java.io.InputStream;
 
 /**
- * SoundJLayerBridge
- * <p>
  * Sound bridge to the JLayer library.
  */
 public class SoundJLayerBridge extends PlaybackListener implements Runnable {
@@ -33,7 +31,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
             playerThread = new Thread(this, "AudioPlayerThread");
             playerThread.start();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // TODO rethrow exception
         }
     }
 
@@ -44,7 +42,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
         try {
             playerThread.stop();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // TODO rethrow exception
         }
     }
 
@@ -55,7 +53,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
         try {
             player.play();
         } catch (JavaLayerException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // TODO rethrow exception
         }
     }
 }

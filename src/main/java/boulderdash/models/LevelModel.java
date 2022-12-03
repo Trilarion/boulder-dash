@@ -10,10 +10,7 @@ import boulderdash.utils.Observable;
 
 import java.awt.image.BufferedImage;
 
-
 /**
- * LevelModel
- * <p>
  * Levels are loaded from XML file. The view knows the model, the controller is
  * going to modify the model in function of the game panel. The model notifies
  * the view when there are changes on it.
@@ -22,11 +19,11 @@ public class LevelModel extends Observable<String> implements Runnable {
 
     private final AudioLoadHelper audioLoadHelper;
     private DisplayableElementModel[][] groundGrid;
-    private int sizeWidth = 0;
-    private int sizeHeight = 0;
-    private int cursorXPosition = 0;
-    private int cursorYPosition = 0;
-    private boolean showCursor = false;
+    private int sizeWidth;
+    private int sizeHeight;
+    private int cursorXPosition;
+    private int cursorYPosition;
+    private boolean showCursor;
     private CursorModel cursorModel;
     private LevelLoadHelper levelLoadHelper;
     private RockfordModel rockford;
@@ -272,7 +269,7 @@ public class LevelModel extends Observable<String> implements Runnable {
             // Disable cursor (important)
             //this.setShowCursor(false);
         } catch (UnknownModelException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
     }
 
@@ -578,7 +575,7 @@ public class LevelModel extends Observable<String> implements Runnable {
             Thread.sleep(200);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
         localNotifyObservers();
     }
@@ -624,7 +621,7 @@ public class LevelModel extends Observable<String> implements Runnable {
             Thread.sleep(50);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
         localNotifyObservers();
     }
@@ -719,9 +716,6 @@ public class LevelModel extends Observable<String> implements Runnable {
 
     /**
      * Explose the brick wall
-     *
-     * @param x
-     * @param y
      */
     public void exploseThisBrickWall(int x, int y) {
         groundGrid[x][y] = new EmptyModel();
@@ -730,9 +724,6 @@ public class LevelModel extends Observable<String> implements Runnable {
 
     /**
      * Expand the ExpandingWallModel to left
-     *
-     * @param x
-     * @param y
      */
     public void expandThisWallToLeft(int x, int y) {
         groundGrid[x - 1][y] = new ExpandingWallModel();
@@ -740,9 +731,6 @@ public class LevelModel extends Observable<String> implements Runnable {
 
     /**
      * Expand the ExpandingWallModel to right
-     *
-     * @param x
-     * @param y
      */
     public void expandThisWallToRight(int x, int y) {
         groundGrid[x + 1][y] = new ExpandingWallModel();

@@ -3,8 +3,6 @@ package boulderdash.controllers;
 import boulderdash.models.LevelModel;
 
 /**
- * ElementPositionUpdateHelper
- * <p>
  * Updates position of all elements displayed on the map, according to their
  * next potential position. Each object has a weight, which is used to compare
  * their power to destroy in the food chain. Sorry for that Darwinism.
@@ -39,7 +37,7 @@ public class RockfordUpdateController implements Runnable {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // TODO rethrow exception
             }
         }
     }

@@ -1,8 +1,6 @@
 package boulderdash.models;
 
 /**
- * EmptyModel
- * <p>
  * Represents "nothing".
  */
 public class EmptyModel extends DisplayableElementModel {

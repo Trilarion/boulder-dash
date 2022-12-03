@@ -7,25 +7,18 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 /**
- * MenuImage
- * <p>
  * Specifies the menu image
- *
- * @author Valerian Saliou <valerian@valeriansaliou.name>
- * @since 2015-06-23
  */
 public class MenuImage extends JPanel {
     private BufferedImage imageFile;
 
-
     public MenuImage() {
         try {
-            InputStream imagePath = MenuImage.class.getResourceAsStream("/drawable/app/menu_actual.jpg");
+            InputStream imagePath = MenuImage.class.getResourceAsStream("/drawable/app/menu_actual.jpg"); // TODO replace with constant
             imageFile = ImageIO.read(imagePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO rethrow exception
         }
     }
 

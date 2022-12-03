@@ -6,10 +6,7 @@ import boulderdash.views.LevelEditorView;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
 /**
- * LevelEditorKeyController
- * <p>
  * Manages the key-events controller.
  */
 public class LevelEditorKeyController implements KeyListener {

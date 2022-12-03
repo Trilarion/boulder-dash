@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * LevelEditorController
- * <p>
  * Manages the level editor controller.
  */
 public class LevelEditorController implements ActionListener {

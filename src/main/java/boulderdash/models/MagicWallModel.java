@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 
 /**
- * MagicWallModel
- * <p>
  * Represents the magic wall.
  */
 public class MagicWallModel extends DisplayableElementModel {
@@ -75,7 +73,7 @@ public class MagicWallModel extends DisplayableElementModel {
     private void initSprites() {
         framesMagicWall = new ArrayList<>();
         /* INIT SPRITE FOR DIAMOND */
-        framesMagicWall.add(grabSprite(loadSprite(spriteName), 0, 0, 16, 16));
+        framesMagicWall.add(grabSprite(loadSprite(spriteName), 0, 0, 16, 16)); // TODO replace with constant
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 24, 0, 16, 16));
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 48, 0, 16, 16));
         framesMagicWall.add(grabSprite(loadSprite(spriteName), 72, 0, 16, 16));
