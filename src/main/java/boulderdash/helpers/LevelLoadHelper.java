@@ -29,17 +29,17 @@ import java.util.Locale;
  * to be used as a data factory from level model classes
  */
 public class LevelLoadHelper {
-    private final SimpleDateFormat dateFormatter;
     private static final int limitsWidth = 2;
     private static final int limitsHeight = 2;
     private static final int limitsOffsetWidth = 1;
     private static final int limitsOffsetHeight = 1;
+    private final SimpleDateFormat dateFormatter;
     private String levelId;
     private Document levelDOM;
     private XPath xpathBuilder;
     // Parsed values
     private String nameValue;
-    private Date dateCreatedValue;
+    private Date dateCreatedValue; // TODO Date is obsolete type, can we use another one
     private Date dateModifiedValue;
     private int widthSizeValue;
     private int heightSizeValue;
@@ -230,7 +230,6 @@ public class LevelLoadHelper {
      * @param lineIndex  Position in line (vertical axis)
      */
     private DisplayableElementModel constructGridElement(String spriteName, int rowIndex, int lineIndex, boolean convertible) throws UnknownModelException {
-        ModelConvertHelper modelConvert = new ModelConvertHelper();
         DisplayableElementModel element = ModelConvertHelper.toModel(spriteName, convertible);
 
         // Custom actions?

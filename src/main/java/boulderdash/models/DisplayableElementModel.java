@@ -57,24 +57,6 @@ public abstract class DisplayableElementModel {
     }
 
     /**
-     * Gets the 'destructible' value
-     *
-     * @return Whether object is destructible or not
-     */
-    public boolean isDestructible() {
-        return destructible;
-    }
-
-    /**
-     * Gets the 'moving' value
-     *
-     * @return Whether object is moving or not
-     */
-    public boolean isMoving() {
-        return moving;
-    }
-
-    /**
      * Gets the group name value
      *
      * @return Group name value
@@ -90,6 +72,24 @@ public abstract class DisplayableElementModel {
      */
     public static String getStateValue() {
         return stateValue;
+    }
+
+    /**
+     * Gets the 'destructible' value
+     *
+     * @return Whether object is destructible or not
+     */
+    public boolean isDestructible() {
+        return destructible;
+    }
+
+    /**
+     * Gets the 'moving' value
+     *
+     * @return Whether object is moving or not
+     */
+    public boolean isMoving() {
+        return moving;
     }
 
     /**

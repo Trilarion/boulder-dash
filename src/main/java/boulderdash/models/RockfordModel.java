@@ -266,7 +266,7 @@ public class RockfordModel extends DisplayableElementModel {
      *
      * @return Whether Rockford has exploded or not
      */
-    public boolean getHasExplosed() {
+    public boolean getHasExploded() {
         return hasExploded;
     }
 
@@ -275,7 +275,7 @@ public class RockfordModel extends DisplayableElementModel {
      *
      * @param hasExploded Whether Rockford has exploded or not
      */
-    public void setHasExplosed(boolean hasExploded) {
+    public void setHasExploded(boolean hasExploded) {
         this.hasExploded = hasExploded;
     }
 }

@@ -12,7 +12,7 @@ import boulderdash.models.LevelModel;
  */
 public class BoulderAndDiamondController implements Runnable {
     private final LevelModel levelModel;
-    private final AudioLoadHelper audioLoadHelper;
+    private final AudioLoadHelper audioLoadHelper; // TODO there is only one audio load helper, can as well make it a singleton
 
     /**
      * @param levelModel Level model
@@ -32,41 +32,37 @@ public class BoulderAndDiamondController implements Runnable {
     public void run() {
         while (levelModel.isGameRunning()) {
             if (!levelModel.getGamePaused()) {
-                manageFallingObject();
-            }
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace(); // TODO rethrow exception
-            }
-        }
-    }
+                /**
+                 * Scan the ground to detect the boulders & the diamonds, then make them
+                 * fall if necessary
+                 * Note: scan of the ground upside down: we want things to fall slowly!
+                 */
+                for (int x = levelModel.getSizeWidth() - 1; x >= 0; x--) {
+                    for (int y = levelModel.getSizeHeight() - 1; y >= 0; y--) {
+                        // Gets the spriteName of actual DisplayableElementModel object scanned
+                        DisplayableElementModel elementModel = levelModel.getGroundLevelModel()[x][y];
 
-    /**
-     * Scan the ground to detect the boulders & the diamonds, then make them
-     * fall if necessary
-     * Note: scan of the ground upside down: we want things to fall slowly!
-     */
-    private void manageFallingObject() {
-        for (int x = levelModel.getSizeWidth() - 1; x >= 0; x--) {
-            for (int y = levelModel.getSizeHeight() - 1; y >= 0; y--) {
-                // Gets the spriteName of actual DisplayableElementModel object scanned
-                DisplayableElementModel elementModel = levelModel.getGroundLevelModel()[x][y];
+                        if (elementModel == null) {
+                            elementModel = new DirtModel();
+                        }
 
-                if (elementModel == null) {
-                    elementModel = new DirtModel();
-                }
+                        String spriteName = elementModel.getSpriteName();
 
-                String spriteName = elementModel.getSpriteName();
-
-                // If it is a boulder or a diamond...
-                if ("boulder".equals(spriteName) || "diamond".equals(spriteName)) {
-                    manageFall(x, y);
-                } else if ("expandingwall".equals(spriteName)) {
-                    if ("left".equals(expandWall(x, y))) {
-                        x -= 1; // TODO assignment to loop variable, is this good?
+                        // If it is a boulder or a diamond...
+                        if ("boulder".equals(spriteName) || "diamond".equals(spriteName)) {
+                            manageFall(x, y);
+                        } else if ("expandingwall".equals(spriteName)) {
+                            if ("left".equals(expandWall(x, y))) {
+                                x -= 1; // TODO assignment to loop variable, is this good?
+                            }
+                        }
                     }
                 }
+            }
+            try {
+                Thread.sleep(250); // TODO is this best practice? what to do better than sleep(time)
+            } catch (InterruptedException e) {
+                e.printStackTrace(); // TODO rethrow exception
             }
         }
     }
@@ -122,7 +118,7 @@ public class BoulderAndDiamondController implements Runnable {
                 levelModel.makeThisBoulderSlideRight(x, y);
             }
         } else if ("rockford".equals(spriteNameBelow) && levelModel.getGroundLevelModel()[x][y].isFalling()) {
-            levelModel.exploseGround(x, y + 1);
+            levelModel.explodeGround(x, y + 1);
 
             audioLoadHelper.playSound("die");
 
@@ -144,7 +140,7 @@ public class BoulderAndDiamondController implements Runnable {
                 }
             }
         } else if (elementBelow.isDestructible() && !"dirt".equals(spriteNameBelow) && levelModel.getGroundLevelModel()[x][y].isFalling()) {
-            levelModel.exploseThisBrickWall(x, y);
+            levelModel.explodeThisBrickWall(x, y);
         } else if ("rockford".equals(spriteNameLeft) && levelModel.getRockford().isRunningRight() && "black".equals(levelModel.getGroundLevelModel()[x + 1][y].getSpriteName())) {
             levelModel.moveThisBoulderToRight(x, y);
         } else if ("rockford".equals(spriteNameRight) && levelModel.getRockford().isRunningLeft() && "black".equals(levelModel.getGroundLevelModel()[x - 1][y].getSpriteName())) {

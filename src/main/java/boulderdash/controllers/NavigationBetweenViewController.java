@@ -20,7 +20,7 @@ public class NavigationBetweenViewController implements ActionListener {
     public NavigationBetweenViewController() {
         audioLoadHelper = new AudioLoadHelper();
 
-        // Play game music
+        // play initial music
         audioLoadHelper.startMusic("game");
 
         // Creation of the first view
@@ -54,7 +54,7 @@ public class NavigationBetweenViewController implements ActionListener {
                 break;
 
             case "game":
-                // Reinit the levelModelForGame...
+                // Re-initialize the levelModelForGame...
                 pickedLevelIdentifier = menuView.getLevelIdentifier();
 
                 LevelModel levelModelForGame = new LevelModel(pickedLevelIdentifier, audioLoadHelper);
@@ -100,12 +100,4 @@ public class NavigationBetweenViewController implements ActionListener {
     public String getPickedLevelIdentifier() {
         return pickedLevelIdentifier;
     }
-
-    /**
-     * Set the pickedLevelIdentifier
-     */
-    public void setPickedLevelIdentifier(String pickedLevelIdentifier) {
-        this.pickedLevelIdentifier = pickedLevelIdentifier;
-    }
-
 }

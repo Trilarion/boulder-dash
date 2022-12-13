@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 /**
  * Specifies the menu level selector
  */
-public class MenuLevelSelector extends JComboBox<String> {
+public class MenuLevelSelector extends JComboBox<String> { // TODO composition instead of inheritance
     private String choiceValue;
     private LevelEditorView levelEditorView;
 
@@ -25,8 +25,7 @@ public class MenuLevelSelector extends JComboBox<String> {
      * @param e Action event
      */
     public void actionPerformed(ActionEvent e) {
-        JComboBox<String> comboBoxSource = (JComboBox) e.getSource();
-        choiceValue = (String) comboBoxSource.getSelectedItem();
+        choiceValue = getItemAt(getSelectedIndex());
 
         if (levelEditorView != null) {
             levelEditorView.menuLevelSelectorChanged(this);

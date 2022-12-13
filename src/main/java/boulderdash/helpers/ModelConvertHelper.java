@@ -17,7 +17,7 @@ public class ModelConvertHelper {
     public static DisplayableElementModel toModel(String spriteName, boolean isConvertible) throws UnknownModelException {
         DisplayableElementModel element;
 
-        // Instanciates the sprite element matching the given sprite name
+        // Instantiates the sprite element matching the given sprite name
         switch (spriteName) { // TODO this is a mapping from String to Model (can be done better?)
             case "black":
             case "Black":

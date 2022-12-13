@@ -16,50 +16,48 @@ public class MenuView extends JFrame {
 
     public MenuView(NavigationBetweenViewController navigationBetweenViewController) {
         this.navigationBetweenViewController = navigationBetweenViewController;
-        // Initializes the view
+
+        // initialize the view
         setVisible(true);
         setResizable(false);
-
-        // UI parameters
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 200, 100); // TODO replace with constants
         setSize(432, 536);
-
-        // App parameters
         setTitle("Boulder Dash | Menu");
-        // Creates the view layout
-        LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(false);
+
+        // create the view layout
+        LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(null);
         menuLevelSelector = levelSelectorHelper.createLevelList();
 
         JPanel targetPanel = new JPanel();
 
         MenuImage menuImage = new MenuImage();
-        actionPanel = new JPanel();
-
-        // Add some buttons on the actionPanel
-        createButton("game", "Game");
-        createButton("editor", "Editor");
-        createButton("quit", "Quit");
 
         add(menuImage, BorderLayout.CENTER);
         add(targetPanel, BorderLayout.SOUTH);
 
-        targetPanel.add(menuLevelSelector, BorderLayout.NORTH);
-        targetPanel.add(actionPanel, BorderLayout.SOUTH);
-    }
+        actionPanel = new JPanel();
+        // add some buttons on the actionPanel
+        JButton button2 = new JButton("Game");
+        button2.addActionListener(this.navigationBetweenViewController);
+        button2.setActionCommand("game");
 
-    /**
-     * Creates the given button
-     *
-     * @param name Button name
-     */
-    public void createButton(String id, String name) {
-        JButton button = new JButton(name);
-        button.addActionListener(navigationBetweenViewController);
-        button.setActionCommand(id);
+        actionPanel.add(button2);
+
+        JButton button1 = new JButton("Editor");
+        button1.addActionListener(this.navigationBetweenViewController);
+        button1.setActionCommand("editor");
+
+        actionPanel.add(button1);
+
+        JButton button = new JButton("Quit");
+        button.addActionListener(this.navigationBetweenViewController);
+        button.setActionCommand("quit");
 
         actionPanel.add(button);
 
+        targetPanel.add(menuLevelSelector, BorderLayout.NORTH);
+        targetPanel.add(actionPanel, BorderLayout.SOUTH);
     }
 
     /**

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
  * Information panel element.
  */

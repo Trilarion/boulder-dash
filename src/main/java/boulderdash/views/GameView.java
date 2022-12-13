@@ -42,9 +42,21 @@ public class GameView extends JFrame {
 
 
         // Add some buttons on the informationPanel
-        createButton("restart", "Restart");
-        createButton("pause", "Pause");
-        createButton("menu", "Menu");
+        JButton button2 = new JButton("Restart");
+        button2.addActionListener(this.gameController);
+        button2.setActionCommand("restart");
+
+        actionPanel.add(button2);
+        JButton button1 = new JButton("Pause");
+        button1.addActionListener(this.gameController);
+        button1.setActionCommand("pause");
+
+        actionPanel.add(button1);
+        JButton button = new JButton("Menu");
+        button.addActionListener(this.gameController);
+        button.setActionCommand("menu");
+
+        actionPanel.add(button);
 
         add(actionPanel, BorderLayout.SOUTH);
         add(informationPanel, BorderLayout.NORTH);
@@ -62,16 +74,4 @@ public class GameView extends JFrame {
         return gameGroundView;
     }
 
-    /**
-     * Creates the given button
-     *
-     * @param name Button name
-     */
-    public void createButton(String id, String name) {
-        JButton button = new JButton(name);
-        button.addActionListener(gameController);
-        button.setActionCommand(id);
-
-        actionPanel.add(button);
-    }
 }

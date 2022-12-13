@@ -3,7 +3,6 @@ package boulderdash.views;
 import boulderdash.controllers.LevelEditorKeyController;
 import boulderdash.models.LevelModel;
 
-
 /**
  * Game field view for the level editor.
  */

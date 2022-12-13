@@ -1,6 +1,7 @@
 package boulderdash.views;
 
 import boulderdash.models.LevelModel;
+import boulderdash.ui.UIHelper;
 import boulderdash.utils.Observer;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,13 +27,21 @@ public abstract class GroundView extends JPanel implements Observer<String> {
     }
 
     /**
-     * Draws the map
+     * Paints the map
      *
-     * @param width  Map width
-     * @param height Map height
-     * @param g      Map graphical object
+     * @param g Map graphical object
      */
-    public void drawTerrain(int width, int height, Graphics g) {
+    public void paint(Graphics g) {
+        int width = levelModel.getSizeWidth();
+        int height = levelModel.getSizeHeight();
+        /**
+         * Draws the map
+         *
+         * @param width  Map width
+         * @param height Map height
+         * @param g      Map graphical object
+         */
+
         // Draw items
         if ("game".equals(levelModel.getMode())) {
             for (int x = 0; x < width; x++) {
@@ -42,10 +51,10 @@ public abstract class GroundView extends JPanel implements Observer<String> {
             }
 
             if (!levelModel.isGameRunning()) {
-                if (!levelModel.getRockford().getHasExplosed()) {
-                    displayWin();
+                if (!levelModel.getRockford().getHasExploded()) {
+                    UIHelper.displayWin();
                 } else {
-                    displayLose();
+                    UIHelper.displayLose();
                 }
             }
         } else {
@@ -63,29 +72,6 @@ public abstract class GroundView extends JPanel implements Observer<String> {
                 );
             }
         }
-    }
-
-    /**
-     * Set the view to inform the user that he won
-     */
-    private static void displayWin() {
-        new WinLoseView("win");
-    }
-
-    /**
-     * Set the view to inform the user that he is not good at this game
-     */
-    private static void displayLose() {
-        new WinLoseView("lose");
-    }
-
-    /**
-     * Paints the map
-     *
-     * @param g Map graphical object
-     */
-    public void paint(Graphics g) {
-        drawTerrain(levelModel.getSizeWidth(), levelModel.getSizeHeight(), g);
     }
 
     /**

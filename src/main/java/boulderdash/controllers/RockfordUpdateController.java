@@ -35,7 +35,7 @@ public class RockfordUpdateController implements Runnable {
                 }
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(100); // TODO is this best practice? what to do better than sleep(time)
             } catch (InterruptedException e) {
                 e.printStackTrace(); // TODO rethrow exception
             }

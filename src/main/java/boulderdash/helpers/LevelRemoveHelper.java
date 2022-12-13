@@ -7,7 +7,7 @@ import java.io.File;
  * Able to iterate on internal representation of a map and serialize it to XML
  */
 public class LevelRemoveHelper {
-    private String levelId;
+    private final String levelId;
 
     /**
      * @param levelId Level identifier

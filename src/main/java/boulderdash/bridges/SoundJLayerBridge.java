@@ -40,7 +40,7 @@ public class SoundJLayerBridge extends PlaybackListener implements Runnable {
      */
     public void stop() {
         try {
-            playerThread.stop();
+            playerThread.stop();  // TODO deprecated, use instead wants to stop and wait for it
         } catch (Exception ex) {
             ex.printStackTrace(); // TODO rethrow exception
         }

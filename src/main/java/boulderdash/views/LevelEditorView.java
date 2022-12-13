@@ -14,8 +14,8 @@ import java.awt.*;
 public class LevelEditorView extends JFrame {
     private final NavigationBetweenViewController nav;
     private final LevelEditorGroundView fieldPanel;
-    private String selectedLevel;
     private final MenuLevelSelector menuLevelSelector;
+    private String selectedLevel;
     private LevelEditorController levelEditorController;
     private LevelModel levelModel;
 
@@ -26,24 +26,20 @@ public class LevelEditorView extends JFrame {
         this.levelModel = levelModel;
         this.nav = nav;
 
-        // Initializes the view layout
+        // initializes the view layout
         setFocusable(true);
         setVisible(false);
         setResizable(false);
-
-        // UI parameters
         setSize(984, 454); // TODO replace with constant
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // App parameters
         setTitle("Boulder Dash | Level Editor");
 
         Image appIcon = Toolkit.getDefaultToolkit().getImage("./res/app/app_icon.png"); // TODO replace with constant
         setIconImage(appIcon);
         // Creates the view layout
         // List of levels
-        LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(true, this);
+        LevelSelectorHelper levelSelectorHelper = new LevelSelectorHelper(this);
         menuLevelSelector = levelSelectorHelper.createLevelList();
 
         // Field + select panels
@@ -172,14 +168,5 @@ public class LevelEditorView extends JFrame {
      */
     public String getSelectedLevel() {
         return selectedLevel;
-    }
-
-    /**
-     * Sets selected level
-     *
-     * @param level Selected level
-     */
-    public void setSelectedLevel(String level) {
-        selectedLevel = level;
     }
 }

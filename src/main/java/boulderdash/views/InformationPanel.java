@@ -22,7 +22,7 @@ public class InformationPanel extends JPanel implements Observer<String> {
 
         text.setText(
                 "Score : " + levelModel.getGameInformationModel().getScore() +
-                        "\nRemaining diamonds : " + levelModel.getGameInformationModel().getRemainingsDiamonds()
+                        "\nRemaining diamonds : " + levelModel.getGameInformationModel().getRemainingDiamonds()
         );
 
         add(text);
@@ -35,7 +35,7 @@ public class InformationPanel extends JPanel implements Observer<String> {
     public void update(@NotNull String notification) {
         text.setText(
                 "Score : " + levelModel.getGameInformationModel().getScore() +
-                        "\nRemaining diamonds : " + levelModel.getGameInformationModel().getRemainingsDiamonds()
+                        "\nRemaining diamonds : " + levelModel.getGameInformationModel().getRemainingDiamonds()
         );
     }
 }

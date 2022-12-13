@@ -7,12 +7,12 @@ import boulderdash.utils.Observable;
  */
 public class GameInformationModel extends Observable<String> {
     private int score;
-    private int remainingsDiamonds;
+    private int remainingDiamonds;
     private int timer;
 
-    public GameInformationModel(int remainingsDiamonds) {
+    public GameInformationModel(int remainingDiamonds) {
         score = 0;
-        this.remainingsDiamonds = remainingsDiamonds;
+        this.remainingDiamonds = remainingDiamonds;
         timer = 0;
     }
 
@@ -39,8 +39,8 @@ public class GameInformationModel extends Observable<String> {
      *
      * @return Remaining diamonds
      */
-    public int getRemainingsDiamonds() {
-        return remainingsDiamonds;
+    public int getRemainingDiamonds() {
+        return remainingDiamonds;
     }
 
     /**
@@ -48,8 +48,8 @@ public class GameInformationModel extends Observable<String> {
      *
      * @param remainingDiamonds Remaining diamonds
      */
-    public void setRemainingsDiamonds(int remainingDiamonds) {
-        remainingsDiamonds = remainingDiamonds;
+    public void setRemainingDiamonds(int remainingDiamonds) {
+        this.remainingDiamonds = remainingDiamonds;
     }
 
     /**
@@ -88,9 +88,9 @@ public class GameInformationModel extends Observable<String> {
     /**
      * Decrement of one the number total of remaining diamonds.
      */
-    public void decrementRemainingsDiamonds() {
-        if (remainingsDiamonds > 0) {
-            remainingsDiamonds -= 1;
+    public void decrementRemainingDiamonds() {
+        if (remainingDiamonds > 0) {
+            remainingDiamonds -= 1;
             myNotify();
         }
     }
@@ -98,7 +98,7 @@ public class GameInformationModel extends Observable<String> {
     /**
      * Reset details about object
      */
-    public void resetInformations() {
+    public void resetInformation() {
         score = 0;
         timer = 0;
     }

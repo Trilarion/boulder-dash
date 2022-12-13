@@ -135,7 +135,7 @@ public class LevelModel extends Observable<String> implements Runnable {
     public void resetLevelModel() {
         groundGrid = levelLoadHelper.getGroundGrid();
         gameRunning = true;
-        gameInformationModel.resetInformations();
+        gameInformationModel.resetInformation();
     }
 
     /**
@@ -203,8 +203,8 @@ public class LevelModel extends Observable<String> implements Runnable {
 
         if ("diamond".equals(groundGrid[posX][posY].getSpriteName())) {
             gameInformationModel.incrementScore();
-            gameInformationModel.decrementRemainingsDiamonds();
-            if (gameInformationModel.getRemainingsDiamonds() == 0) {
+            gameInformationModel.decrementRemainingDiamonds();
+            if (gameInformationModel.getRemainingDiamonds() == 0) {
                 spawnExit();
             }
         }
@@ -253,7 +253,6 @@ public class LevelModel extends Observable<String> implements Runnable {
         }
 
         // Grab model value
-        ModelConvertHelper modelConverter = new ModelConvertHelper();
         DisplayableElementModel targetModel;
         int xPos, yPos;
 
@@ -469,7 +468,7 @@ public class LevelModel extends Observable<String> implements Runnable {
             }
 
             try {
-                Thread.sleep(Options.DELAY);
+                Thread.sleep(Options.DELAY); // TODO is this best practice? what to do better than sleep(time)
             } catch (InterruptedException e) {
                 System.out.println("Interrupted: " + e.getMessage());
             }
@@ -511,7 +510,7 @@ public class LevelModel extends Observable<String> implements Runnable {
     }
 
     /**
-     * Increaments the cursor position X value
+     * Increments the cursor position X value
      */
     public void incrementCursorXPosition() {
         if (cursorXPosition < (sizeWidth - 1 - 2)) {
@@ -533,7 +532,7 @@ public class LevelModel extends Observable<String> implements Runnable {
     }
 
     /**
-     * Increaments the cursor position Y value
+     * Increments the cursor position Y value
      */
     public void incrementCursorYPosition() {
         if (cursorYPosition < (sizeHeight - 1 - 2)) {
@@ -604,7 +603,7 @@ public class LevelModel extends Observable<String> implements Runnable {
      * @param x Object horizontal position
      * @param y Object vertical position
      */
-    public void exploseGround(int x, int y) {
+    public void explodeGround(int x, int y) {
         groundGrid[x][y] = new EmptyModel();
         groundGrid[x + 1][y] = new EmptyModel();
         groundGrid[x - 1][y] = new EmptyModel();
@@ -614,7 +613,7 @@ public class LevelModel extends Observable<String> implements Runnable {
         groundGrid[x][y - 1] = new EmptyModel();
         groundGrid[x + 1][y - 1] = new EmptyModel();
         groundGrid[x - 1][y - 1] = new EmptyModel();
-        rockford.setHasExplosed(true);
+        rockford.setHasExploded(true);
 
         // Again a sleep to notify the observers properly
         try {
@@ -706,18 +705,16 @@ public class LevelModel extends Observable<String> implements Runnable {
     }
 
     /**
-     * Gets gameInformationModel
-     *
-     * @return gameInfos like score, remainings Diamonds etc
+     * @return game information like score, remaining Diamonds etc
      */
     public GameInformationModel getGameInformationModel() {
         return gameInformationModel;
     }
 
     /**
-     * Explose the brick wall
+     * Explode the brick wall
      */
-    public void exploseThisBrickWall(int x, int y) {
+    public void explodeThisBrickWall(int x, int y) {
         groundGrid[x][y] = new EmptyModel();
         groundGrid[x][y + 1] = new EmptyModel();
     }

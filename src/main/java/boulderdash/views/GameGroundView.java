@@ -7,7 +7,6 @@ import boulderdash.models.LevelModel;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
  * Game field view for the game itself.
  */

@@ -10,7 +10,7 @@ import java.io.InputStream;
 /**
  * Specifies the menu image
  */
-public class MenuImage extends JPanel {
+public class MenuImage extends JPanel { // TODO use composition instead and inline
     private BufferedImage imageFile;
 
     public MenuImage() {

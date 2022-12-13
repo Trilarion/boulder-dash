@@ -2,10 +2,13 @@ package boulderdash.helpers;
 
 import boulderdash.models.DirtModel;
 import boulderdash.models.DisplayableElementModel;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSOutput;
+import org.w3c.dom.ls.LSSerializer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -148,17 +151,18 @@ public class LevelSaveHelper {
         boolean isSuccessful = true;
 
         try {
-            XMLSerializer serializer = new XMLSerializer();
+            DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
+            DOMImplementationLS impls = (DOMImplementationLS) registry.getDOMImplementation("LS");
+            LSSerializer serializer = impls.createLSSerializer();
 
-            serializer.setOutputCharStream(new java.io.FileWriter(
-                    getLevelPathInDataStore()
-            ));
-            serializer.serialize(document);
-        } catch (IOException e) {
+            LSOutput domOutput = impls.createLSOutput();
+            domOutput.setCharacterStream(new java.io.FileWriter(getLevelPathInDataStore()));
+
+            serializer.write(document, domOutput);
+        } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             isSuccessful = false;
             e.printStackTrace(); // TODO rethrow exception
         }
-
     }
 
     /**
