@@ -12,9 +12,9 @@ import javax.swing.*;
  */
 public class InformationPanel extends JPanel implements Observer<String> {
     private final LevelModel levelModel;
-    private final JTextArea text;
+    private final @NotNull JTextArea text;
 
-    public InformationPanel(LevelModel levelModel) {
+    public InformationPanel(@NotNull LevelModel levelModel) {
         this.levelModel = levelModel;
         text = new JTextArea();
         text.setEditable(false);

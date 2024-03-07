@@ -6,6 +6,7 @@ import boulderdash.helpers.LevelSaveHelper;
 import boulderdash.models.LevelModel;
 import boulderdash.views.HelpView;
 import boulderdash.views.LevelEditorView;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +18,7 @@ import java.awt.event.ActionListener;
 public class LevelEditorController implements ActionListener {
     private final LevelModel levelModel;
     private final NavigationBetweenViewController nav;
-    private LevelEditorView levelEditorView;
+    private final LevelEditorView levelEditorView;
 
     /**
      * @param levelModel Level model
@@ -40,7 +41,7 @@ public class LevelEditorController implements ActionListener {
      *
      * @param event Action event
      */
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(@NotNull ActionEvent event) {
         switch (event.getActionCommand()) {
             case "menu":
                 levelEditorView.setVisible(false);

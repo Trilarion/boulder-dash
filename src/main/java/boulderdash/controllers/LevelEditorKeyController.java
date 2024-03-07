@@ -2,6 +2,7 @@ package boulderdash.controllers;
 
 import boulderdash.models.LevelModel;
 import boulderdash.views.LevelEditorView;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,7 +30,7 @@ public class LevelEditorKeyController implements KeyListener {
      *
      * @param e Key event
      */
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(@NotNull KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {

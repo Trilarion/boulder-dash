@@ -2,6 +2,7 @@ package boulderdash.helpers;
 
 import boulderdash.exceptions.UnknownModelException;
 import boulderdash.models.*;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Provides model conversion services.
@@ -14,7 +15,7 @@ public class ModelConvertHelper {
      * @param spriteName Sprite name
      * @return Model associated to given sprite name
      */
-    public static DisplayableElementModel toModel(String spriteName, boolean isConvertible) throws UnknownModelException {
+    public static @NotNull DisplayableElementModel toModel(@NotNull String spriteName, boolean isConvertible) throws UnknownModelException {
         DisplayableElementModel element;
 
         // Instantiates the sprite element matching the given sprite name

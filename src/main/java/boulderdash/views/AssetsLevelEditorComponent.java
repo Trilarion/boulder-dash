@@ -1,5 +1,7 @@
 package boulderdash.views;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -55,7 +57,7 @@ public class AssetsLevelEditorComponent extends JPanel implements ActionListener
      *
      * @param e Action event
      */
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(@NotNull ActionEvent e) {
         JRadioButton sourceButton = (JRadioButton) e.getSource();
         String sourceText = sourceButton.getText();
 

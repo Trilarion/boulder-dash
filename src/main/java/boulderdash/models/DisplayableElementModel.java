@@ -1,5 +1,8 @@
 package boulderdash.models;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,8 +11,8 @@ import java.io.IOException;
  * Represents a abstract displayable element
  */
 public abstract class DisplayableElementModel {
-    private static final String groupName;
-    private static final String stateValue;
+    private static final @NotNull String groupName;
+    private static final @NotNull String stateValue;
 
     /*
       Static dataset
@@ -25,7 +28,7 @@ public abstract class DisplayableElementModel {
     private boolean animate;
     private boolean impactExplosive;
     private int priority;
-    private BufferedImage sprite;
+    private @Nullable BufferedImage sprite;
     private boolean falling;
     private boolean convertible;
     private String collideSound;
@@ -175,7 +178,7 @@ public abstract class DisplayableElementModel {
      * @param spriteName Sprite name
      * @return Sprite object
      */
-    public BufferedImage loadSprite(String spriteName) {
+    public @Nullable BufferedImage loadSprite(String spriteName) {
         BufferedImage sprite = null;
 
         try {
@@ -199,7 +202,7 @@ public abstract class DisplayableElementModel {
      * @param height      Sub image height on sprite sheet
      * @return Target sub image
      */
-    public BufferedImage grabSprite(BufferedImage spriteSheet, int x, int y, int width, int height) {
+    public BufferedImage grabSprite(@NotNull BufferedImage spriteSheet, int x, int y, int width, int height) {
         BufferedImage subImage = spriteSheet.getSubimage(x, y, width, height);
 
         sprite = subImage;

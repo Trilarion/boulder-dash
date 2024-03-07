@@ -2,6 +2,7 @@ package boulderdash.views;
 
 import boulderdash.controllers.NavigationBetweenViewController;
 import boulderdash.helpers.LevelSelectorHelper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +11,9 @@ import java.awt.*;
  * Menu view
  */
 public class MenuView extends JFrame {
-    private final NavigationBetweenViewController navigationBetweenViewController;
     private final MenuLevelSelector menuLevelSelector;
-    private final JPanel actionPanel;
 
     public MenuView(NavigationBetweenViewController navigationBetweenViewController) {
-        this.navigationBetweenViewController = navigationBetweenViewController;
 
         // initialize the view
         setVisible(true);
@@ -36,22 +34,22 @@ public class MenuView extends JFrame {
         add(menuImage, BorderLayout.CENTER);
         add(targetPanel, BorderLayout.SOUTH);
 
-        actionPanel = new JPanel();
+        @NotNull JPanel actionPanel = new JPanel();
         // add some buttons on the actionPanel
         JButton button2 = new JButton("Game");
-        button2.addActionListener(this.navigationBetweenViewController);
+        button2.addActionListener(navigationBetweenViewController);
         button2.setActionCommand("game");
 
         actionPanel.add(button2);
 
         JButton button1 = new JButton("Editor");
-        button1.addActionListener(this.navigationBetweenViewController);
+        button1.addActionListener(navigationBetweenViewController);
         button1.setActionCommand("editor");
 
         actionPanel.add(button1);
 
         JButton button = new JButton("Quit");
-        button.addActionListener(this.navigationBetweenViewController);
+        button.addActionListener(navigationBetweenViewController);
         button.setActionCommand("quit");
 
         actionPanel.add(button);

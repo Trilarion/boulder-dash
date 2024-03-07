@@ -1,5 +1,7 @@
 package boulderdash.models;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -8,14 +10,14 @@ import java.util.ArrayList;
  * Represents the magic wall.
  */
 public class MagicWallModel extends DisplayableElementModel {
-    private static final String spriteName;
+    private static final @NotNull String spriteName;
     private static final boolean isDestructible;
     private static final boolean canMove;
     private static final boolean impactExplosive;
     private static final boolean animate;
     private static final int priority;
     private static final boolean falling;
-    private static final String collideSound;
+    private static final @NotNull String collideSound;
 
     /*
       Static dataset

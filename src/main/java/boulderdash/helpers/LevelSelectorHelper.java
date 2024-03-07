@@ -2,12 +2,13 @@ package boulderdash.helpers;
 
 import boulderdash.views.LevelEditorView;
 import boulderdash.views.MenuLevelSelector;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Level selector helper
  */
 public class LevelSelectorHelper {
-    private LevelEditorView levelEditorView;
+    private final LevelEditorView levelEditorView;
 
     public LevelSelectorHelper(LevelEditorView levelEditorView) {
         this.levelEditorView = levelEditorView;
@@ -18,7 +19,7 @@ public class LevelSelectorHelper {
      *
      * @return Available levels
      */
-    private static String[] listAvailableLevels() {
+    private static String @NotNull [] listAvailableLevels() {
         return new String[]{"01", "02", "03", "04", "05"};
     } // TODO discover from resources the available levels, do not hardcode
 
@@ -27,7 +28,7 @@ public class LevelSelectorHelper {
      *
      * @return Level list selector
      */
-    public MenuLevelSelector createLevelList() { // TODO this can become static and later go into a helper class
+    public @NotNull MenuLevelSelector createLevelList() { // TODO this can become static and later go into a helper class
         String[] availableLevels = listAvailableLevels();
 
         // Proceed available levels listing

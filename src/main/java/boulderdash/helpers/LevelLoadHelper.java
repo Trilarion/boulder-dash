@@ -3,6 +3,8 @@ package boulderdash.helpers;
 import boulderdash.exceptions.UnknownModelException;
 import boulderdash.models.DisplayableElementModel;
 import boulderdash.models.RockfordModel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -72,7 +74,7 @@ public class LevelLoadHelper {
      *
      * @return Level path, with file extension
      */
-    private InputStream getLevelPathInDataStore() {
+    private @Nullable InputStream getLevelPathInDataStore() {
         String name = "/levels/level" + levelId + ".xml"; // TODO this is fragile (we don't really know if this exists)
         return LevelLoadHelper.class.getResourceAsStream(name);
     }
@@ -229,7 +231,7 @@ public class LevelLoadHelper {
      * @param rowIndex   Position in row (horizontal axis)
      * @param lineIndex  Position in line (vertical axis)
      */
-    private DisplayableElementModel constructGridElement(String spriteName, int rowIndex, int lineIndex, boolean convertible) throws UnknownModelException {
+    private DisplayableElementModel constructGridElement(@NotNull String spriteName, int rowIndex, int lineIndex, boolean convertible) throws UnknownModelException {
         DisplayableElementModel element = ModelConvertHelper.toModel(spriteName, convertible);
 
         // Custom actions?

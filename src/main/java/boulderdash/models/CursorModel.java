@@ -1,12 +1,13 @@
 package boulderdash.models;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents the field cursor pointer.
  */
 public class CursorModel extends DisplayableElementModel {
-    private static final String spriteName;
+    private static final @NotNull String spriteName;
     private static final boolean isDestructible;
     private static final boolean canMove;
     private static final boolean impactExplosive;

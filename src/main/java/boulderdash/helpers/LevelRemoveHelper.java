@@ -1,5 +1,7 @@
 package boulderdash.helpers;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 
 /**
@@ -24,7 +26,7 @@ public class LevelRemoveHelper {
      *
      * @return Level path, with file extension
      */
-    private String getLevelPathInDataStore() {
+    private @NotNull String getLevelPathInDataStore() {
         return "./res/levels/" + levelId + ".xml"; // TODO better path handling
     }
 }

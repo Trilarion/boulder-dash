@@ -2,6 +2,7 @@ package boulderdash.helpers;
 
 import boulderdash.models.DirtModel;
 import boulderdash.models.DisplayableElementModel;
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -58,7 +59,7 @@ public class LevelSaveHelper {
      *
      * @return Level identifier
      */
-    private static String generateNewLevelId() {
+    private static @NotNull String generateNewLevelId() {
         File directory = new File(pathToDataStore);
         int electedLastLevelId, tempLevelId;
         String matchedId, finalLevelId;
@@ -111,7 +112,7 @@ public class LevelSaveHelper {
      *
      * @return Level path, with file extension
      */
-    private String getLevelPathInDataStore() {
+    private @NotNull String getLevelPathInDataStore() {
         return pathToDataStore + "/" + levelId + ".xml";
     }
 
@@ -171,7 +172,7 @@ public class LevelSaveHelper {
      * @param document Document
      * @return Name node
      */
-    private Node nameNode(Document document) {
+    private @NotNull Node nameNode(@NotNull Document document) {
         String nameValue;
 
         nameValue = "Unknown Level Name";
@@ -185,7 +186,7 @@ public class LevelSaveHelper {
      * @param document Document
      * @return Date node
      */
-    private Node dateNode(Document document) {
+    private @NotNull Node dateNode(@NotNull Document document) {
         // Get values
         String dateCreatedValue, dateModifiedValue;
 
@@ -209,11 +210,10 @@ public class LevelSaveHelper {
      * @param document Document
      * @return Size node
      */
-    private Node sizeNode(Document document) {
+    private @NotNull Node sizeNode(@NotNull Document document) {
         // Get values
-        int widthValue = 0, heightValue = 0;
-
-        widthValue = getGroundGrid().length - 2;
+        int widthValue = getGroundGrid().length - 2;
+        int heightValue = 0;
 
         if (widthValue > 0) {
             heightValue = getGroundGrid()[0].length - 2;
@@ -239,7 +239,7 @@ public class LevelSaveHelper {
      * @param document Document
      * @return Grid node
      */
-    private Node gridNode(Document document) {
+    private @NotNull Node gridNode(@NotNull Document document) {
         Element gridElement = document.createElement("grid");
         gridElement.setAttribute("state", "initial");
 
@@ -261,7 +261,7 @@ public class LevelSaveHelper {
      * @param curLineIndex Current line index
      * @return Grid line node
      */
-    private Node gridLineNode(Document document, Integer curLineIndex) {
+    private @NotNull Node gridLineNode(@NotNull Document document, @NotNull Integer curLineIndex) {
         Element gridLineElement = document.createElement("line");
         gridLineElement.setAttribute("index", Integer.toString(curLineIndex - 1));
 
@@ -284,7 +284,7 @@ public class LevelSaveHelper {
      * @param curItemIndex Current line item index
      * @return Grid line item node
      */
-    private Node gridLineItemNode(Document document, Integer curLineIndex, Integer curItemIndex) {
+    private @NotNull Node gridLineItemNode(@NotNull Document document, @NotNull Integer curLineIndex, @NotNull Integer curItemIndex) {
         Element gridLineItemElement = document.createElement("item");
         gridLineItemElement.setAttribute("index", Integer.toString(curItemIndex - 1));
 
@@ -301,7 +301,7 @@ public class LevelSaveHelper {
      * @param curItemIndex Current line item index
      * @return Grid line item sprite node
      */
-    private Node gridLineItemSpriteNode(Document document, Integer curLineIndex, Integer curItemIndex) {
+    private @NotNull Node gridLineItemSpriteNode(@NotNull Document document, @NotNull Integer curLineIndex, @NotNull Integer curItemIndex) {
         String groupValue, nameValue, stateValue, convertibleValue;
 
         DisplayableElementModel curGridElement = getGroundGrid()[curItemIndex][curLineIndex];
@@ -340,7 +340,7 @@ public class LevelSaveHelper {
      * @param value    Element value
      * @return Text node
      */
-    private Node textNode(Document document, String name, String value) {
+    private @NotNull Node textNode(@NotNull Document document, String name, String value) {
         Element node = document.createElement(name);
         node.appendChild(document.createTextNode(value));
 

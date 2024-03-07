@@ -1,6 +1,8 @@
 package boulderdash.models;
 
 import boulderdash.Options;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -9,14 +11,14 @@ import java.util.ArrayList;
  * Represents the hero of the game.
  */
 public class RockfordModel extends DisplayableElementModel {
-    private static final String spriteName;
+    private static final @NotNull String spriteName;
     private static final boolean isDestructible;
     private static final boolean canMove;
     private static final boolean impactExplosive;
     private static final boolean animate;
     private static final int priority;
     private static final boolean falling;
-    private static final String collideSound;
+    private static final @Nullable String collideSound;
 
     /**
      * Maps the sub images of the sprite file

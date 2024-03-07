@@ -31,13 +31,13 @@ public abstract class GroundView extends JPanel implements Observer<String> {
      *
      * @param g Map graphical object
      */
-    public void paint(Graphics g) {
+    public void paint(@NotNull Graphics g) {
         int width = levelModel.getSizeWidth();
         int height = levelModel.getSizeHeight();
-        /**
-         * Draws the map
-         *
-         * @param width  Map width
+        /*
+          Draws the map
+
+          @param width  Map width
          * @param height Map height
          * @param g      Map graphical object
          */

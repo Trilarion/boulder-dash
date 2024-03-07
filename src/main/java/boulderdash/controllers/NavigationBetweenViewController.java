@@ -3,6 +3,7 @@ package boulderdash.controllers;
 import boulderdash.helpers.AudioLoadHelper;
 import boulderdash.models.LevelModel;
 import boulderdash.views.MenuView;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,7 @@ import java.awt.event.ActionListener;
  * Controller to navigate between the different views
  */
 public class NavigationBetweenViewController implements ActionListener {
-    private final AudioLoadHelper audioLoadHelper;
+    private final @NotNull AudioLoadHelper audioLoadHelper;
     private LevelEditorController levelEditorController;
     private MenuView menuView;
     private GameController gameController;
@@ -33,7 +34,7 @@ public class NavigationBetweenViewController implements ActionListener {
      * @param event Action event
      */
     @Override
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(@NotNull ActionEvent event) {
         switch (event.getActionCommand()) {
             case "quit":
                 System.exit(0);

@@ -1,5 +1,7 @@
 package boulderdash.views;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +30,7 @@ public class MenuImage extends JPanel { // TODO use composition instead and inli
      * @param g Graphics element
      */
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(@NotNull Graphics g) {
         super.paintComponent(g);
 
         g.drawImage(imageFile, 0, 0, null);

@@ -1,5 +1,7 @@
 package boulderdash.views;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -10,11 +12,11 @@ public class MenuLevelSelector extends JComboBox<String> { // TODO composition i
     private String choiceValue;
     private LevelEditorView levelEditorView;
 
-    public MenuLevelSelector(String[] items) {
+    public MenuLevelSelector(String @NotNull [] items) {
         super(items);
     }
 
-    public MenuLevelSelector(String[] items, LevelEditorView levelEditorView) {
+    public MenuLevelSelector(String @NotNull [] items, LevelEditorView levelEditorView) {
         this(items);
         this.levelEditorView = levelEditorView;
     }

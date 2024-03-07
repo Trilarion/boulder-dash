@@ -7,6 +7,7 @@ import boulderdash.helpers.AudioLoadHelper;
 import boulderdash.helpers.LevelLoadHelper;
 import boulderdash.helpers.ModelConvertHelper;
 import boulderdash.utils.Observable;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.image.BufferedImage;
 
@@ -241,7 +242,7 @@ public class LevelModel extends Observable<String> implements Runnable {
      *
      * @param blockValue New value
      */
-    public void triggerBlockChange(String blockValue) {
+    public void triggerBlockChange(@Nullable String blockValue) {
         // No block value?
         if (blockValue == null || blockValue.isEmpty()) {
             return;

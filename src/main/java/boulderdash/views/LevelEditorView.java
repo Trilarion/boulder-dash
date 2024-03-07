@@ -4,6 +4,8 @@ import boulderdash.controllers.LevelEditorController;
 import boulderdash.controllers.NavigationBetweenViewController;
 import boulderdash.helpers.LevelSelectorHelper;
 import boulderdash.models.LevelModel;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +15,9 @@ import java.awt.*;
  */
 public class LevelEditorView extends JFrame {
     private final NavigationBetweenViewController nav;
-    private final LevelEditorGroundView fieldPanel;
+    private final @NotNull LevelEditorGroundView fieldPanel;
     private final MenuLevelSelector menuLevelSelector;
-    private String selectedLevel;
+    private @Nullable String selectedLevel;
     private LevelEditorController levelEditorController;
     private LevelModel levelModel;
 
@@ -77,7 +79,7 @@ public class LevelEditorView extends JFrame {
      * @param name Button name
      * @return Created button
      */
-    public JButton createButton(String id, String name) {
+    public @NotNull JButton createButton(String id, String name) {
         JButton button = new JButton(name);
         button.addActionListener(levelEditorController);
         button.setActionCommand(id);
@@ -117,7 +119,7 @@ public class LevelEditorView extends JFrame {
      *
      * @param selectedLevelValue Selected level value
      */
-    public void openedLevelChange(String selectedLevelValue) {
+    public void openedLevelChange(@Nullable String selectedLevelValue) {
         LevelModel pickedLevelModel;
 
         if (selectedLevelValue != null && !selectedLevelValue.isEmpty()) {
@@ -150,7 +152,7 @@ public class LevelEditorView extends JFrame {
      *
      * @param changedSelector Changed selector
      */
-    public void menuLevelSelectorChanged(MenuLevelSelector changedSelector) {
+    public void menuLevelSelectorChanged(@NotNull MenuLevelSelector changedSelector) {
         String selectedLevelValue = changedSelector.getChoiceValue();
 
         // Value didn't change?

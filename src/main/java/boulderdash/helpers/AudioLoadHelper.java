@@ -1,6 +1,7 @@
 package boulderdash.helpers;
 
 import boulderdash.bridges.SoundJLayerBridge;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class AudioLoadHelper {
      * @param musicId Music identifier
      * @return Music path, with file extension
      */
-    private static InputStream getMusicPathInAudioStore(String musicId) {
+    private static @Nullable InputStream getMusicPathInAudioStore(String musicId) {
         return AudioLoadHelper.class.getResourceAsStream("/audio/music/" + musicId + ".mp3");
     }
 

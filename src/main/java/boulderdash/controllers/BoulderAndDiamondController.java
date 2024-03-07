@@ -4,6 +4,7 @@ import boulderdash.helpers.AudioLoadHelper;
 import boulderdash.models.DirtModel;
 import boulderdash.models.DisplayableElementModel;
 import boulderdash.models.LevelModel;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Updates position of all elements displayed on the map, according to their
@@ -73,7 +74,7 @@ public class BoulderAndDiamondController implements Runnable {
      * @param x Horizontal position
      * @param y Vertical position
      */
-    private String expandWall(int x, int y) {
+    private @NotNull String expandWall(int x, int y) {
         DisplayableElementModel elementLeft = levelModel.getGroundLevelModel()[x - 1][y];
         DisplayableElementModel elementRight = levelModel.getGroundLevelModel()[x + 1][y];
         String spriteNameLeft = elementLeft.getSpriteName();

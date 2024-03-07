@@ -3,6 +3,7 @@ package boulderdash.controllers;
 import boulderdash.helpers.AudioLoadHelper;
 import boulderdash.models.DisplayableElementModel;
 import boulderdash.models.LevelModel;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,7 +13,7 @@ import java.awt.event.KeyListener;
  */
 public class GameKeyController implements KeyListener {
     private final LevelModel levelModel;
-    private final RockfordUpdateController rockfordUpdateController;
+    private final @NotNull RockfordUpdateController rockfordUpdateController;
 
     /**
      * @param levelModel Level model
@@ -28,7 +29,7 @@ public class GameKeyController implements KeyListener {
      *
      * @param e Key event
      */
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(@NotNull KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         switch (keyCode) {

@@ -4,6 +4,7 @@ import boulderdash.helpers.AudioLoadHelper;
 import boulderdash.models.LevelModel;
 import boulderdash.views.GameView;
 import boulderdash.views.MenuView;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +24,7 @@ public class GameController implements ActionListener {
     /**
      * @param levelModel Level model
      */
-    public GameController(LevelModel levelModel, AudioLoadHelper audioLoadHelper, NavigationBetweenViewController navigationBetweenViewController) {
+    public GameController(@NotNull LevelModel levelModel, AudioLoadHelper audioLoadHelper, @NotNull NavigationBetweenViewController navigationBetweenViewController) {
         firstClickOnPause = true;
 
         this.navigationBetweenViewController = navigationBetweenViewController;
@@ -42,7 +43,7 @@ public class GameController implements ActionListener {
      *
      * @param event Action event
      */
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(@NotNull ActionEvent event) {
         switch (event.getActionCommand()) {
             case "pause":
                 levelModel.setGamePaused(firstClickOnPause);
